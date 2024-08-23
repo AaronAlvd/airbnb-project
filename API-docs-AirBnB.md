@@ -2,6 +2,8 @@
 
 ## Database Schema Design
 
+![Database](/Copy%20of%20AirBnbAPIProject.pdf)
+
 
 ## API Documentation
 
