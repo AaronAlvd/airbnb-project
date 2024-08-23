@@ -1,8 +1,52 @@
-# `<name of application here>`
+# `GroundBNB`
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+`Table reviews {
+  id integer [primary key]
+  body varchar
+  user_Id integer
+  location_Id integer
+  created_at timestamp 
+  updated_at timestamp
+}
+
+Table users {
+  id integer [primary key]
+  first_name varchar(40)
+  last_name varchar(40)
+  email varchar(255)
+}
+
+Table locations {
+  id integer [primary key]
+  owner_Id integer
+  address varchar
+  city varchar
+  state varchar
+  country varchar
+  lat float
+  lng float
+  name varchar(10)
+  description varchar
+  price float
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table owners {
+  id integer [primary key]
+  first_name varchar(40)
+  last_name varchar(40)
+  email varchar(255)
+  username varchar(20)
+}
+
+Ref: users.id < reviews.user_Id
+
+Ref: locations.id < reviews.location_Id
+
+Ref: owners.id < locations.owner_Id`
 
 ## API Documentation
 
