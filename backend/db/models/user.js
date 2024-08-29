@@ -16,10 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING(256),
       allowNull: false,
+      defaultValue: 'Blank'
     },
     lastName: {
       type: DataTypes.STRING(256),
       allowNull: false,
+      defaultValue: 'Blank'
     },
     username: {
       type: DataTypes.STRING(30),
