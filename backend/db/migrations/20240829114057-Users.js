@@ -6,13 +6,11 @@ module.exports = {
     await queryInterface.addColumn("Users", "firstName", {
       type: Sequelize.STRING(256),
       allowNull: false,
-      defaultValue: 'Blank'
     });
 
     await queryInterface.addColumn("Users", "lastName", {
       type: Sequelize.STRING(256),
       allowNull: false,
-      defaultValue: 'Blank'
     });  
   },
 

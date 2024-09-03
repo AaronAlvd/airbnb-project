@@ -9,19 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Spot, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      })
     }
   }
   User.init({
     firstName: {
       type: DataTypes.STRING(256),
       allowNull: false,
-      defaultValue: 'Blank'
     },
     lastName: {
       type: DataTypes.STRING(256),
       allowNull: false,
-      defaultValue: 'Blank'
     },
     username: {
       type: DataTypes.STRING(30),
