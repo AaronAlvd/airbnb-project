@@ -7,14 +7,14 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "User",
-          key: "id"
+          model: 'Users', 
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },

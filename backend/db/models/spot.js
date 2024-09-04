@@ -1,5 +1,7 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     /**
@@ -11,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
-      })
+      });
     }
   }
   Spot.init({
@@ -20,19 +22,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     address: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     city: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     state: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     country: {
-      type: DataTypes.STRING(256),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lat: {
@@ -44,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     description: {
