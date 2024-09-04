@@ -4,9 +4,10 @@ const { Spot } = require('../../db/models');
 const router = express.Router();
 
 router.get('/current', requireAuth, async (req, res, next) => {
-  const currUser = req.user;
+  const currUser = req.user.id;
+  const userSpots = await Spot.findAll({ where: { userId: currUser }});
 
-  res.json(currUser);
+  res.json(userSpots);
 });
 
 
@@ -21,7 +22,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 
   const newSpot = Spot.create({ userId, address, city, state, country, lat, lng, name, description, price });
 
-  res.json(newSpot);
+  res.send(newSpot);
 });
 
 module.exports = router;
