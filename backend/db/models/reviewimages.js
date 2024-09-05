@@ -1,30 +1,22 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ReviewImages extends Model {
+  class ReviewImage extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      ReviewImage.belongsTo(models.Review, {
+        foreignKey: 'reviewId',
+        onDelete: 'CASCADE',
+      });
     }
   }
-  ReviewImages.init({
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+  ReviewImage.init({
     reviewId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Reviews',
-        key: 'id'
-      },
       onDelete: 'CASCADE',
       allowNull: false,
     },
@@ -32,17 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-    }
   }, {
     sequelize,
-    modelName: 'ReviewImages',
+    modelName: 'ReviewImage',
+    tableName: 'ReviewImages'
   });
-  return ReviewImages;
+  return ReviewImage;
 };

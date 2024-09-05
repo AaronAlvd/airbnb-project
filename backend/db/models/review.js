@@ -14,12 +14,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
-
       Review.belongsTo(models.Spot, {
         foreignKey: 'spotId',
         onDelete: 'CASCADE',
       });
-
+      Review.hasMany(models.ReviewImage, {
+        foreignKey: 'reviewId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Review.init({
