@@ -1,13 +1,17 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth.js');
-const { Spot } = require('../../db/models');
-const { User } = require('../../db/models');
-const { SpotImage } = require('../../db/models');
+const { Spot, sequelize, User, SpotImage, Review } = require('../../db/models');
 const router = express.Router();
 
 router.get('/current', requireAuth, async (req, res, next) => {
   const currUser = req.user.id;
-  const userSpots = await Spot.findAll({ where: { userId: currUser }});
+  const userSpots = await Spot.findAll({ 
+    where: { userId: currUser },
+    attributes: [
+      'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+      [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'], [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews']
+    ]
+  });
 
   res.json(userSpots);
 });
@@ -16,17 +20,25 @@ router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const getSpot = await Spot.findOne({ 
+    const getSpot = await Spot.findOne({
+      attributes: [
+        'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'], [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews']
+      ],
       where: { id },
       include: [
         {
           model: User,
-          attributes: ['id', 'firstName', 'lastName'] // Specify which attributes to include from the User model
+          attributes: ['id', 'firstName', 'lastName'] 
         },
         {
           model: SpotImage,
           attributes: ['id', 'url', 'preview']
-        }
+        },
+        {
+          model: Review,
+          attributes: [],
+        },
       ] 
     });
 
@@ -41,7 +53,23 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-  const getSpots = await Spot.findAll();
+  const getSpots = await Spot.findAll({
+    attributes: [
+      'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+      [sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating'], 
+    ],
+    include: [
+      {
+        model: Review,
+        attributes: [],
+      },
+      {
+        model: SpotImage,
+        attributes: [['url', 'previewImage']],
+        where: { preview: true }
+      }
+    ]
+  });
 
   res.json(getSpots);
 });
