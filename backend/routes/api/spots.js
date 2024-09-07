@@ -49,6 +49,50 @@ router.get('/current', requireAuth, async (req, res, next) => {
   }
 });
 
+router.get('/:spotId/reviews', async (req, res, next) => {
+  try {
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      return res.status(404).json({ message: "Spot couldn't be found" });
+    }
+
+    const reviews = await Review.findAll({
+      where: { spotId },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        },
+        {
+          model: ReviewImage,
+          attributes: ['id', 'url']
+        }
+      ]
+    });
+
+    const formattedReviews = reviews.map(review => ({
+      id: review.id,
+      userId: review.userId,
+      spotId: review.spotId,
+      review: review.review,
+      stars: review.stars,
+      createdAt: review.createdAt,
+      updatedAt: review.updatedAt,
+      User: review.User,
+      ReviewImages: review.ReviewImages.map(image => ({
+        id: image.id,
+        url: image.url
+      }))
+    }));
+
+    res.status(200).json({ Reviews: formattedReviews });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:spotId', async (req, res, next) => {
   const { spotId } = req.params;
 
@@ -227,6 +271,63 @@ router.post('/', requireAuth, async (req, res, next) => {
   }
 });
 
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+  try {
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
+    const userId = req.user.id;
+
+    let errors = {};
+
+    if (!review || typeof review !== 'string' || review.trim() === '') {
+      errors.review = 'Review text is required';
+    }
+    if (stars === undefined || !Number.isInteger(stars) || stars < 1 || stars > 5) {
+      errors.stars = 'Stars must be an integer from 1 to 5';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json({
+        message: 'Bad Request',
+        errors
+      });
+    }
+
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      return res.status(404).json({ message: "Spot couldn't be found" });
+    }
+
+    const newReview = await Review.create({
+      userId,
+      spotId,
+      review,
+      stars
+    });
+
+    res.status(201).json({
+      id: newReview.id,
+      userId: newReview.userId,
+      spotId: newReview.spotId,
+      review: newReview.review,
+      stars: newReview.stars,
+      createdAt: newReview.createdAt,
+      updatedAt: newReview.updatedAt
+    });
+  } catch (error) {
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({
+        message: 'Validation error',
+        errors: error.errors.reduce((acc, curr) => {
+          acc[curr.path] = curr.message;
+          return acc;
+        }, {})
+      });
+    }
+    next(error);
+  }
+});
+
 router.put('/:spotId', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
@@ -262,7 +363,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findByPk(spotId);
     if (!spot) {
-      return res.status(404).json({ message: "Spot not found." });
+      return res.status(404).json({ message: "Spot couldn't be found." });
     }
 
     await spot.update({
@@ -294,6 +395,28 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       });
     }
 
+    next(error);
+  }
+});
+
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+  try {
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      return res.status(404).json({ message: 'Spot not found' });
+    }
+
+    if (spot.userId !== req.user.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    await spot.destroy();
+
+    res.status(200).json({ message: 'Spot deleted successfully' });
+  } catch (error) {
     next(error);
   }
 });
