@@ -286,6 +286,19 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
       errors.stars = 'Stars must be an integer from 1 to 5';
     }
 
+    const existingReview = await Review.findOne({
+      where: {
+        userId: userId,
+        spotId: spotId
+      }
+    })
+
+    if (existingReview) {
+      return res.status(500).json({
+        message: "User already has a review for this spot",
+      });
+    }
+
     if (Object.keys(errors).length > 0) {
       return res.status(400).json({
         message: 'Bad Request',
@@ -294,6 +307,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     }
 
     const spot = await Spot.findByPk(spotId);
+
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }
