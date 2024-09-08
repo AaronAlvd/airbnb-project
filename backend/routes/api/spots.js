@@ -457,6 +457,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     if (!review || typeof review !== 'string' || review.trim() === '') {
       errors.review = 'Review text is required';
     }
+
     if (stars === undefined || !Number.isInteger(stars) || stars < 1 || stars > 5) {
       errors.stars = 'Stars must be an integer from 1 to 5';
     }
@@ -466,11 +467,11 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         userId: userId,
         spotId: spotId
       }
-    })
+    });
 
     if (existingReview) {
-      return res.status(500).json({
-        message: "User already has a review for this spot",
+      return res.status(403).json({
+        message: "User already has a review for this spot", // Change 500 -> 403 for better semantic meaning
       });
     }
 
@@ -482,7 +483,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     }
 
     const spot = await Spot.findByPk(spotId);
-
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }
@@ -504,6 +504,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
       updatedAt: newReview.updatedAt
     });
   } catch (error) {
+
     if (error.name === 'SequelizeValidationError') {
       return res.status(400).json({
         message: 'Validation error',
@@ -513,9 +514,10 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         }, {})
       });
     }
-    next(error);
+    next(error); // Pass any other errors to the error handler
   }
 });
+
 
 router.put('/:spotId', requireAuth, async (req, res, next) => {
   try {
