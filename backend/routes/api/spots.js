@@ -498,6 +498,13 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       return res.status(404).json({ message: "Spot couldn't be found." });
     }
 
+    // Check if the user is the owner of the spot
+    if (spot.userId !== req.user.id) {
+      return res.status(403).json({
+        message: "Forbidden: You are not the owner of this spot."
+      });
+    }
+
     await spot.update({
       address,
       city,
@@ -530,6 +537,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     next(error);
   }
 });
+
 
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
   try {
