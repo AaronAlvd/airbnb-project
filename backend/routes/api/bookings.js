@@ -4,6 +4,74 @@ const { Spot, Booking, SpotImage, sequelize } = require('../../db/models');
 
 const router = express.Router();
 
+
+router.get('/current', requireAuth, async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const bookings = await Booking.findAll({
+      where: { userId },
+      include: [
+        {
+          model: Spot,
+          attributes: [
+            'id',
+            'userId',
+            'address',
+            'city',
+            'state',
+            'country',
+            'lat',
+            'lng',
+            'name',
+            'price'
+          ],
+          include: [
+            {
+              model: SpotImage,
+              attributes: [['url', 'previewImage']],
+              where: { preview: true },
+              required: false  // Include even if no preview image exists
+            }
+          ]
+        }
+      ]
+    });
+
+    const formattedBookings = bookings.map(booking => {
+      const spot = booking.Spot;
+      const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null;
+
+      return {
+        id: booking.id,
+        spotId: booking.spotId,
+        userId: booking.userId,
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+        createdAt: booking.createdAt,
+        updatedAt: booking.updatedAt,
+        Spot: {
+          id: spot.id,
+          ownerId: spot.userId,
+          address: spot.address,
+          city: spot.city,
+          state: spot.state,
+          country: spot.country,
+          lat: spot.lat,
+          lng: spot.lng,
+          name: spot.name,
+          price: spot.price,
+          previewImage
+        }
+      };
+    });
+
+    return res.status(200).json({ Bookings: formattedBookings });
+    
+  } catch (error) {
+    next(error);
+  }
+});
 router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
@@ -148,73 +216,7 @@ router.put('/bookings/:bookingId', requireAuth, async (req, res, next) => {
   });
   
 
-router.get('/bookings/current', requireAuth, async (req, res, next) => {
-  try {
-    const userId = req.user.id;
 
-    const bookings = await Booking.findAll({
-      where: { userId },
-      include: [
-        {
-          model: Spot,
-          attributes: [
-            'id',
-            'ownerId',
-            'address',
-            'city',
-            'state',
-            'country',
-            'lat',
-            'lng',
-            'name',
-            'price'
-          ],
-          include: [
-            {
-              model: SpotImage,
-              attributes: [['url', 'previewImage']],
-              where: { preview: true },
-              required: false  // Include even if no preview image exists
-            }
-          ]
-        }
-      ]
-    });
-
-    const formattedBookings = bookings.map(booking => {
-      const spot = booking.Spot;
-      const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null;
-
-      return {
-        id: booking.id,
-        spotId: booking.spotId,
-        userId: booking.userId,
-        startDate: booking.startDate,
-        endDate: booking.endDate,
-        createdAt: booking.createdAt,
-        updatedAt: booking.updatedAt,
-        Spot: {
-          id: spot.id,
-          ownerId: spot.ownerId,
-          address: spot.address,
-          city: spot.city,
-          state: spot.state,
-          country: spot.country,
-          lat: spot.lat,
-          lng: spot.lng,
-          name: spot.name,
-          price: spot.price,
-          previewImage
-        }
-      };
-    });
-
-    return res.status(200).json({ Bookings: formattedBookings });
-    
-  } catch (error) {
-    next(error);
-  }
-});
 
 
 router.delete('/bookings/:bookingId', requireAuth, async (req, res, next) => {
