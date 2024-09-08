@@ -28,10 +28,30 @@ const validateSignup = [
 
 const router = express.Router();
 
-router.post('/', validateSignup, async (req, res) => {
-    const { firstName, lastName, email, password, username } = req.body;
+router.post('/', validateSignup, async (req, res, next) => {
+  const { firstName, lastName, email, password, username } = req.body;
+
+  try {
+    // Check if email or username already exists by manually querying both conditions
+    const existingEmail = await User.findOne({ where: { email } });
+    const existingUsername = await User.findOne({ where: { username } });
+
+    if (existingEmail || existingUsername) {
+      const err = new Error('Email or username already exists');
+      err.status = 500;
+      err.errors = { email: 'Email or username already exists' };
+      return next(err);
+    }
+
+    // Hash password and create user
     const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ firstName, lastName, email, username, hashedPassword });
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      username,
+      hashedPassword
+    });
 
     const safeUser = {
       id: user.id,
@@ -41,12 +61,16 @@ router.post('/', validateSignup, async (req, res) => {
       username: user.username,
     };
 
+    // Set token cookie and log in user
     await setTokenCookie(res, safeUser);
 
     return res.json({
       user: safeUser
     });
+  } catch (error) {
+    return next(error);
   }
-);
+});
+
 
 module.exports = router;
