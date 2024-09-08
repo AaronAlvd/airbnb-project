@@ -1,6 +1,6 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth.js');
-const { Spot, sequelize, User, SpotImage, Review } = require('../../db/models');
+const { Spot, sequelize, User, ReviewImage, SpotImage, Review } = require('../../db/models');
 const router = express.Router();
 
 router.get('/current', requireAuth, async (req, res, next) => {
@@ -295,6 +295,63 @@ router.get('/spots/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     return res.status(200).json({ Bookings: formattedBookings });
     
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/:spotId/reviews', async (req, res, next) => {
+  const { spotId } = req.params;
+
+  try {
+    // Check if the spot exists
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot couldn't be found",
+      });
+    }
+
+    // Fetch reviews associated with the spot
+    const reviews = await Review.findAll({
+      where: { spotId },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName'],
+        },
+        {
+          model: ReviewImage,
+          attributes: ['id', 'url'],
+        },
+      ],
+    });
+
+    // Format the reviews to match the response requirements
+    const formattedReviews = reviews.map((review) => {
+      return {
+        id: review.id,
+        userId: review.userId,
+        spotId: review.spotId,
+        review: review.review,
+        stars: review.stars,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+        User: {
+          id: review.User.id,
+          firstName: review.User.firstName,
+          lastName: review.User.lastName,
+        },
+        ReviewImages: review.ReviewImages.map((image) => ({
+          id: image.id,
+          url: image.url,
+        })),
+      };
+    });
+
+    return res.status(200).json({
+      Reviews: formattedReviews,
+    });
   } catch (error) {
     next(error);
   }

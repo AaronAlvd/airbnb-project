@@ -4,7 +4,7 @@ const { User, Review, Spot, sequelize, SpotImage, ReviewImage } = require('../..
 
 const router = express.Router();
 
-router.get('/reviews/current', requireAuth, async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
 
