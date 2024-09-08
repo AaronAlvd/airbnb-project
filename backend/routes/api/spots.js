@@ -315,9 +315,9 @@ router.post('/:spotId/images', async (req, res, next) => {
       });
     }
 
-    const spot = await Spot.findByPk(id);
+    const spot = await Spot.findByPk(spotId);
     if (!spot) {
-      return res.status(404).json({ message: "Spot not found." });
+      return res.status(404).json({ message: "Spot couldn't be found." });
     }
 
     const newImage = await SpotImage.create({ spotId: spotId, url, preview });
