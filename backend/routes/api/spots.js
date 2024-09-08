@@ -49,6 +49,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
   }
 });
 
+// Get all spots
 router.get('/', async (req, res, next) => {
   try {
     let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
@@ -91,63 +92,69 @@ router.get('/', async (req, res, next) => {
     if (minPrice) where.price = { [sequelize.Op.gte]: minPrice };
     if (maxPrice) where.price = { ...where.price, [sequelize.Op.lte]: maxPrice };
 
+    // Step 1: Fetch spots without aggregates
     const spots = await Spot.findAll({
       where,
       limit: size,
       offset: (page - 1) * size,
       attributes: [
-        'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating']
+        'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'
       ],
       include: [
-        {
-          model: Review,
-          attributes: [],
-        },
         {
           model: SpotImage,
           attributes: [['url', 'previewImage']],
           where: { preview: true },
           required: false
         }
-      ],
-      group: ['Spot.id']
+      ]
     });
 
-    if (!spots.length) {
-      return res.json({ message: "No spots found." });
-    }
+    // Step 2: Calculate aggregates for each spot
+    const formattedSpots = await Promise.all(
+      spots.map(async (spot) => {
+        // Fetch average rating and number of reviews for each spot
+        const reviews = await Review.findAll({
+          where: { spotId: spot.id },
+          attributes: [
+            [sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating'],
+            [sequelize.fn('COUNT', sequelize.col('id')), 'numReviews']
+          ]
+        });
 
-    const formattedSpots = spots.map(spot => {
-      const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null;
+        const { avgStarRating, numReviews } = reviews[0].dataValues;
 
-      return {
-        id: spot.id,
-        ownerId: spot.userId,
-        address: spot.address,
-        city: spot.city,
-        state: spot.state,
-        country: spot.country,
-        lat: spot.lat,
-        lng: spot.lng,
-        name: spot.name,
-        description: spot.description,
-        price: spot.price,
-        createdAt: spot.createdAt,
-        updatedAt: spot.updatedAt,
-        avgStarRating: spot.avgStarRating ? parseFloat(spot.avgStarRating) : null,
-        previewImage
-      };
-    });
+        // Construct the final spot object
+        return {
+          id: spot.id,
+          userId: spot.userId,
+          address: spot.address,
+          city: spot.city,
+          state: spot.state,
+          country: spot.country,
+          lat: spot.lat,
+          lng: spot.lng,
+          name: spot.name,
+          description: spot.description,
+          price: spot.price,
+          createdAt: spot.createdAt,
+          updatedAt: spot.updatedAt,
+          avgStarRating: avgStarRating ? parseFloat(avgStarRating) : null,
+          numReviews: numReviews ? parseInt(numReviews, 10) : 0,
+          previewImage: spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null
+        };
+      })
+    );
 
+    // Step 3: Return the formatted spots
     res.json({
       Spots: formattedSpots,
       page,
       size
     });
-    
+
   } catch (error) {
-    next(error); 
+    next(error);
   }
 });
 
