@@ -6,7 +6,6 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-// Middleware to validate the login credentials
 const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
@@ -20,7 +19,6 @@ const validateLogin = [
 
 const router = express.Router();
 
-// Get the current logged-in user
 router.get('/', (req, res) => {
     const { user } = req;
     if (user) {
@@ -37,7 +35,6 @@ router.get('/', (req, res) => {
     }
 });
 
-// Login route
 router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
 
@@ -50,7 +47,6 @@ router.post('/', validateLogin, async (req, res, next) => {
         }
     });
 
-    // If user not found or password doesn't match
     if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
         const err = new Error('Login failed');
         err.status = 401;
@@ -59,7 +55,6 @@ router.post('/', validateLogin, async (req, res, next) => {
         return next(err);
     }
 
-    // If login is successful, send the user information back
     const safeUser = {
         id: user.id,
         firstName: user.firstName,
@@ -73,7 +68,6 @@ router.post('/', validateLogin, async (req, res, next) => {
     return res.json({ user: safeUser });
 });
 
-// Log out the current user
 router.delete('/', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'success' });

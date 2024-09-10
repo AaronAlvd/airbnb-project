@@ -10,7 +10,7 @@ module.exports = {
       {
         spotId: 1,
         url: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fmansion&psig=AOvVaw0crs3rkuUKKEiYZ6dn-7Lz&ust=1725677167711000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCIjKiMemrYgDFQAAAAAdAAAAABAE',
-        preview: true,
+        preview: false,
       },
       {
         spotId: 2,
@@ -21,11 +21,11 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await Spot.destroy({
+    await SpotImage.destroy({
       where: {
         [Op.or]: [
-          { spotId: 2 },
-          { spotId: 1 },
+          { id: 1 },
+          { id: 2 },
         ]
       }
     });

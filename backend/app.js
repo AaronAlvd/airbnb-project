@@ -71,3 +71,11 @@ app.use((err, _req, res, _next) => {
 });
 
 module.exports = app;
+
+
+// {
+//   "spotId": 00,  Fill in the spotId
+//   "userId": 00,  Fill in the userId
+//   "startDate": "",  Fill in the startDate in ISO format
+//   "endDate": ""  Fill in the endDate in ISO format
+// }

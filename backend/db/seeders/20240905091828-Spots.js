@@ -50,9 +50,9 @@ module.exports = {
     await Spot.destroy({
       where: {
         [Op.or]: [
-          { address: "123 Disney Lane" },
-          { address: "456 Hollywood Blvd" },
-          { address: "789 Innovation Drive" }
+          { id: 1},
+          { id: 2},
+          { id: 3}
         ]
       }
     });

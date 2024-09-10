@@ -64,7 +64,7 @@ router.post('/', validateSignup, async (req, res, next) => {
     // Set token cookie and log in user
     await setTokenCookie(res, safeUser);
 
-    return res.json({
+    return res.status(201).json({
       user: safeUser
     });
   } catch (error) {

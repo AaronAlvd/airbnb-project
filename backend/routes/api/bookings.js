@@ -1,5 +1,6 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth.js');
+const { Op } = require('sequelize');
 const { Spot, Booking, SpotImage, sequelize } = require('../../db/models');
 
 const router = express.Router();
@@ -31,7 +32,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
               model: SpotImage,
               attributes: [['url', 'previewImage']],
               where: { preview: true },
-              required: false  // Include even if no preview image exists
+              required: false  
             }
           ]
         }
@@ -72,154 +73,103 @@ router.get('/current', requireAuth, async (req, res, next) => {
     next(error);
   }
 });
-router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+router.put('/:bookingId', requireAuth, async (req, res, next) => {
   try {
-    const { spotId } = req.params;
+    const { bookingId } = req.params;
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
-    const spot = await Spot.findByPk(spotId);
-    if (!spot) {
-      return res.status(404).json({ message: "Spot couldn't be found" });
+    // Validate startDate and endDate
+    if (!startDate || !endDate) {
+      return res.status(400).json({ message: 'Start date and end date are required' });
     }
 
-    if (spot.ownerId === userId) {
-      return res.status(403).json({
-        message: "You cannot book your own spot"
-      });
+    // Convert dates to Date objects and check for validity
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      return res.status(400).json({ message: 'Invalid date format' });
     }
 
+    if (start >= end) {
+      return res.status(400).json({ message: 'End date must be after start date' });
+    }
+
+    // Find the booking by its ID
+    const booking = await Booking.findByPk(bookingId, {
+      include: {
+        model: Spot,
+        attributes: ['id']
+      }
+    });
+
+    // Check if the booking exists
+    if (!booking) {
+      return res.status(404).json({ message: "Booking couldn't be found" });
+    }
+
+    // Ensure the user is authorized to update this booking
+    if (booking.userId !== userId) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    // Ensure the booking is not in the past
+    const currentDate = new Date();
+    if (end < currentDate) {
+      return res.status(400).json({ message: "Past bookings cannot be edited" });
+    }
+
+    // Check for conflicts with other bookings
     const existingBooking = await Booking.findOne({
       where: {
-        spotId: spotId,
-        [sequelize.Op.or]: [
+        spotId: booking.spotId,
+        id: { [Op.ne]: bookingId }, // Exclude the current booking
+        [Op.or]: [
           {
-            startDate: { [sequelize.Op.between]: [startDate, endDate] }
+            startDate: { [Op.between]: [startDate, endDate] }
           },
           {
-            endDate: { [sequelize.Op.between]: [startDate, endDate] }
+            endDate: { [Op.between]: [startDate, endDate] }
           },
           {
-            [sequelize.Op.and]: [
-              { startDate: { [sequelize.Op.lte]: startDate } },
-              { endDate: { [sequelize.Op.gte]: endDate } }
+            [Op.and]: [
+              { startDate: { [Op.lte]: startDate } },
+              { endDate: { [Op.gte]: endDate } }
             ]
           }
         ]
       }
     });
 
+    // Handle booking conflict
     if (existingBooking) {
-      return res.status(403).json({
-        message: "Booking already exists for the spot on the selected dates"
-      });
+      return res.status(403).json({ message: "Another booking already exists for the spot on the selected dates" });
     }
 
-    const newBooking = await Booking.create({
-      userId,
-      spotId,
-      startDate,
-      endDate
+    // Update the booking details
+    booking.startDate = startDate;
+    booking.endDate = endDate;
+    await booking.save();
+
+    // Return the updated booking
+    return res.status(200).json({
+      id: booking.id,
+      userId: booking.userId,
+      spotId: booking.spotId,
+      startDate: booking.startDate,
+      endDate: booking.endDate,
+      createdAt: booking.createdAt,
+      updatedAt: booking.updatedAt
     });
 
-    return res.status(201).json({
-      id: newBooking.id,
-      userId: newBooking.userId,
-      spotId: newBooking.spotId,
-      startDate: newBooking.startDate,
-      endDate: newBooking.endDate,
-      createdAt: newBooking.createdAt,
-      updatedAt: newBooking.updatedAt
-    });
-    
   } catch (error) {
-    next(error);
+    next(error); // Pass errors to the error-handling middleware
   }
 });
 
-router.put('/bookings/:bookingId', requireAuth, async (req, res, next) => {
-    try {
-      const { bookingId } = req.params;
-      const { startDate, endDate } = req.body;
-      const userId = req.user.id;
-  
-      const booking = await Booking.findByPk(bookingId, {
-        include: {
-          model: Spot,
-          attributes: ['id', 'ownerId']  // Include the spot's ownerId for future authorization checks if needed
-        }
-      });
-  
-      if (!booking) {
-        return res.status(404).json({
-          message: "Booking couldn't be found"
-        });
-      }
-  
-      if (booking.userId !== userId) {
-        return res.status(403).json({
-          message: 'Forbidden: You cannot edit this booking'
-        });
-      }
-  
-      const currentDate = new Date();
-      if (new Date(booking.endDate) < currentDate) {
-        return res.status(400).json({
-          message: "Past bookings cannot be edited"
-        });
-      }
-  
-      const existingBooking = await Booking.findOne({
-        where: {
-          spotId: booking.spotId,
-          id: { [sequelize.Op.ne]: bookingId },  // Exclude current booking from the check
-          [sequelize.Op.or]: [
-            {
-              startDate: { [sequelize.Op.between]: [startDate, endDate] }
-            },
-            {
-              endDate: { [sequelize.Op.between]: [startDate, endDate] }
-            },
-            {
-              [sequelize.Op.and]: [
-                { startDate: { [sequelize.Op.lte]: startDate } },
-                { endDate: { [sequelize.Op.gte]: endDate } }
-              ]
-            }
-          ]
-        }
-      });
-  
-      if (existingBooking) {
-        return res.status(403).json({
-          message: "Another booking already exists for the spot on the selected dates"
-        });
-      }
-  
-      booking.startDate = startDate;
-      booking.endDate = endDate;
-      await booking.save();
-  
-      return res.status(200).json({
-        id: booking.id,
-        userId: booking.userId,
-        spotId: booking.spotId,
-        startDate: booking.startDate,
-        endDate: booking.endDate,
-        createdAt: booking.createdAt,
-        updatedAt: booking.updatedAt
-      });
-  
-    } catch (error) {
-      next(error);
-    }
-  });
-  
-
-
-
-
-router.delete('/bookings/:bookingId', requireAuth, async (req, res, next) => {
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     try {
       const { bookingId } = req.params;
       const userId = req.user.id;
@@ -227,7 +177,7 @@ router.delete('/bookings/:bookingId', requireAuth, async (req, res, next) => {
       const booking = await Booking.findByPk(bookingId, {
         include: {
           model: Spot,
-          attributes: ['ownerId'] // Include the spot's ownerId for authorization
+          attributes: ['id']
         }
       });
   

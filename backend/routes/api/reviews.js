@@ -169,37 +169,6 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
   }
 });
 
-router.delete('/:reviewId', requireAuth, async (req, res, next) => {
-  try {
-    const { reviewId } = req.params;
-
-    const review = await Review.findByPk(reviewId);
-
-    if (!review) {
-      return res.status(404).json({
-        message: "Review couldn't be found"
-      });
-    }
-
-    if (review.userId !== req.user.id) {
-      return res.status(403).json({
-        message: 'Forbidden'
-      });
-    }
-
-    await ReviewImage.destroy({ where: { reviewId } });
-
-    await review.destroy();
-
-    res.status(200).json({
-      message: 'Successfully deleted'
-    });
-
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.delete('/:reviewId/images/:imageId', requireAuth, async (req, res, next) => {
   try {
     const { reviewId, imageId } = req.params;
@@ -232,6 +201,37 @@ router.delete('/:reviewId/images/:imageId', requireAuth, async (req, res, next) 
 
     res.status(200).json({
       message: 'Image deleted successfully'
+    });
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:reviewId', requireAuth, async (req, res, next) => {
+  try {
+    const { reviewId } = req.params;
+
+    const review = await Review.findByPk(reviewId);
+
+    if (!review) {
+      return res.status(404).json({
+        message: "Review couldn't be found"
+      });
+    }
+
+    if (review.userId !== req.user.id) {
+      return res.status(403).json({
+        message: 'Forbidden'
+      });
+    }
+
+    await ReviewImage.destroy({ where: { reviewId } });
+
+    await review.destroy();
+
+    res.status(200).json({
+      message: 'Successfully deleted'
     });
 
   } catch (error) {
