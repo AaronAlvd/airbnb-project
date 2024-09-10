@@ -104,6 +104,48 @@ router.get('/:spotId/reviews', async (req, res, next) => {
   }
 });
 
+router.get('/spots/:spotId/bookings', requireAuth, async (req, res, next) => {
+  try {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      return res.status(404).json({
+        message: "Spot couldn't be found"
+      });
+    }
+
+    const isOwner = spot.userId === userId;
+
+    const bookings = await Booking.findAll({
+      where: {
+        spotId: spotId
+      },
+      include: isOwner ? [{ model: User, attributes: ['id', 'firstName', 'lastName'] }] : []
+    });
+
+    if (isOwner) {
+      res.status(200).json({
+        Bookings: bookings
+      });
+    } else {
+      const simplifiedBookings = bookings.map(booking => ({
+        spotId: booking.spotId,
+        startDate: booking.startDate,
+        endDate: booking.endDate
+      }));
+      res.status(200).json({
+        Bookings: simplifiedBookings
+      });
+    }
+
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:spotId', async (req, res, next) => {
 
   try {
@@ -144,7 +186,56 @@ router.get('/:spotId', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   try {
+    const errors = {};
+
+    const page = parseInt(req.query.page, 10) || 1;
+    if (isNaN(page) || page < 1) {
+      errors.page = 'Page must be greater than or equal to 1';
+    }
+
+    const size = parseInt(req.query.size, 10) || 20;
+    if (isNaN(size) || size < 1 || size > 20) {
+      errors.size = 'Size must be between 1 and 20';
+    }
+
+    if (req.query.minLat && isNaN(parseFloat(req.query.minLat))) {
+      errors.minLat = 'Minimum latitude is invalid';
+    }
+    if (req.query.maxLat && isNaN(parseFloat(req.query.maxLat))) {
+      errors.maxLat = 'Maximum latitude is invalid';
+    }
+  
+    if (req.query.minLng && isNaN(parseFloat(req.query.minLng))) {
+      errors.minLng = 'Minimum longitude is invalid';
+    }
+    if (req.query.maxLng && isNaN(parseFloat(req.query.maxLng))) {
+      errors.maxLng = 'Maximum longitude is invalid';
+    }
+  
+    if (req.query.minPrice && (isNaN(parseFloat(req.query.minPrice)) || parseFloat(req.query.minPrice) < 0)) {
+      errors.minPrice = 'Minimum price must be greater than or equal to 0';
+    }
+    if (req.query.maxPrice && (isNaN(parseFloat(req.query.maxPrice)) || parseFloat(req.query.maxPrice) < 0)) {
+      errors.maxPrice = 'Maximum price must be greater than or equal to 0';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return res.status(400).json({
+        message: 'Bad Request',
+        errors: errors
+      });
+    }
+
+    const filterConditions = {};
+    if (req.query.minLat) filterConditions.lat = { [Op.gte]: parseFloat(req.query.minLat) };
+    if (req.query.maxLat) filterConditions.lat = { ...filterConditions.lat, [Op.lte]: parseFloat(req.query.maxLat) };
+    if (req.query.minLng) filterConditions.lng = { [Op.gte]: parseFloat(req.query.minLng) };
+    if (req.query.maxLng) filterConditions.lng = { ...filterConditions.lng, [Op.lte]: parseFloat(req.query.maxLng) };
+    if (req.query.minPrice) filterConditions.price = { [Op.gte]: parseFloat(req.query.minPrice) };
+    if (req.query.maxPrice) filterConditions.price = { ...filterConditions.price, [Op.lte]: parseFloat(req.query.maxPrice) };
+
     const spots = await Spot.findAll({
+      where: filterConditions,
       attributes: [
         'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating']
@@ -223,7 +314,11 @@ router.post('/:spotId/images', async (req, res, next) => {
 
     res.status(201).json({
       message: "Image added successfully.",
-      image: newImage
+      image: {
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+      }
     });
   } catch (error) {
     if (error.name === 'SequelizeValidationError') {
@@ -507,41 +602,10 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
   }
 });
 
-router.delete('/:spotId/images/:imageId', requireAuth, async (req, res, next) => {
-  try {
-    const { spotId, imageId } = req.params;
-
-    const spot = await Spot.findByPk(spotId);
-
-    if (!spot) {
-      return res.status(404).json({ message: "Spot couldn't be found" });
-    }
-
-    if (spot.userId !== req.user.id) {
-      return res.status(403).json({ message: 'Forbidden' });
-    }
-
-    const image = await SpotImage.findOne({
-      where: { id: imageId, spotId: spotId }
-    });
-
-    if (!image) {
-      return res.status(404).json({ message: "Image couldn't be found" });
-    }
-
-    await image.destroy();
-
-    res.status(200).json({ message: 'Image deleted successfully' });
-
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
-  try {
-    const { spotId } = req.params;
+  const { spotId } = req.params;
 
+  try {
     const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
@@ -552,11 +616,28 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
-    await spot.destroy();
+    const transaction = await sequelize.transaction();
 
-    res.status(200).json({ message: 'Spot deleted successfully' });
+    try {
+      await SpotImage.destroy({ where: { spotId }, transaction });
+      await Review.destroy({ where: { spotId }, transaction });
+      await Booking.destroy({ where: { spotId }, transaction });
+
+      await spot.destroy({ transaction });
+
+      await transaction.commit();
+      res.status(200).json({ message: 'Spot deleted successfully' });
+    } catch (error) {
+      await transaction.rollback();
+      throw error; 
+    }
   } catch (error) {
-    next(error);
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      res.status(400).json({ message: 'Foreign key constraint error: unable to delete spot with related records' });
+    } else {
+      console.error('Error deleting spot:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
   }
 });
 

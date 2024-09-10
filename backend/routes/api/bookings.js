@@ -80,12 +80,10 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     const { startDate, endDate } = req.body;
     const userId = req.user.id;
 
-    // Validate startDate and endDate
     if (!startDate || !endDate) {
       return res.status(400).json({ message: 'Start date and end date are required' });
     }
 
-    // Convert dates to Date objects and check for validity
     const start = new Date(startDate);
     const end = new Date(endDate);
 
@@ -97,7 +95,6 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
       return res.status(400).json({ message: 'End date must be after start date' });
     }
 
-    // Find the booking by its ID
     const booking = await Booking.findByPk(bookingId, {
       include: {
         model: Spot,
@@ -105,27 +102,23 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
       }
     });
 
-    // Check if the booking exists
     if (!booking) {
       return res.status(404).json({ message: "Booking couldn't be found" });
     }
 
-    // Ensure the user is authorized to update this booking
     if (booking.userId !== userId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
-    // Ensure the booking is not in the past
     const currentDate = new Date();
     if (end < currentDate) {
       return res.status(400).json({ message: "Past bookings cannot be edited" });
     }
 
-    // Check for conflicts with other bookings
     const existingBooking = await Booking.findOne({
       where: {
         spotId: booking.spotId,
-        id: { [Op.ne]: bookingId }, // Exclude the current booking
+        id: { [Op.ne]: bookingId }, 
         [Op.or]: [
           {
             startDate: { [Op.between]: [startDate, endDate] }
@@ -143,17 +136,14 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
       }
     });
 
-    // Handle booking conflict
     if (existingBooking) {
       return res.status(403).json({ message: "Another booking already exists for the spot on the selected dates" });
     }
 
-    // Update the booking details
     booking.startDate = startDate;
     booking.endDate = endDate;
     await booking.save();
 
-    // Return the updated booking
     return res.status(200).json({
       id: booking.id,
       userId: booking.userId,
@@ -165,51 +155,52 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     });
 
   } catch (error) {
-    next(error); // Pass errors to the error-handling middleware
+    next(error); 
   }
 });
 
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
-    try {
+  try {
       const { bookingId } = req.params;
       const userId = req.user.id;
-  
+
       const booking = await Booking.findByPk(bookingId, {
-        include: {
-          model: Spot,
-          attributes: ['id']
-        }
+          include: {
+              model: Spot,
+              attributes: ['id']
+          }
       });
-  
+
       if (!booking) {
-        return res.status(404).json({
-          message: "Booking couldn't be found"
-        });
+          return res.status(404).json({
+              message: "Booking couldn't be found"
+          });
       }
-  
+
       if (booking.userId !== userId && booking.Spot.ownerId !== userId) {
-        return res.status(403).json({
-          message: 'Forbidden: You cannot delete this booking'
-        });
+          return res.status(403).json({
+              message: 'Forbidden: You cannot delete this booking'
+          });
       }
-  
+
       const currentDate = new Date();
       if (new Date(booking.startDate) <= currentDate) {
-        return res.status(400).json({
-          message: "Bookings that have started or passed cannot be deleted"
-        });
+          return res.status(400).json({
+              message: "Bookings that have started or passed cannot be deleted"
+          });
       }
-  
+
       await booking.destroy();
-  
+
       res.status(200).json({
-        message: 'Booking deleted successfully'
+          message: 'Booking deleted successfully'
       });
-  
-    } catch (error) {
+
+  } catch (error) {
       next(error);
-    }
-  });
+  }
+});
+
   
 
 module.exports = router;

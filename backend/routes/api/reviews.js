@@ -169,45 +169,6 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
   }
 });
 
-router.delete('/:reviewId/images/:imageId', requireAuth, async (req, res, next) => {
-  try {
-    const { reviewId, imageId } = req.params;
-
-    const review = await Review.findByPk(reviewId);
-
-    if (!review) {
-      return res.status(404).json({
-        message: "Review couldn't be found"
-      });
-    }
-
-    if (review.userId !== req.user.id) {
-      return res.status(403).json({
-        message: 'Forbidden'
-      });
-    }
-
-    const image = await ReviewImage.findOne({
-      where: { id: imageId, reviewId: reviewId }
-    });
-
-    if (!image) {
-      return res.status(404).json({
-        message: "Image couldn't be found"
-      });
-    }
-
-    await image.destroy();
-
-    res.status(200).json({
-      message: 'Image deleted successfully'
-    });
-
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
   try {
     const { reviewId } = req.params;
