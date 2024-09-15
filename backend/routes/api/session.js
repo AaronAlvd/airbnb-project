@@ -63,7 +63,6 @@ router.post('/', validateLogin, async (req, res, next) => {
         username: user.username,
     };
 
-    await restoreUser
     await setTokenCookie(res, safeUser);
 
     return res.json({ user: safeUser });
