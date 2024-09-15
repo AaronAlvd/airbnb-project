@@ -19,7 +19,7 @@ const validateLogin = [
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
         const safeUser = {
