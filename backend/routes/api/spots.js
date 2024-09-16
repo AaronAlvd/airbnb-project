@@ -147,7 +147,6 @@ router.get('/spots/:spotId/bookings', requireAuth, async (req, res, next) => {
 });
 
 router.get('/:spotId', async (req, res, next) => {
-
   try {
     const { spotId } = req.params;
     const spotExists = await Spot.findByPk(spotId)
@@ -157,10 +156,11 @@ router.get('/:spotId', async (req, res, next) => {
     }
 
     const getSpot = await Spot.findOne({
-      where: { id: spotId},
+      where: { id: spotId },
       attributes: [
         'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'], [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews']
+        [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
+        [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews']
       ],
       include: [
         {
@@ -169,13 +169,14 @@ router.get('/:spotId', async (req, res, next) => {
         },
         {
           model: User,
-          attributes: ['id', 'firstName', 'lastName'] 
+          attributes: ['id', 'firstName', 'lastName']
         },
         {
           model: Review,
-          attributes: [],
-        },
-      ] 
+          attributes: []
+        }
+      ],
+      group: ['Spot.id', 'SpotImages.id', 'User.id']
     });
 
     res.json(getSpot);
@@ -183,6 +184,7 @@ router.get('/:spotId', async (req, res, next) => {
     next(error); 
   }
 });
+
 
 router.get('/', async (req, res, next) => {
   try {
