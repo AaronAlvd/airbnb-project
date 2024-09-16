@@ -99,11 +99,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
       });
     }
 
-    // if (review.userId !== req.user.id) {
-    //   return res.status(403).json({
-    //     message: "Forbidden"
-    //   });
-    // }
+    if (review.userId !== req.user.id) {
+      return res.status(403).json({
+        message: "Forbidden"
+      });
+    }
 
     if (reviewImages.length >= 10) {
       return res.status(403).json({
@@ -152,11 +152,11 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
       });
     }
 
-    // if (existingReview.userId !== req.user.id) {
-    //   return res.status(403).json({
-    //     message: 'Forbidden'
-    //   });
-    // }
+    if (existingReview.userId !== req.user.id) {
+      return res.status(403).json({
+        message: 'Forbidden'
+      });
+    }
 
     existingReview.review = review;
     existingReview.stars = stars;
@@ -181,11 +181,11 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
       });
     }
 
-    // if (review.userId !== req.user.id) {
-    //   return res.status(403).json({
-    //     message: 'Forbidden'
-    //   });
-    // }
+    if (review.userId !== req.user.id) {
+      return res.status(403).json({
+        message: 'Forbidden'
+      });
+    }
 
     await ReviewImage.destroy({ where: { reviewId } });
 

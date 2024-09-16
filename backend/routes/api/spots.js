@@ -639,11 +639,11 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     }
 
     // Check if the logged-in user is the owner of the spot
-    // if (spot.userId !== req.user.id) {
-    //   return res.status(403).json({
-    //     message: "Forbidden: You are not the owner of this spot."
-    //   });
-    // }
+    if (spot.userId !== req.user.id) {
+      return res.status(403).json({
+        message: "Forbidden"
+      });
+    }
 
     // Update the spot with new data
     await spot.update({
@@ -711,9 +711,9 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
       return res.status(404).json({ message: 'Spot not found' });
     }
 
-    // if (spot.userId !== req.user.id) {
-    //   return res.status(403).json({ message: 'Forbidden' });
-    // }
+    if (spot.userId !== req.user.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
 
     const transaction = await sequelize.transaction();
 

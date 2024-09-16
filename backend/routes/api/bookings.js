@@ -106,9 +106,9 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
       return res.status(404).json({ message: "Booking couldn't be found" });
     }
 
-    // if (booking.userId !== userId) {
-    //   return res.status(403).json({ message: 'Forbidden' });
-    // }
+    if (booking.userId !== userId) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
 
     const currentDate = new Date();
     if (end < currentDate) {
@@ -177,11 +177,11 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
           });
       }
 
-      // if (booking.userId !== userId && booking.Spot.ownerId !== userId) {
-      //     return res.status(403).json({
-      //         message: 'Forbidden: You cannot delete this booking'
-      //     });
-      // }
+      if (booking.userId !== userId && booking.Spot.ownerId !== userId) {
+          return res.status(403).json({
+              message: 'Forbidden'
+          });
+      }
 
       const currentDate = new Date();
       if (new Date(booking.startDate) <= currentDate) {
