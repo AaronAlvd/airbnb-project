@@ -536,29 +536,58 @@ router.post('/', requireAuth, async (req, res, next) => {
       });
     }
 
-    const newSpot = await Spot.create({ userId: req.user.id, address, city, state, country, lat, lng, name, description, price });
+    const newSpot = await Spot.create({ 
+      userId: req.user.id, 
+      address, city, state, country, lat, lng, name, description, price 
+    });
+
+    // Helper function to format date as "YYYY-MM-DD HH:mm:ss"
+    const formatDate = (date) => {
+      const d = new Date(date);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const dd = String(d.getDate()).padStart(2, '0');
+      const hh = String(d.getHours()).padStart(2, '0');
+      const min = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+    };
 
     res.status(201).json({
       message: 'Spot created successfully.',
-      spot: newSpot
+      spot: {
+        id: newSpot.id,
+        ownerId: newSpot.userId,  // Rename userId to ownerId
+        address: newSpot.address,
+        city: newSpot.city,
+        state: newSpot.state,
+        country: newSpot.country,
+        lat: newSpot.lat,
+        lng: newSpot.lng,
+        name: newSpot.name,
+        description: newSpot.description,
+        price: newSpot.price,
+        createdAt: formatDate(newSpot.createdAt),  // Format createdAt
+        updatedAt: formatDate(newSpot.updatedAt)   // Format updatedAt
+      }
     });
   } catch (error) {
-    // if (error.name === 'SequelizeValidationError') {
-    //   const validationErrors = error.errors.reduce((acc, err) => {
-    //     acc[err.path] = err.message;
-    //     return acc;
-    //   }, {});
-      
-    //   return res.status(400).json({
-    //     message: "Validation error",
-    //     errors: validationErrors
-    //   });
-    // }
-
     next(error);
   }
 });
 
+
+// if (error.name === 'SequelizeValidationError') {
+//   const validationErrors = error.errors.reduce((acc, err) => {
+//     acc[err.path] = err.message;
+//     return acc;
+//   }, {});
+  
+//   return res.status(400).json({
+//     message: "Validation error",
+//     errors: validationErrors
+//   });
+// }
 router.put('/:spotId', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
