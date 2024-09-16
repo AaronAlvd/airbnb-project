@@ -160,7 +160,7 @@ router.get('/:spotId', async (req, res, next) => {
       attributes: [
         'id', 
         ['userId', 'ownerId'], // Rename userId to ownerId
-        'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 
+        'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
         [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
         
