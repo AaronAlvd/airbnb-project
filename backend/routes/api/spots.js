@@ -330,6 +330,18 @@ router.post('/:spotId/images', async (req, res, next) => {
     const { spotId } = req.params;
     const { url, preview } = req.body;
 
+    const spot = await Spot.findByPk(spotId);
+    
+    if (!spot) {
+      return res.status(404).json({ message: "Spot couldn't be found." });
+    }
+
+    if (spot.userId !== req.user.id) {
+      return res.status(403).json({
+        message: "Forbidden"
+      });
+    }
+
     if (!url || typeof preview !== 'boolean') {
       return res.status(400).json({
         message: "Bad Request",
@@ -338,11 +350,6 @@ router.post('/:spotId/images', async (req, res, next) => {
           preview: "Preview must be a boolean value"
         }
       });
-    }
-
-    const spot = await Spot.findByPk(spotId);
-    if (!spot) {
-      return res.status(404).json({ message: "Spot couldn't be found." });
     }
 
     const newImage = await SpotImage.create({ spotId: spotId, url, preview });
