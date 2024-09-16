@@ -332,7 +332,7 @@ router.get('/', async (req, res, next) => {
 
 
 
-router.post('/:spotId/images', async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const { url, preview } = req.body;
