@@ -149,7 +149,7 @@ router.get('/spots/:spotId/bookings', requireAuth, async (req, res, next) => {
 router.get('/:spotId', async (req, res, next) => {
   try {
     const { spotId } = req.params;
-    const spotExists = await Spot.findByPk(spotId)
+    const spotExists = await Spot.findByPk(spotId);
 
     if (!spotExists) {
       return res.status(404).json({ message: "Spot couldn't be found" });
@@ -158,9 +158,13 @@ router.get('/:spotId', async (req, res, next) => {
     const getSpot = await Spot.findOne({
       where: { id: spotId },
       attributes: [
-        'id', 'userId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+        'id', 
+        ['userId', 'ownerId'], // Rename userId to ownerId
+        'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
-        [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews']
+        [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
+        [sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'], // Format createdAt
+        [sequelize.fn('DATE_FORMAT', sequelize.col('updatedAt'), '%Y-%m-%d %H:%i:%s'), 'updatedAt']  // Format updatedAt
       ],
       include: [
         {
@@ -169,6 +173,7 @@ router.get('/:spotId', async (req, res, next) => {
         },
         {
           model: User,
+          as: 'Owner', // Rename User to Owner
           attributes: ['id', 'firstName', 'lastName']
         },
         {
@@ -176,10 +181,17 @@ router.get('/:spotId', async (req, res, next) => {
           attributes: []
         }
       ],
-      group: ['Spot.id', 'SpotImages.id', 'User.id']
+      group: ['Spot.id', 'SpotImages.id', 'Owner.id']
     });
 
-    res.json(getSpot);
+    // Parse the avgStarRating and numReviews into numbers instead of strings
+    const formattedSpot = {
+      ...getSpot.toJSON(),
+      avgStarRating: parseFloat(getSpot.get('avgStarRating')),
+      numReviews: parseInt(getSpot.get('numReviews'), 10)
+    };
+
+    res.json(formattedSpot);
   } catch (error) {
     next(error); 
   }
