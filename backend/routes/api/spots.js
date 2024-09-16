@@ -188,7 +188,6 @@ router.get('/', async (req, res, next) => {
   try {
     const errors = {};
 
-    // Parse and validate query parameters
     const page = parseInt(req.query.page, 10) || 1;
     if (isNaN(page) || page < 1) {
       errors.page = 'Page must be greater than or equal to 1';
@@ -220,7 +219,6 @@ router.get('/', async (req, res, next) => {
       errors.maxPrice = 'Maximum price must be greater than or equal to 0';
     }
 
-    // If any validation errors exist, return them
     if (Object.keys(errors).length > 0) {
       return res.status(400).json({
         message: 'Bad Request',
@@ -228,7 +226,6 @@ router.get('/', async (req, res, next) => {
       });
     }
 
-    // Filter conditions based on query parameters
     const filterConditions = {};
     if (req.query.minLat) filterConditions.lat = { [Op.gte]: parseFloat(req.query.minLat) };
     if (req.query.maxLat) filterConditions.lat = { ...filterConditions.lat, [Op.lte]: parseFloat(req.query.maxLat) };
@@ -237,7 +234,6 @@ router.get('/', async (req, res, next) => {
     if (req.query.minPrice) filterConditions.price = { [Op.gte]: parseFloat(req.query.minPrice) };
     if (req.query.maxPrice) filterConditions.price = { ...filterConditions.price, [Op.lte]: parseFloat(req.query.maxPrice) };
 
-    // Query spots with filtering, average rating, and preview image
     const spots = await Spot.findAll({
       where: filterConditions,
       attributes: [
@@ -247,24 +243,22 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: Review,
-          attributes: [], // Only calculate the average rating, no need to include fields
+          attributes: [],
         },
         {
           model: SpotImage,
-          attributes: [['url', 'previewImage']], // Fetch the preview image URL
+          attributes: [['url', 'previewImage']],
           where: { preview: true },
-          required: false // Include spots even if they have no preview image
+          required: false 
         }
       ],
-      group: ['Spot.id', 'SpotImages.id'], // Group by Spot.id and SpotImages.id to avoid SQL error
+      group: ['Spot.id'] 
     });
 
-    // If no spots are found, return a message
     if (spots.length === 0) {
       return res.json({ message: "No spots found." });
     }
 
-    // Format the response for each spot
     const formattedSpots = {
       Spots: spots.map(spot => {
         const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null;
@@ -289,13 +283,12 @@ router.get('/', async (req, res, next) => {
       })
     };
     
-    // Return the formatted spots in the response
+
     res.json(formattedSpots);
   } catch (error) {
-    next(error); // Pass errors to the error-handling middleware
+    next(error); 
   }
 });
-
 
 router.post('/:spotId/images', async (req, res, next) => {
   try {
