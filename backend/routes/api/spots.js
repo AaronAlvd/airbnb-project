@@ -163,7 +163,6 @@ router.get('/:spotId', async (req, res, next) => {
         'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
         [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
-        
       ],
       include: [
         {
@@ -183,11 +182,25 @@ router.get('/:spotId', async (req, res, next) => {
       group: ['Spot.id', 'SpotImages.id', 'Owner.id']
     });
 
+    // Convert createdAt and updatedAt to 'YYYY-MM-DD HH:mm:ss' format
+    const formatDate = (date) => {
+      const d = new Date(date);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const dd = String(d.getDate()).padStart(2, '0');
+      const hh = String(d.getHours()).padStart(2, '0');
+      const min = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+    };
+
     // Parse the avgStarRating and numReviews into numbers instead of strings
     const formattedSpot = {
       ...getSpot.toJSON(),
       avgStarRating: parseFloat(getSpot.get('avgStarRating')),
-      numReviews: parseInt(getSpot.get('numReviews'), 10)
+      numReviews: parseInt(getSpot.get('numReviews'), 10),
+      createdAt: formatDate(getSpot.createdAt), // Apply formatting to createdAt
+      updatedAt: formatDate(getSpot.updatedAt)  // Apply formatting to updatedAt
     };
 
     res.json(formattedSpot);
@@ -195,6 +208,7 @@ router.get('/:spotId', async (req, res, next) => {
     next(error); 
   }
 });
+
 
 
 router.get('/', async (req, res, next) => {
