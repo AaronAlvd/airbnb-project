@@ -163,8 +163,7 @@ router.get('/:spotId', async (req, res, next) => {
         'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
         [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
-        [sequelize.fn('DATE_FORMAT', sequelize.col('createdAt'), '%Y-%m-%d %H:%i:%s'), 'createdAt'], // Format createdAt
-        [sequelize.fn('DATE_FORMAT', sequelize.col('updatedAt'), '%Y-%m-%d %H:%i:%s'), 'updatedAt']  // Format updatedAt
+        
       ],
       include: [
         {
