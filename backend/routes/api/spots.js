@@ -589,6 +589,18 @@ router.post('/', requireAuth, async (req, res, next) => {
 //   });
 // }
 router.put('/:spotId', requireAuth, async (req, res, next) => {
+  // Custom date formatting function
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const dd = String(d.getDate()).padStart(2, '0');
+    const hh = String(d.getHours()).padStart(2, '0');
+    const min = String(d.getMinutes()).padStart(2, '0');
+    const ss = String(d.getSeconds()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+  };
+
   try {
     const { spotId } = req.params;
     const {
@@ -626,12 +638,14 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       return res.status(404).json({ message: "Spot couldn't be found." });
     }
 
+    // Check if the logged-in user is the owner of the spot
     // if (spot.userId !== req.user.id) {
     //   return res.status(403).json({
     //     message: "Forbidden: You are not the owner of this spot."
     //   });
     // }
 
+    // Update the spot with new data
     await spot.update({
       address,
       city,
@@ -644,11 +658,31 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       price
     });
 
+    // Format the createdAt and updatedAt using the custom formatDate function
+    const formattedCreatedAt = formatDate(spot.createdAt);
+    const formattedUpdatedAt = formatDate(spot.updatedAt);
+
+    // Send the updated spot as the response with ownerId and formatted dates
     res.status(200).json({
       message: 'Spot updated successfully.',
-      spot
+      spot: {
+        id: spot.id,
+        ownerId: spot.userId,  // Renaming userId to ownerId
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+        price: spot.price,
+        createdAt: formattedCreatedAt,  // Formatted createdAt
+        updatedAt: formattedUpdatedAt   // Formatted updatedAt
+      }
     });
   } catch (error) {
+    // Handle Sequelize validation errors
     if (error.name === 'SequelizeValidationError') {
       const validationErrors = error.errors.reduce((acc, err) => {
         acc[err.path] = err.message;
@@ -661,9 +695,11 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
       });
     }
 
+    // Pass any other errors to the next middleware
     next(error);
   }
 });
+
 
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
   const { spotId } = req.params;
