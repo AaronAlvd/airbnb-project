@@ -210,7 +210,6 @@ router.get('/:spotId', async (req, res, next) => {
 });
 
 
-
 router.get('/', async (req, res, next) => {
   try {
     const errors = {};
@@ -313,7 +312,9 @@ router.get('/', async (req, res, next) => {
           avgRating: spot.avgStarRating ? parseFloat(spot.avgStarRating) : null,
           previewImage
         };
-      })
+      }),
+      page,
+      size
     };
     
     // Return the formatted spots in the response
