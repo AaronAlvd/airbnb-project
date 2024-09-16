@@ -460,6 +460,17 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     // Ensure dates are in proper format
     const start = new Date(startDate);
     const end = new Date(endDate);
+    const today = new Date();
+
+    // Validation: startDate cannot be in the past
+    if (start < today) {
+      return res.status(400).json({ message: "startDate cannot be in the past" });
+    }
+
+    // Validation: endDate must be after startDate
+    if (end <= start) {
+      return res.status(400).json({ message: "endDate cannot be on or before startDate" });
+    }
 
     const spot = await Spot.findByPk(spotId);
     if (!spot) {
@@ -519,6 +530,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     next(error);
   }
 });
+
 
 
 router.post('/', requireAuth, async (req, res, next) => {
