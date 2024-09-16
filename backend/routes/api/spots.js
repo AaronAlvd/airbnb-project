@@ -324,14 +324,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-    
-    // Return the formatted spots in the response
-    res.json(formattedSpots);
-  } catch (error) {
-    next(error); // Pass errors to the error-handling middleware
-  }
-});
-
 
 router.post('/:spotId/images', async (req, res, next) => {
   try {
