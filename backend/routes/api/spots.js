@@ -509,17 +509,17 @@ router.post('/', requireAuth, async (req, res, next) => {
       spot: newSpot
     });
   } catch (error) {
-    if (error.name === 'SequelizeValidationError') {
-      const validationErrors = error.errors.reduce((acc, err) => {
-        acc[err.path] = err.message;
-        return acc;
-      }, {});
+    // if (error.name === 'SequelizeValidationError') {
+    //   const validationErrors = error.errors.reduce((acc, err) => {
+    //     acc[err.path] = err.message;
+    //     return acc;
+    //   }, {});
       
-      return res.status(400).json({
-        message: "Validation error",
-        errors: validationErrors
-      });
-    }
+    //   return res.status(400).json({
+    //     message: "Validation error",
+    //     errors: validationErrors
+    //   });
+    // }
 
     next(error);
   }
