@@ -104,7 +104,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
   }
 });
 
-router.get('/spots/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
     const userId = req.user.id;
