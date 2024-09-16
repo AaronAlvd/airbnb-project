@@ -231,14 +231,14 @@ router.get('/', async (req, res, next) => {
     if (req.query.maxLat && isNaN(parseFloat(req.query.maxLat))) {
       errors.maxLat = 'Maximum latitude is invalid';
     }
-  
+
     if (req.query.minLng && isNaN(parseFloat(req.query.minLng))) {
       errors.minLng = 'Minimum longitude is invalid';
     }
     if (req.query.maxLng && isNaN(parseFloat(req.query.maxLng))) {
       errors.maxLng = 'Maximum longitude is invalid';
     }
-  
+
     if (req.query.minPrice && (isNaN(parseFloat(req.query.minPrice)) || parseFloat(req.query.minPrice) < 0)) {
       errors.minPrice = 'Minimum price must be greater than or equal to 0';
     }
@@ -316,6 +316,14 @@ router.get('/', async (req, res, next) => {
       page,
       size
     };
+    
+    // Return the formatted spots in the response
+    res.json(formattedSpots);
+  } catch (error) {
+    next(error); // Pass errors to the error-handling middleware
+  }
+});
+
     
     // Return the formatted spots in the response
     res.json(formattedSpots);
