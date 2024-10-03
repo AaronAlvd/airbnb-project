@@ -5,12 +5,18 @@ import App from './App';
 import './index.css';
 import configureStore from './store';
 
-const store = configureStore();
+(async () => {
+  const store = await configureStore();
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+  // Make the store accessible in the browser console
+  window['store'] = store;
+
+  // Render the application once the store is ready
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>
+  );
+})();
