@@ -5,9 +5,10 @@ import App from './App';
 import './index.css';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
+import * as sessionActions from './store/session';
 
 (async () => {
-  const store = await configureStore();
+  const store = configureStore();
 
   // Make the store accessible in the browser console
   window['store'] = store;
@@ -17,6 +18,7 @@ import { restoreCSRF, csrfFetch } from './store/csrf';
   
     window.csrfFetch = csrfFetch;
     window.store = store;
+    window.sessionActions = sessionActions;
   }
 
   // Render the application once the store is ready
