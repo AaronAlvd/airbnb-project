@@ -30,3 +30,5 @@ import * as sessionActions from './store/session';
     </React.StrictMode>
   );
 })();
+
+// This works
