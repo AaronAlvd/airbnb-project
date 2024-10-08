@@ -3,6 +3,7 @@ import * as sessionActions from '../../store/session';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useModal } from '../../context/Modal';
 import { Navigate } from 'react-router-dom';
 
 import './LoginForm.css';
@@ -13,18 +14,21 @@ function LoginFormPage() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { closeModal } = useModal();
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(closeModal)
+      .catch(async (res) => {
         const data = await res.json();
-        if (data?.errors) setErrors(data.errors);
-      }
-    );
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
   };
 
   return (
@@ -53,6 +57,12 @@ function LoginFormPage() {
 }
 
 export default LoginFormPage;
+
+
+
+
+
+
 
 
  {/* <form onSubmit={handleSubmit}>
