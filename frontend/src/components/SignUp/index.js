@@ -1,2 +1,1 @@
-import SignUp from "./SignUp";
-export default SignUp
+export { default as SignupFormPage } from './SignUpForm';

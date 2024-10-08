@@ -1,3 +1,1 @@
-import LoginFormPage from './LoginFormPage';
-
-export default LoginFormPage
+export { default as LoginFormPage } from './LoginFormPage';
