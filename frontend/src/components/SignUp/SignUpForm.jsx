@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import { useCookies } from 'react-cookie';
+import { useModal } from '../../context/Modal';
 
-function SignupFormPage() {
+function SignupFormModal() {
   const dispatch = useDispatch();
   const [cookies] = useCookies(['XSRF-Token']);
   const cookie = Object.values(cookies)[0]
   const sessionUser = useSelector((state) => state.session.user);
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -18,51 +18,35 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false); // Loading state
+  const { closeModal } = useModal();
 
   // Redirect if the user is already logged in
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({}); // Reset errors
-    setLoading(true); // Set loading to true
-
     if (password === confirmPassword) {
-      try {
-        // console.log( cookie)
-        await dispatch(
-          sessionActions.signUpUser({
-            email,
-            username,
-            firstName,
-            lastName,
-            password,
-            csrfToken: cookie,
-          })
-        );
-        // Reset form fields on successful signup
-        setEmail("");
-        setUsername("");
-        setFirstName("");
-        setLastName("");
-        setPassword("");
-        setConfirmPassword("");
-      } catch (res) {
-        const data = await res.json();
-        if (data?.errors) {
-          setErrors(data.errors);
-        } else {
-          setErrors({ general: "An unexpected error occurred. Please try again." });
-        }
-      } finally {
-        setLoading(false); // Reset loading state
-      }
-    } else {
-      setErrors({
-        confirmPassword: "Confirm Password field must be the same as the Password field",
-      });
-      setLoading(false); // Reset loading state
+      setErrors({});
+      return dispatch(
+        sessionActions.signup({
+          email,
+          username,
+          firstName,
+          lastName,
+          password
+        })
+      )
+        .then(closeModal)
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data?.errors) {
+            setErrors(data.errors);
+          }
+        });
     }
+    return setErrors({
+      confirmPassword: "Confirm Password field must be the same as the Password field"
+    });
   };
 
   return (
@@ -144,4 +128,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;

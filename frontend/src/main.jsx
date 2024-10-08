@@ -6,6 +6,7 @@ import './index.css';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
+import { ModalProvider, Modal } from './context/modal';
 
 (async () => {
   const store = configureStore();
@@ -24,9 +25,12 @@ import * as sessionActions from './store/session';
   // Render the application once the store is ready
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <ModalProvider>
+        <Provider store={store}>
+          <App />
+          <Modal />
+        </Provider>
+      </ModalProvider>
     </React.StrictMode>
   );
 })();
