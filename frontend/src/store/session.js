@@ -2,9 +2,6 @@
 // import { setTokenCookie } from "../../../backend/utils/auth";
 import { csrfFetch } from "./csrf";
 
-
-
-
 const SIGN_UP = "session/setUser";
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
@@ -15,8 +12,6 @@ const setUser = (user) => {
     payload: user,
   };
 };
-
-
 
 export const signUpUser = (user) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = user;
@@ -60,16 +55,11 @@ export const signUpUser = (user) => async (dispatch) => {
   }
 };
 
-
-
-
-
-
-// const removeUser = () => {
-//   return {
-//     type: REMOVE_USER
-//   };
-// };
+const removeUser = () => {
+  return {
+    type: REMOVE_USER
+  };
+};
 
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
@@ -109,6 +99,14 @@ const sessionReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'DELETE'
+  });
+  dispatch(removeUser());
+  return response;
 };
 
 export default sessionReducer;
