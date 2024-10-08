@@ -15,7 +15,7 @@ import * as sessionActions from './store/session';
 
   if (import.meta.env.MODE !== 'production') {
     restoreCSRF();
-  
+
     window.csrfFetch = csrfFetch;
     window.store = store;
     window.sessionActions = sessionActions;
@@ -31,4 +31,4 @@ import * as sessionActions from './store/session';
   );
 })();
 
-// This works
+// This works 

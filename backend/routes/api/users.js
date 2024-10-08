@@ -38,6 +38,7 @@ const router = express.Router();
 
 router.post('/', validateSignup, async (req, res, next) => {
   const { firstName, lastName, email, password, username } = req.body;
+  console.log(req.body)
 
   try {
     // Check if email or username already exists by manually querying both conditions
