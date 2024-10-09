@@ -1,0 +1,72 @@
+* {
+  font-family: Helvetica, sans-serif;
+}
+
+.register-div-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-div-input {
+  margin: 40px;
+}
+
+.register-div-input:hover {
+  cursor: text;
+}
+
+.register-formLabel {
+  position: absolute;
+  transform: translate(10px, 8px);
+  transition: transform .5s;
+}
+
+.register-formLabel:hover {
+  cursor: text;
+}
+
+.register-inputBox {
+  height: 30px;
+  width: 300px;
+}
+
+.focusedLabel {
+  position: absolute;
+  transform: translate(0px, -11px) scale(.85);
+  transition: transform .5s;
+  background-color: white;
+  padding: 3px;
+}
+
+.register-submitButton {
+  height: 30px;
+  width: 100px;
+  margin-bottom: 30px;
+  color: black;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+.div-submitButton {
+  display: flex;
+  justify-content: center;
+}
+
+.div-h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.div-h1 > h1 {
+  margin-bottom: 0;
+}
+
+.focused-inputBox {  
+  height: 30px;
+  width: 300px;
+  border: 2px solid rgb(26, 53, 228);
+  border-radius: 3px;
+}
+

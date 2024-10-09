@@ -1,1 +1,1 @@
-export { default as SignupFormPage } from './SignUpForm';
+export { default as SignupFormModal } from './SignUpForm';

@@ -46,6 +46,7 @@
   height: 30px;
   border: solid black 2px;
   color: black;
+  margin: 20px;
 }
 
 .formLabel {
@@ -76,4 +77,13 @@ input[type="password"]:focus {
 
 input[type="text"]:focus {
   outline: none;
+}
+
+.div-h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.div-h1 > h1 {
+  margin-bottom: 0;
 }

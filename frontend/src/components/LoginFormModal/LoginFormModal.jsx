@@ -3,7 +3,7 @@ import * as sessionActions from '../../store/session';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useModal } from '../../context/Modal';
+import { useModal } from '../../context/modal';
 import { Navigate } from 'react-router-dom';
 
 import './LoginForm.css';
@@ -33,7 +33,9 @@ function LoginFormPage() {
 
   return (
     <div>
-      <h1>Log In</h1>
+      <div className="div-h1">
+        <h1>Log In</h1>
+      </div>
       <form className="loginForm" onSubmit={handleSubmit}>
         <div className="div-input">
           <FontAwesomeIcon icon={faUser} className="formIcons" id="faUser"/>
