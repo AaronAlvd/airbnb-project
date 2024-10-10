@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
         <OpenModalButton buttonText="Log In" modalComponent={<LoginFormModal/>}/>
       </li>
       <li>
-        <OpenModalButton buttonText="Sign Up" modalComponent={<SignupFormModal />}/>
+        <OpenModalButton buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
       </li>
       </>
     );

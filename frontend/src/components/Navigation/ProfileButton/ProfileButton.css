@@ -1,3 +1,35 @@
+
 .hidden {
   display: none;
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
+.profile-dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-150px, 10px);
+}
+
+.profileButton-list {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid black;
+  background-color: rgb(235, 229, 229);
+}
+
+.pbl-bottom {
+  border-radius: 0 0 5px 5px;
+}
+
+.pbl-top {
+  border-radius: 5px 5px 0 0;
+}
+
+.pb-logout {
+  font-size: 16px;
 }

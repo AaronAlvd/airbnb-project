@@ -34,7 +34,7 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = showMenu ? "profile-dropdown" : " hidden";
 
   return (
     <>
@@ -42,11 +42,11 @@ function ProfileButton({ user }) {
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li>{user.username}</li>
-        <li>{user.firstName} {user.lastName}</li>
-        <li>{user.email}</li>
-        <li>
-          <button onClick={logout}>Log Out</button>
+        <li className={showMenu ? "profileButton-list pbl-top" : null}>{user.username}</li>
+        <li className={showMenu ? "profileButton-list" : null}>{user.firstName} {user.lastName}</li>
+        <li className={showMenu ? "profileButton-list" : null}>{user.email}</li>
+        <li className={showMenu ? "profileButton-list pbl-bottom" : null}>
+          <button onClick={logout} className="pb-logout">Log Out</button>
         </li>
       </ul>
     </>

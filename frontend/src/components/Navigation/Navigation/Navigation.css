@@ -1,8 +1,11 @@
 ul {
   list-style-type: none;
   display: flex;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: flex-end;
+}
+
+li {
+  margin: 0 15px 0 15px;
 }
 
 .nav-profileButton {
@@ -11,17 +14,20 @@ ul {
 
 a {
  text-decoration: none;
- color: black
+ color: black;
+ font-family: 'Helvetica',sans-serif;
+ font-size: 16px;
 }
 
 .logo {
-  width: 50%;
+  width: 50vw;
 }
 
 .div-nav {
   display: flex;
+  width: 100vw;
 }
 
 .div-ul {
-  
+  width: 50vw;
 }
