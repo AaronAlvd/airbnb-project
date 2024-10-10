@@ -7,6 +7,7 @@ import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import { ModalProvider, Modal } from './context/modal';
+import { BrowserRouter } from 'react-router-dom';
 
 (async () => {
   const store = configureStore();
@@ -27,7 +28,7 @@ import { ModalProvider, Modal } from './context/modal';
     <React.StrictMode>
       <ModalProvider>
         <Provider store={store}>
-          <App />
+          <App/>
           <Modal />
         </Provider>
       </ModalProvider>

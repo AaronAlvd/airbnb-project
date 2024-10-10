@@ -1,0 +1,27 @@
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.nav-profileButton {
+  background-color: white;
+}
+
+a {
+ text-decoration: none;
+ color: black
+}
+
+.logo {
+  width: 50%;
+}
+
+.div-nav {
+  display: flex;
+}
+
+.div-ul {
+  
+}
