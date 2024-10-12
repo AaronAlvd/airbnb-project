@@ -285,8 +285,8 @@ router.get('/', async (req, res, next) => {
         },
         {
           model: SpotImage,
-          attributes: [['url', 'previewImage']], // Fetch the preview image URL
-          where: { preview: true },
+          attributes: [['url', 'preview']], // Fetch the preview image URL
+          where: { preview: 1 },
           required: false // Include spots even if they have no preview image
         }
       ],
@@ -303,7 +303,7 @@ router.get('/', async (req, res, next) => {
     // Format the response for each spot
     const formattedSpots = {
       Spots: spots.map(spot => {
-        const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].previewImage : null;
+        const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].preview : null;
 
         return {
           id: spot.id,

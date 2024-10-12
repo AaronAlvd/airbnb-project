@@ -1,6 +1,7 @@
 import * as spotActions from '../../store/spots'; // Import your actions
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import './spots.css'
 
 function Spots() {
   const dispatch = useDispatch();
@@ -15,11 +16,19 @@ function Spots() {
 
   return (
     <div>
-      {/* {spots.map((spot) => {
+      {spots.map((spot) => {
+        const { id, previewImage } = spot; // Destructure for clarity
+
         return (
-          <img src={}/>
-        )
-      })} */}
+          <div key={id}> {/* Add a unique key here */}
+            {previewImage ? ( // Conditional rendering for the image
+              <img src={previewImage} alt={`Preview of ${spot.name}`} className="displayImages" />
+            ) : (
+              <p>No preview available</p> // Handle the case when there is no preview image
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

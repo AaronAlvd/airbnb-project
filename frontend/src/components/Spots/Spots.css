@@ -1,0 +1,7 @@
+.displayImages {
+  width: 100px; /* Set the desired width */
+  height: auto; /* Maintain aspect ratio */
+  /* Optional: Add margin and border */
+  margin: 5px;
+  border: 1px solid #ccc;
+}
