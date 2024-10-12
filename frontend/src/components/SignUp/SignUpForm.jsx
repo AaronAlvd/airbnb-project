@@ -51,6 +51,12 @@ function SignupFormModal() {
     e.preventDefault();
 
     const { password, confirmPassword, email, username, firstName, lastName } = formData;
+    if(username.length < 4 ){
+     return setErrors({username: "username must be longer than 4 characters"})
+    }
+    if(password.length < 6 ){
+     return setErrors({password: "password must be longer than 4 characters"})
+    }
 
     if (password === confirmPassword) {
       setErrors({});
@@ -81,7 +87,7 @@ function SignupFormModal() {
 
   const handleChange = (e) => {
     return setFormData({
-      ...formData, 
+      ...formData,
       [e.target.name]: e.target.value
     })
   };
@@ -89,7 +95,7 @@ function SignupFormModal() {
   const handleFocus = (e, name) => {
     e.stopPropagation();
     refVariables[name].current.focus();
-    setIsFocused({...isFocused, [name]: true })   
+    setIsFocused({...isFocused, [name]: true })
   };
 
   const handleBlur = () => {
@@ -110,14 +116,14 @@ function SignupFormModal() {
       <form className="registerForm" onSubmit={handleSubmit}>
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "firstName")}}>
           <label className={isFocused.firstName ? "focusedLabel" : "register-formLabel"}>First Name</label>
-          <input ref={firstNameRef} type="text" id="firstName" name="firstName" value={formData.firstName} onChange={(e) => handleChange(e)} 
+          <input ref={firstNameRef} type="text" id="firstName" name="firstName" value={formData.firstName} onChange={(e) => handleChange(e)}
                  className={isFocused.firstName? "focused-inputBox" : "register-inputBox"} required />
           {errors.firstName && <p>{errors.firstName}</p>}
         </div>
 
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "lastName")}}>
           <label className={isFocused.lastName ? "focusedLabel" : "register-formLabel"}>Last Name</label>
-          <input ref={lastNameRef} type="text" id="lastName" name="lastName" value={formData.lastName} onChange={(e) => handleChange(e)} 
+          <input ref={lastNameRef} type="text" id="lastName" name="lastName" value={formData.lastName} onChange={(e) => handleChange(e)}
                  className={isFocused.lastName ? "focused-inputBox" : "register-inputBox"} required />
           {errors.lastName && <p>{errors.lastName}</p>}
         </div>
@@ -131,14 +137,14 @@ function SignupFormModal() {
 
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "email")}}>
           <label className={isFocused.email ? "focusedLabel" : "register-formLabel"}>Email</label>
-          <input ref={emailRef} type="email" id="email" name="email" value={formData.email} onChange={(e) => handleChange(e)} 
+          <input ref={emailRef} type="email" id="email" name="email" value={formData.email} onChange={(e) => handleChange(e)}
             className={isFocused.email ? "focused-inputBox" : "register-inputBox"} required />
           {errors.email && <p>{errors.email}</p>}
         </div>
-        
+
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "password")}}>
           <label className={isFocused.password ? "focusedLabel" : "register-formLabel"}>Password</label>
-          <input ref={passwordRef} type="password" id="password" name="password" value={formData.password} onChange={(e) => handleChange(e)} 
+          <input ref={passwordRef} type="password" id="password" name="password" value={formData.password} onChange={(e) => handleChange(e)}
                  className={isFocused.password ? "focused-inputBox" : "register-inputBox"} required />
           {errors.password && <p>{errors.password}</p>}
         </div>
@@ -153,7 +159,7 @@ function SignupFormModal() {
         {errors.general && <p>{errors.general}</p>} {/* General error message */}
 
         <div className="div-submitButton">
-          <button type="submit" disabled={loading} className="register-submitButton"> 
+          <button type="submit" disabled={loading} className="register-submitButton">
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </div>
@@ -226,7 +232,7 @@ export default SignupFormModal;
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         {errors.general && <p>{errors.general}</p>}
 
-        <button type="submit" disabled={loading}> 
+        <button type="submit" disabled={loading}>
           {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form> */}
