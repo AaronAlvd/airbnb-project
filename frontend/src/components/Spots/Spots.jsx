@@ -1,14 +1,27 @@
-import { getSpots } from '../../store/spots'
+import * as spotActions from '../../store/spots'; // Import your actions
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function Spots() {
+  const dispatch = useDispatch();
+  
+  // Assuming the spots are stored as an array in state.spots.spots
+  const spots = useSelector((state) => state.spots.spots); // Adjust according to your state structure
 
-  console.log(getSpots());
+  // Fetch spots when the component mounts
+  useEffect(() => {
+    dispatch(spotActions.getSpots());
+  }, [dispatch]);
 
   return (
-    <>
-      <h1>Hello</h1>
-    </>
-  )
+    <div>
+      {/* {spots.map((spot) => {
+        return (
+          <img src={}/>
+        )
+      })} */}
+    </div>
+  );
 }
 
 export default Spots;

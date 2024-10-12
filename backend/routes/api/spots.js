@@ -291,7 +291,7 @@ router.get('/', async (req, res, next) => {
         }
       ],
       group: ['Spot.id', 'SpotImages.id'], // Group by Spot.id and SpotImages.id to avoid SQL error
-      limit: size,
+      // limit: size,
       offset: (page - 1) * size,
     });
 

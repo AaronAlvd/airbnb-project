@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { useDispatch } from 'react-redux';
 
 const SET_SPOTS = "spots/setSpots";
 
@@ -9,17 +10,28 @@ const setSpots = (spots) => {
   }
 };
 
-export const getSpots = async () => { 
-  const response = await csrfFetch('api/spots/');
+export const getSpots = () => {
+  return async (dispatch) => {  // Return a function that takes dispatch as an argument
+    try {
+      const response = await csrfFetch('/api/spots/');
 
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(setSpots(data.spots))
-    return data;
-  }
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(setSpots(data.Spots));  // Dispatch the action with the fetched spots
+        return data;
+      } else {
+        // Handle non-200 responses
+        console.error('Failed to fetch spots:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Failed to fetch spots:', error);
+    }
+  };
+};
+
+const initialState = {
+  spots: []
 }
-
-const initialState = {};
 
 const spotReducer = (state = initialState, action) => {
   switch (action.type) {
