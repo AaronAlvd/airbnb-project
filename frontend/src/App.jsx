@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation/Navigation';
-import Spots from './components/Spots/Spots';
+import SpotsDisplayAll from './components/Spots/SpotsDisplayAll/SpotsDisplayAll';
+import Spot from './components/Spots/Spot/Spot';
 import * as sessionActions from './store/session';
 
 
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Spots />
+        element: <SpotsDisplayAll />
       },
+      {
+        path: 'spots/:spotId',
+        element: <Spot />
+      }
     ]
   }
 ]);
@@ -41,4 +46,3 @@ function App() {
 }
 
 export default App;
-// itesting

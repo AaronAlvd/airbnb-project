@@ -1,0 +1,32 @@
+.div-spotsGallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 5px; /* Optional: space between boxes */
+}
+
+.box {
+  display: grid;
+  grid-template-areas: 
+    'name'
+    'spotImage'
+    'price';
+  background-color: rgb(233, 235, 237);
+  border-radius: 10px;
+}
+
+.spotImage {
+  grid-area: 'spotImage';
+  width: 100%;
+  height: auto;
+}
+
+.spotName {
+  grid-area: 'name';
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.spotPrice {
+  grid-area: 'price';
+  font-size: 14px;
+}
