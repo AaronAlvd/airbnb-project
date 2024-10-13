@@ -25,10 +25,10 @@ function SpotsDisplayAll() {
     <div className="div-spotsGallery">
       {spots.map((spot) => {
         return (
-          <div className="box" key={spot.id} onClick={() => handleClick(spot.id)}>
-            <p className="spotName">{spot.name}</p>
-            <img className="spotImage"src={spot.previewImage}/>
-            <p className="spotPrice">${spot.price}</p>
+          <div className="SDA-box" key={spot.id} onClick={() => handleClick(spot.id)}>
+            <img className="SDA-Image"src={spot.previewImage}/>
+            <div className="SDA-Name"><p>{spot.city}, {spot.state}</p></div>
+            <div className="SDA-Price"><p>${spot.price}</p></div>
           </div>
         )
       })}

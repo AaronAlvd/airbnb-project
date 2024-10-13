@@ -4,29 +4,48 @@
   gap: 5px; /* Optional: space between boxes */
 }
 
-.box {
+.SDA-box {
   display: grid;
   grid-template-areas: 
-    'name'
     'spotImage'
+    'name'
     'price';
-  background-color: rgb(233, 235, 237);
-  border-radius: 10px;
+  width: 275px;
+  grid-template-rows: 175px 30px 30px;
+  margin: 10px
 }
 
-.spotImage {
+.SDA-Image {
   grid-area: 'spotImage';
-  width: 100%;
   height: auto;
+  border-radius: 15px;
 }
 
-.spotName {
+.SDA-Name {
   grid-area: 'name';
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
-.spotPrice {
+.SDA-Price {
   grid-area: 'price';
-  font-size: 14px;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.SDA-box > img {
+  width: 275px;
+  height: 175px;
+  object-fit: cover; /* Ensures the image covers the container without stretching */
+  object-position: center; /* Center the image within the container */
+}
+
+.SDA-Name > p,
+.SDA-Price > p {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, monospace;
 }
