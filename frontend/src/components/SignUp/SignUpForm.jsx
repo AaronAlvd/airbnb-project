@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 import { useModal } from '../../context/modal';
 import './SignupForm.css';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  const [cookies] = useCookies(['XSRF-Token']);
+  // const [cookies] = useCookies(['XSRF-Token']);
   // const cookie = Object.values(cookies)[0]
   const sessionUser = useSelector((state) => state.session.user);
   const firstNameRef = useRef(null);

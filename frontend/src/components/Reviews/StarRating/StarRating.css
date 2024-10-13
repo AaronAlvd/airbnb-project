@@ -1,0 +1,5 @@
+.star-rating {
+    display: flex;       /* Use flexbox for horizontal alignment */
+    gap: 4px;
+          /* Optional: space between stars */
+  }

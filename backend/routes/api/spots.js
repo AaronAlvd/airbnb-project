@@ -46,7 +46,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     res.json(formattedSpots);
   } catch (error) {
-    next(error); 
+    next(error);
   }
 });
 
@@ -158,7 +158,7 @@ router.get('/:spotId', async (req, res, next) => {
     const getSpot = await Spot.findOne({
       where: { id: spotId },
       attributes: [
-        'id', 
+        'id',
         ['userId', 'ownerId'], // Rename userId to ownerId
         'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
@@ -205,7 +205,7 @@ router.get('/:spotId', async (req, res, next) => {
 
     res.json(formattedSpot);
   } catch (error) {
-    next(error); 
+    next(error);
   }
 });
 
@@ -340,7 +340,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body;
 
     const spot = await Spot.findByPk(spotId);
-    
+
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found." });
     }
@@ -391,8 +391,8 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
-    const { review, stars } = req.body;
-    const userId = req.user.id;
+    const { review, stars, userId } = req.body;
+    // const userId = req.user.id;
 
     let errors = {};
 
@@ -456,7 +456,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         }, {})
       });
     }
-    next(error); 
+    next(error);
   }
 });
 
@@ -534,7 +534,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       createdAt: newBooking.createdAt,
       updatedAt: newBooking.updatedAt
     });
-    
+
   } catch (error) {
     next(error);
   }
@@ -563,9 +563,9 @@ router.post('/', requireAuth, async (req, res, next) => {
       });
     }
 
-    const newSpot = await Spot.create({ 
-      userId: req.user.id, 
-      address, city, state, country, lat, lng, name, description, price 
+    const newSpot = await Spot.create({
+      userId: req.user.id,
+      address, city, state, country, lat, lng, name, description, price
     });
 
     // Helper function to format date as "YYYY-MM-DD HH:mm:ss"
@@ -605,7 +605,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 //     acc[err.path] = err.message;
 //     return acc;
 //   }, {});
-  
+
 //   return res.status(400).json({
 //     message: "Validation error",
 //     errors: validationErrors
@@ -751,7 +751,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
       res.status(200).json({ message: 'Spot deleted successfully' });
     } catch (error) {
       await transaction.rollback();
-      throw error; 
+      throw error;
     }
   } catch (error) {
     if (error.name === 'SequelizeForeignKeyConstraintError') {

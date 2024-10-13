@@ -1,0 +1,29 @@
+.review-form{
+    background-color: rgb(64, 185, 37);
+    color: white;
+    height: 200px;
+    width: 490px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.submit{
+    border: 2px solid yellow;
+    background-color: transparent;
+    color: yellow;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left:300px;
+    position:relative;
+    bottom: 40px;
+  }
+  .submit:hover {
+    background-color: yellow; /* Change background on hover */
+    color: black; /* Change text color on hover */
+  }
