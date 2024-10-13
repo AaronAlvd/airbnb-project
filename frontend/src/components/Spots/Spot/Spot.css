@@ -1,8 +1,36 @@
-.spotImage {
-  width: 600px;
-  height: auto;
+.div-spot {
+  display: grid; /* Activate grid layout */
+  grid-template-areas: 
+    'Title'
+    'Pictures'
+    'Body';
+  grid-template-rows: 40px 350px 1fr; /* Define the heights of each row */
+  grid-gap: 10px; /* Optional: adds spacing between grid items */
+  height: 100vh; /* Set the container height to fill the viewport */
 }
 
-.spotPrice {
-  font-size: 16px;
+.div-title {
+  grid-area: 'Title';
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+}
+
+.div-pictures {
+  grid-area: 'Pictures';
+  /* border: 1px solid black; */
+}
+
+.div-body {
+  grid-area: 'Body';
+  /* border: 1px solid black; */
+}
+
+.div-spot > div > p, h2 {
+  margin: 0;
+}
+
+.spot-mainImage {
+  border-radius: 10px;
+  height: 349px;
 }

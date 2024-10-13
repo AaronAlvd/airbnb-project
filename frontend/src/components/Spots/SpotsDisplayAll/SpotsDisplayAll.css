@@ -8,10 +8,9 @@
   display: grid;
   grid-template-areas: 
     'spotImage'
-    'name'
-    'price';
+    'information';
   width: 275px;
-  grid-template-rows: 175px 30px 30px;
+  grid-template-rows: 175px 60px;
   margin: 10px
 }
 
@@ -21,19 +20,24 @@
   border-radius: 15px;
 }
 
-.SDA-Name {
-  grid-area: 'name';
+.div-SDA-info {
+  grid-area: "information";
+  height: 100%;
+}
+
+.SDA-Location {
   font-size: 14px;
   font-weight: 600;
   display: flex;
   align-items: center;
 }
 
+.SDA-Name {
+  font-size: 13px;
+}
+
 .SDA-Price {
-  grid-area: 'price';
-  font-size: 12px;
-  display: flex;
-  justify-content: flex-end;
+  font-size: 13px;
 }
 
 .SDA-box > img {
@@ -43,9 +47,18 @@
   object-position: center; /* Center the image within the container */
 }
 
-.SDA-Name > p,
-.SDA-Price > p {
+.div-SDA-info > span > p {
   margin: 0;
-  padding: 0;
-  font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, monospace;
 }
+
+.SDA-icon {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.SDA-Rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+

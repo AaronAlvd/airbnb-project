@@ -18,9 +18,13 @@ function Spot() {
 
   return (
     <div className="div-spot">
-      <h2 className="spotTitle">{spot.name}</h2>
-      <img className="spotImage"src={spot.previewImage}/>
-      <p className="spotPrice">${spot.price}</p>
+      <div className="div-title">
+        <h2>{spot.name}</h2>
+      </div>
+      <div className="div-pictures">
+        <img src={spot.previewImage} className="spot-mainImage"/>
+      </div>
+      <div className="div-body"></div>
     </div>
   )
 }
