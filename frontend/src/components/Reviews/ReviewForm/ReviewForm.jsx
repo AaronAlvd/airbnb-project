@@ -2,24 +2,26 @@ import "./ReviewForm.css";
 import StarRating from "../StarRating";
 import { useState } from "react";
 import { useSelector, useDispatch} from "react-redux";
-import { makeReview } from "../../../store/spots";
+import { createReview } from "../../../store/review";
 import { useModal } from '../../../context/modal';
 
-export default function ReviewForm({ spot }) {
+export default function ReviewForm({props}) {
   const user = useSelector((state) => state.session.user);
+
   const [review, setReview] = useState("");
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
+//   const { closeModal } = useModal();
+// console.log(props.id)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const safeReview = {
         review,
         userId:user.id,
-        spotId:spot.id,
+        spotId:props.id,
          stars: window.rating
         };
-        dispatch(makeReview(safeReview));
+        dispatch(createReview(safeReview));
     console.log("form submitted");
     console.log(safeReview);
   };

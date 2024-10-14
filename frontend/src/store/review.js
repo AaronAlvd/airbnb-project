@@ -1,4 +1,4 @@
-
+import { csrfFetch } from "./csrf";
 const CREATE_REVIEW = 'review/CREATE_REVIEW';
 
 const setReview = (review) => {
@@ -48,11 +48,12 @@ const initialState = {
   reviews: []
 }
 
-export default reviewReducer = (state = initialState, action) => {
+const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_USER:
+    case CREATE_REVIEW:
       return {...state, reviews: action.payload};
     default:
       return state
   }
 }
+export default reviewReducer;
