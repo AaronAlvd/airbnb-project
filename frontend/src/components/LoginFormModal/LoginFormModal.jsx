@@ -19,7 +19,6 @@ function LoginFormPage() {
 
   if (sessionUser) {
     return <Navigate to="/" replace={true} />;
-
   }
 
   const handleSubmit = (e) => {

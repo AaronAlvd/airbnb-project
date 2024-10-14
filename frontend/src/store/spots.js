@@ -29,44 +29,6 @@ export const getSpots = () => {
     }
   };
 };
-export const makeReview = (batchReview) => async (dispatch) => {
-  const { review, userId, spotId, stars } = batchReview;
-
-  try {
-    // Use csrfFetch to perform the signup request
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-      method: "POST",
-      body: JSON.stringify({
-        review,
-        stars,
-        userId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      // Dispatch the user data to the Redux store
-      // dispatch(setUser(data.user));
-
-      window.sessionStorage.setItem(
-        "reviews",
-        JSON.stringify({ review, userId, spotId, stars })
-      );
-
-      return response;
-    } else {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "create review failed");
-    }
-  } catch (error) {
-    console.error("Network or other error:", error);
-    throw new Error("An unexpected error occurred. Please try again.");
-  }
-};
 
 const initialState = {
   spots: [],

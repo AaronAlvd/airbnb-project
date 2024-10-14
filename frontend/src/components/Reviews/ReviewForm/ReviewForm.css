@@ -1,29 +1,44 @@
-.review-form{
-    background-color: rgb(64, 185, 37);
-    color: white;
-    height: 200px;
-    width: 490px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    padding: 20px;
-    margin-top: 10px;
+.div-reviewForm {
+  width: 400px;
+  height: 400px;
+  background-color: white;
 }
 
-.submit{
-    border: 2px solid yellow;
-    background-color: transparent;
-    color: yellow;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    margin-left:300px;
-    position:relative;
-    bottom: 40px;
-  }
-  .submit:hover {
-    background-color: yellow; /* Change background on hover */
-    color: black; /* Change text color on hover */
-  }
+.div-reviewTextbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.reviewForm-textarea {
+  width: 350px;
+  height: 200px;
+  resize: none;
+  font-size: 15px;
+}
+
+.div-reviewRating {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.reviewForm-label {
+  margin: 15px 0 15px 0;
+}
+
+.div-reviewButton {
+  display: flex;
+  justify-content: center;
+}
+
+.RF-submitButton {
+  border: 1px solid black;
+  margin: 15px;
+  height: 35px;
+  width: 120px;
+  border-radius: 5px;
+}

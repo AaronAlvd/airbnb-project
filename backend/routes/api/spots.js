@@ -391,8 +391,8 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
   try {
     const { spotId } = req.params;
-    const { review, stars, userId } = req.body;
-    // const userId = req.user.id;
+    const { review, stars } = req.body;
+    const userId = req.user.id;
 
     let errors = {};
 

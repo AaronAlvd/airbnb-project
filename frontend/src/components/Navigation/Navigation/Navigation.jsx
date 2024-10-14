@@ -21,10 +21,10 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
       <li>
-        <OpenModalButton buttonText="Log In" modalComponent={<LoginFormModal/>}/>
+        <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
       </li>
       <li>
-        <OpenModalButton buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
+        <OpenModalButton className="ModalButton" buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
       </li>
       </>
     );
