@@ -52,7 +52,7 @@ function LoginFormPage() {
     <div className="div-loginForm">
 
       <div className="div-h1">
-        <h1>Log In</h1>
+        <h1 className="h1-login">Log In</h1>
       </div>
       <form className="loginForm" onSubmit={handleSubmit}>
         <div className="div-input">

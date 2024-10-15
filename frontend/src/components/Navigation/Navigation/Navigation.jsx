@@ -10,35 +10,35 @@ import './Navigation.css'
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} className="nav-profileButtons"/>
-      </li>
-    );
-  } else {
-    sessionLinks = (
-      <>
-      <li>
-        <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
-      </li>
-      <li>
-        <OpenModalButton className="ModalButton" buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
-      </li>
-      </>
-    );
-  }
+  // let sessionLinks;
+  // if (sessionUser) {
+  //   sessionLinks = (
+  //     <li>
+  //       <ProfileButton user={sessionUser} className="nav-profileButtons"/>
+  //     </li>
+  //   );
+  // } else {
+  //   sessionLinks = (
+  //     <>
+  //     <li>
+  //       <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
+  //     </li>
+  //     <li>
+  //       <OpenModalButton className="ModalButton" buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
+  //     </li>
+  //     </>
+  //   );
+  // }
 
   return (
     <div className="div-nav">
       <div className="logo"></div>
       <div className="div-ul">
-        <ul>
-          <li>
+        <ul className="nav-ul">
+          <li className="nav-li">
             <NavLink to="/">Home</NavLink>
           </li>
-          {isLoaded && sessionLinks}
+          <ProfileButton/>
         </ul>
       </div>
     </div>

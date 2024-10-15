@@ -3,25 +3,6 @@
   display: none;
 }
 
-button {
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-}
-
-.profile-dropdown {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  transform: translate(-150px, 10px);
-}
-
-.profileButton-list {
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid black;
-  background-color: rgb(235, 229, 229);
-}
-
 .pbl-bottom {
   border-radius: 0 0 5px 5px;
 }
@@ -32,4 +13,50 @@ button {
 
 .pb-logout {
   font-size: 16px;
+  background-color: white;
+  border: none;
+}
+
+.FaUserCircle {
+  font-size: 30px;
+  padding: 0;
+}
+
+.button-FaUser {
+  margin-right: 15px;
+  height: min-content;
+  width: min-content;
+  border: none;
+  background-color: white;
+  transform: translate(0px, 3px);
+}
+
+.UL-ModalButton {
+  position: absolute;
+  transform: translate(-40px, 80px);
+  box-shadow: 1px 1px 5px rgb(181, 180, 180);
+  border-radius: 5%;
+  padding: 0;
+}
+
+.UL-ModalButton-loggedIn {
+  position: absolute;
+  transform: translate(-30px, 130px);
+  box-shadow: 1px 1px 5px rgb(181, 180, 180);
+  border-radius: 5%;
+  padding: 0;
+}
+
+.ModalButton-list {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.userInfo {
+  margin-left: 15px;
 }

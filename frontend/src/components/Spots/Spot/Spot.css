@@ -27,10 +27,6 @@
   /* border: 1px solid black; */
 }
 
-.div-spot > div > p, h2 {
-  margin: 0;
-}
-
 .spot-mainImage {
   border-radius: 10px;
   height: 349px;

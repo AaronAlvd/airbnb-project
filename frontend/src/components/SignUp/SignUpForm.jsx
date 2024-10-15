@@ -112,7 +112,7 @@ function SignupFormModal() {
   return (
     <div>
       <div className="div-h1">
-        <h1>Sign Up</h1>
+        <h1 className="h1-signup">Sign Up</h1>
       </div>
       <form className="registerForm" onSubmit={handleSubmit}>
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "firstName")}}>
