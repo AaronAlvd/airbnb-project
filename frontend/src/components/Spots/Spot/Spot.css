@@ -7,6 +7,7 @@
   grid-template-rows: 40px 350px 1fr; /* Define the heights of each row */
   grid-gap: 10px; /* Optional: adds spacing between grid items */
   height: 100vh; /* Set the container height to fill the viewport */
+  margin: 10px
 }
 
 .div-title {

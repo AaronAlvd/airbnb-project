@@ -17,9 +17,8 @@ function LoginFormPage() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  if (sessionUser) {
-    return <Navigate to="/" replace={true} />;
-  }
+  if (sessionUser) return <Navigate to="/" replace={true} />;
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,8 +34,23 @@ function LoginFormPage() {
       });
   };
 
+  const handleDemoSubmit = () => {
+    const credential = 'Demo-lition';
+    const password = 'password';
+
+    return dispatch(sessionActions.login({ credential, password }))
+    .then(closeModal)
+    .catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
+  }
+
   return (
-    <div>
+    <div className="div-loginForm">
+
       <div className="div-h1">
         <h1>Log In</h1>
       </div>
@@ -74,12 +88,12 @@ function LoginFormPage() {
         </div>
 
         <div className="div-button">
-          {errors.credential && <p>{errors.credential}</p>}
-          <button type="submit" className="submitButton">
-            Login
-          </button>
+          {errors.credential && <p className="login-displayErrors">{errors.credential}</p>}
+          <button type="submit" className="submitButton" disabled={(password.length < 6) && (credential.length < 4)}>Login</button>
         </div>
       </form>
+
+      <button className="LF-demoButton" onClick={() => handleDemoSubmit()}>Demo User</button>
     </div>
   );
 }

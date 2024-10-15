@@ -51,6 +51,7 @@ function SignupFormModal() {
     e.preventDefault();
 
     const { password, confirmPassword, email, username, firstName, lastName } = formData;
+    
     if(username.length < 4 ){
      return setErrors({username: "username must be longer than 4 characters"})
     }

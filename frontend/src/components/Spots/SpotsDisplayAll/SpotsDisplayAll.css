@@ -1,7 +1,12 @@
 .div-spotsGallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
-  gap: 5px; /* Optional: space between boxes */
+  width: 90vw;
+  grid-template-columns: repeat(3, 1fr); /* 4 columns */
+}
+
+.div-SDA-grid {
+  display: flex;
+  justify-content: center;
 }
 
 .SDA-box {
@@ -9,9 +14,10 @@
   grid-template-areas: 
     'spotImage'
     'information';
-  width: 275px;
-  grid-template-rows: 175px 60px;
-  margin: 10px
+  width: 390px;
+  grid-template-rows: 245px 60px;
+  row-gap: 5px;
+  margin: 5px
 }
 
 .SDA-Image {
@@ -37,12 +43,14 @@
 }
 
 .SDA-Price {
-  font-size: 13px;
+  font-size: 14px;
+  display: flex;
+  font-weight: 700;
 }
 
 .SDA-box > img {
-  width: 275px;
-  height: 175px;
+  width: 390px;
+  height: 245px;
   object-fit: cover; /* Ensures the image covers the container without stretching */
   object-position: center; /* Center the image within the container */
 }

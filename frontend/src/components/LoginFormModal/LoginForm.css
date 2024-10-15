@@ -47,6 +47,7 @@
   border: solid black 2px;
   color: black;
   margin: 20px;
+  transform: translate(-70px, 0);
 }
 
 .formLabel {
@@ -86,4 +87,27 @@ input[type="text"]:focus {
 
 .div-h1 > h1 {
   margin-bottom: 0;
+}
+
+.div-loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 350px;
+  width: 400px;
+}
+
+.LF-demoButton {
+  border: 2px solid black;
+  width: 120px;
+  height: 30px;
+  border-radius: 3px;
+  transform: translate(70px, -49px);
+}
+
+.login-displayErrors {
+  position: absolute;
+  transform: translate(10px, 70px);
+  color: rgb(209, 25, 25);
+  font-size: 14px;
 }

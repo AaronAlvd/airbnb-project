@@ -1,10 +1,19 @@
 import { csrfFetch } from "./csrf";
+
 const CREATE_REVIEW = 'review/CREATE_REVIEW';
+const SET_REVIEWS = 'review/SET_REVIEWS';
 
 const setReview = (review) => {
   return {
     type: CREATE_REVIEW,
     payload: review
+  }
+};
+
+const setReviews = (reviews) => {
+  return {
+    type: SET_REVIEWS,
+    payload: reviews
   }
 };
 
@@ -44,6 +53,23 @@ export const createReview = (batchReview) => async (dispatch) => {
   }
 };
 
+export const getReviews = () => {
+  try {
+    return async (dispatch) => {
+      const response = await csrfFetch('/api/reviews/current');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch Reviews');
+      }
+
+      const data = await response.json();
+      dispatch(setReviews(data.Reviews))
+    }
+  } catch(err) {
+    console.error("Error fetching reviews:", err)
+  }
+}
+
 const initialState = {
   reviews: []
 }
@@ -52,8 +78,11 @@ const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_REVIEW:
       return {...state, reviews: action.payload};
+    case SET_REVIEWS:
+      return {...state, reviews: action.payload};
     default:
       return state
   }
 }
+
 export default reviewReducer;
