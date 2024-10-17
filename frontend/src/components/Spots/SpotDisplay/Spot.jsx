@@ -18,6 +18,7 @@ function Spot() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showReview, setShowReview] = useState(false);
+  const [owner, setOwner] = useState(false);
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -55,6 +56,12 @@ function Spot() {
 
   }, [showReview]);
 
+  useEffect(() => {
+    if (spot.ownerId === user.id) {
+      setOwner(true);
+    }
+  },[owner]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!spot) return <div>Spot not found.</div>;
@@ -65,11 +72,35 @@ function Spot() {
           <h2>{spot.name}</h2>
         </div>
         <div className="div-pictures">
-          <img src={spot.previewImage} className="spot-mainImage" />
+          <div  className="div-mainImage" id="picture-01">
+            <img src={spot.previewImage} id="image-01"/>
+          </div>
+
+          <div  className="div-sideImage" id="picture-02">
+          </div>
+
+          <div  className="div-sideImage" id="picture-03">
+          </div>
+
+          <div  className="div-sideImage" id="picture-04">
+          </div>
+
+          <div  className="div-sideImage" id="picture-05">
+          </div>
+
+          <div  className="div-sideImage" id="picture-06">
+          </div>
+
+          <div  className="div-sideImage" id="picture-07">
+          </div>
         </div>
         <div className="div-body">
+          <div className="spotDescription"><p>{spot.description}</p></div>
           {showReview && <button className="RF-modalButton">
             <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
+          </button>}
+          {owner && <button className="RF-modalButton">
+            <OpenModalButton buttonText="Edit"/>
           </button>}
         </div>
       </div>

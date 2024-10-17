@@ -30,7 +30,12 @@ module.exports = {
         lat: 34.092809,
         lng: -118.328661,
         name: "Code Camp",
-        description: "A bootcamp for aspiring software engineers",
+        description: `Each meticulously curated home in our Airbnb-inspired platform offers a welcoming sanctuary for travelers and explorers 
+                      alike, designed to blend modern comforts with local charm. From cozy urban lofts adorned with contemporary art and skyline 
+                      views to rustic countryside cottages nestled among rolling hills and vineyards, every residence promises a unique and 
+                      immersive experience. Discover spaces thoughtfully furnished for relaxation and productivity, whether you seek a bustling 
+                      city center retreat or a tranquil escape off the beaten path. Each home is a testament to our commitment to providing 
+                      unforgettable stays where comfort meets adventure.`,
         price: 456
       },
       {
@@ -43,7 +48,14 @@ module.exports = {
         lat: 47.609722,
         lng: -122.333056,
         name: "Tech University",
-        description: "University specializing in cutting-edge technology",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 789
       },
       {
@@ -56,7 +68,14 @@ module.exports = {
         lat: 30.267153,
         lng: -97.743057,
         name: "Fullstack Academy",
-        description: "Intensive coding bootcamp for full-stack developers",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 350,
       },
       {
@@ -69,7 +88,14 @@ module.exports = {
         lat: 37.338208,
         lng: -121.886329,
         name: "Silicon Valley University",
-        description: "Leading university for tech innovation",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 650,
       },
       {
@@ -82,7 +108,14 @@ module.exports = {
         lat: 40.712776,
         lng: -74.005974,
         name: "NYC Tech School",
-        description: "A premier school for tech skills",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 800,
       },
       {
@@ -95,7 +128,14 @@ module.exports = {
         lat: 41.878113,
         lng: -87.629799,
         name: "Chicago Coding Institute",
-        description: "Focused training for aspiring coders",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 450,
       },
       {
@@ -108,7 +148,14 @@ module.exports = {
         lat: 42.360081,
         lng: -71.058884,
         name: "Boston Engineering Academy",
-        description: "Innovative program for engineers",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 600,
       },
       {
@@ -121,7 +168,14 @@ module.exports = {
         lat: 39.739236,
         lng: -104.990251,
         name: "Data Science School",
-        description: "Specializing in data science and analytics",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 700,
       },
       {
@@ -134,7 +188,14 @@ module.exports = {
         lat: 25.7617,
         lng: -80.1918,
         name: "Cloud Computing Academy",
-        description: "Training in cloud technologies and services",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 750,
       },
       {
@@ -147,7 +208,14 @@ module.exports = {
         lat: 33.7490,
         lng: -84.3880,
         name: "AI Development Institute",
-        description: "Focus on artificial intelligence and machine learning",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 900,
       },
       {
@@ -160,7 +228,14 @@ module.exports = {
         lat: 38.9072,
         lng: -77.0369,
         name: "Cybersecurity Academy",
-        description: "Training in cybersecurity practices and principles",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 850,
       },
       {
@@ -173,7 +248,14 @@ module.exports = {
         lat: 34.0522,
         lng: -118.2437,
         name: "Game Development School",
-        description: "Creating the next generation of game developers",
+        description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
+                      technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
+                      collaborative spaces designed to foster creativity and hands-on learning. From pioneering research labs pushing 
+                      the boundaries of artificial intelligence and sustainable technologies to dynamic classrooms where theory meets 
+                      practice, students immerse themselves in a transformative educational experience. Our diverse faculty of industry 
+                      experts and scholars guides students through rigorous academic programs, equipping them with the skills and knowledge 
+                      to tackle global challenges and drive future innovations. Join us at the intersection of knowledge and discovery,
+                      where passion for cutting-edge technology fuels limitless possibilities.`,
         price: 999,
       },
     ]);

@@ -1,0 +1,89 @@
+.div-spot {
+  display: grid; /* Activate grid layout */
+  grid-template-areas:
+    'Title'
+    'Pictures'
+    'Body';
+  grid-template-rows: 40px auto 1fr; /* Define the heights of each row */
+  grid-gap: 10px; /* Optional: adds spacing between grid items */
+  height: 100vh; /* Set the container height to fill the viewport */
+  margin-left: 10px;
+}
+
+.div-title {
+  grid-area: 'Title';
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+}
+
+
+/* ---- PICTURES ---- */
+
+.div-pictures {
+  grid-area: 'Pictures';
+  display: grid;
+  grid-template-columns: 500px 300px 300px 300px;
+  grid-template-rows: 150px 150px;
+  grid-template-areas: 
+    "pic01 pic02 pic03 pic04"
+    "pic01 pic05 pic06 pic07";
+}
+
+#picture-01 {
+  grid-area: pic01;
+}
+#image-01 {
+  width: 500px;
+  height: 300px;
+}
+
+#picture-02 {
+  grid-area: pic02;
+  
+}
+#picture-03 {
+  grid-area: pic03;
+  
+}
+#picture-04 {
+  grid-area: pic04;
+  
+}
+#picture-05 {
+  grid-area: pic05;
+  
+}
+
+.div-sideImage {
+  object-fit: cover;
+}
+
+.div-mainImage {
+  object-fit: cover;
+}
+
+/* ---- PICTURES ---- */
+
+
+.div-body {
+  grid-area: 'Body';
+  /* border: 1px solid black; */
+}
+
+/* ---- SPOT BODY BUTTON ---- */
+
+.RF-modalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  background-color: rgb(211, 216, 220);
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0;
+}
+
+/* ---- SPOT BODY BUTTON ---- */
+
