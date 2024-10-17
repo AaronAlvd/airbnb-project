@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import OpenModalButton from '../../OpenModalButton/OpenModalButton';
 import LoginFormModal from '../../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../../SignUp/SignUpForm';
@@ -48,6 +49,7 @@ function ProfileButton({ user }) {
           <li className={showMenu ? "ModalButton-list pbl-bottom" : null}>
             <button onClick={logout} className="pb-logout userInfo">Log Out</button>
           </li>
+          <li className={showMenu ? "ModalButton-list" : null}><NavLink to="/spotformpage"><p className="userInfo">Create Spot</p></NavLink></li>
         </ul>
       )
     } else if (showMenu && !liveUser) {
