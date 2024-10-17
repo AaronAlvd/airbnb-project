@@ -39,39 +39,41 @@ export const getSpots = () => {
   };
 };
 
-export const createSpot = async (dispatch, data) => {
+export const createSpot = (data) => async (dispatch) => {
   try {
-    const { address, lng , lat, city, state, country, description, price } = data;
+    const { address, lng, lat, city, state, country, description, price, name } = data;
 
     const response = await csrfFetch('/api/spots/', {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         address,
         city,
         state,
         country,
+        name,
         lat,
         lng,
         description,
-        price
+        price,
       }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (!response.ok) {
-      throw new Error("Create spot failed.")
+      throw new Error("Failed to create a spot.");
     }
 
     const newData = await response.json();
+    dispatch(addSpot(newData));
 
-    dispatch()
-
-  } catch(err) {
-
+    return newData;
+  } catch (err) {
+    console.error("Error creating spot:", err);
+    return err;
   }
-}
+};
 
 export const deleteSpot = async (spotId) => {
   try {
@@ -108,8 +110,11 @@ const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SPOTS:
       return { ...state, spots: action.payload };
-    case ADD_SPOT: 
-      return {...state, ...spots, [action.payload.id]: action.payload}
+    case ADD_SPOT: {
+      const newState = {...state};
+      newState.spots[action.payload.id] = action.payload;
+      return newState;
+    }
     case DELETE_SPOT:
       // Filter out the spot with the given ID from state.spots
       const updatedSpots = state.spots.filter(spot => spot.id !== action.payload.spotId);

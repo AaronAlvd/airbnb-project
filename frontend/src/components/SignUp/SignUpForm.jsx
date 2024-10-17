@@ -114,7 +114,7 @@ function SignupFormModal() {
       <div className="div-h1">
         <h1 className="h1-signup">Sign Up</h1>
       </div>
-      <form className="registerForm" onSubmit={handleSubmit}>
+      <form className="registerForm" onSubmit={(e) => handleSubmit(e)}>
         <div className="register-div-input" tabIndex={0} onBlur={() => handleBlur()} onClick={(e) => {handleFocus(e, "firstName")}}>
           <label className={isFocused.firstName ? "focusedLabel" : "register-formLabel"}>First Name</label>
           <input ref={firstNameRef} type="text" id="firstName" name="firstName" value={formData.firstName} onChange={(e) => handleChange(e)}
