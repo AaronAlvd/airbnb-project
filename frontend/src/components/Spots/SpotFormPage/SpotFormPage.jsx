@@ -1,5 +1,6 @@
 import States from '../../States';
 import { useState } from 'react';
+import * as spotActions from '../../../store/spots';
 
 function SpotFormPage () {
   const [formData, setFormData] = useState({
@@ -14,7 +15,8 @@ function SpotFormPage () {
   })
 
   const handleSubmit = () => {
-
+    e.preventDefault();
+    dispatch(spotActions.createSpot(formData))
   }
 
   const handleChange = (e) => {
@@ -27,7 +29,7 @@ function SpotFormPage () {
   return (
     <div>
       <div className="div-spotForm">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="spotForm-inputLabel">Address</label>
             <input type="text" name="address" value={formData.address} onChange={(e) => handleChange(e)}/>
@@ -40,12 +42,12 @@ function SpotFormPage () {
 
           <div>
             <label className="spotForm-inputLabel">State</label>
-            <States value={formData.state} onChange={(e) => handleChange(e)}/>
+            <States value={formData.state} name="state" onChange={(e) => handleChange(e)}/>
           </div>
 
           <div>
             <label className="spotForm-inputLabel">Country</label>
-            <select>
+            <select value={formData.country} name="country" onChange={(e) => handleChange(e)}>
               <option>Select a country...</option>
               <option>United States</option>
             </select>
@@ -72,7 +74,7 @@ function SpotFormPage () {
           </div>
 
           <div>
-            <button onClick={() => handleSubmit()}>Submit</button>
+            <button type="submit">Submit</button>
           </div>
 
         </form>
