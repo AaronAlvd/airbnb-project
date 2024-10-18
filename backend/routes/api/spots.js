@@ -468,11 +468,13 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     // Ensure dates are in proper format
     const start = new Date(startDate);
+    console.log(start);
     const end = new Date(endDate);
     const today = new Date();
-
+    const SpotId = Number(spotId);
     // Validation: startDate cannot be in the past
     if (start < today) {
+
       return res.status(400).json({ message: "startDate cannot be in the past" });
     }
 
@@ -482,6 +484,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 
     const spot = await Spot.findByPk(spotId);
+
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }
@@ -517,13 +520,20 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
       });
     }
 
+    console.log({"userId": userId, "spotId": SpotId, "startDate": start, "endDate":end});
+
+
     // Create new booking
-    const newBooking = await Booking.create({
+
+ const newBooking = await Booking.create({
       userId,
-      spotId,
+      spotId:SpotId,
       startDate: start,
       endDate: end
     });
+
+    // everything is coming back until newBooking
+    console.log("newBooking", newBooking)
 
     return res.status(201).json({
       id: newBooking.id,
