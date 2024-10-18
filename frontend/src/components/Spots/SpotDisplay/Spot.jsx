@@ -15,9 +15,8 @@ function Spot() {
   const user = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings.bookings);
 
-
-  const spot =  spots.find((spot) => spot.id === Number(spotId));
-
+  const spot = spots.find((spot) => spot.id === Number(spotId));
+  console.log(spot);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,6 +73,12 @@ function Spot() {
       <div className="div-title">
         <h2>{spot.name}</h2>
       </div>
+      <div>
+        <p>
+
+          {spot.city} ,{spot.state} ,{spot.country}
+        </p>
+      </div>
       <div className="div-pictures">
         <div className="div-mainImage" id="picture-01">
           <img src={spot.previewImage} id="image-01" />
@@ -93,20 +98,26 @@ function Spot() {
       </div>
       <div className="div-body">
         <div className="spotDescription">
+          <span>${spot.price}/Night</span>
+          <h3>Hosted by Aaron,Tyler,Bobby,Gabbs</h3>
           <p>{spot.description}</p>
         </div>
-        {/* {!owner && (
-           <button className="RF-modalButton">
-            <OpenModalButton buttonText="Create Booking" modalComponent={<BookingForm props={spot}/>}/>
-</button> )} */}
-            {!owner && (
-              <button className="RF-modalButton">
-              <OpenModalButton
-                buttonText="Make Review"
-                modalComponent={<ReviewForm props={spot} />}
-              /> </button>
-            )}
-
+        {!owner && (
+          <button
+            className="RF-modalButton"
+            onClick={() => window.alert("Feature Coming Soon!!")}
+          >
+            Reserve
+          </button>
+        )}
+        {!owner && (
+          <button className="RF-modalButton">
+            <OpenModalButton
+              buttonText="Make Review"
+              modalComponent={<ReviewForm props={spot} />}
+            />{" "}
+          </button>
+        )}
 
         {owner && (
           <button className="RF-modalButton">

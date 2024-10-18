@@ -25,7 +25,7 @@
   display: grid;
   grid-template-columns: 500px 300px 300px 300px;
   grid-template-rows: 150px 150px;
-  grid-template-areas: 
+  grid-template-areas:
     "pic01 pic02 pic03 pic04"
     "pic01 pic05 pic06 pic07";
 }
@@ -40,19 +40,19 @@
 
 #picture-02 {
   grid-area: pic02;
-  
+
 }
 #picture-03 {
   grid-area: pic03;
-  
+
 }
 #picture-04 {
   grid-area: pic04;
-  
+
 }
 #picture-05 {
   grid-area: pic05;
-  
+
 }
 
 .div-sideImage {
@@ -69,8 +69,18 @@
 .div-body {
   grid-area: 'Body';
   /* border: 1px solid black; */
+  position: relative;
+  bottom:110px;
+}
+span{
+  position: relative;
+  top: 10px;
 }
 
+.spotDescription{
+  position: relative;
+  bottom:100px;
+}
 /* ---- SPOT BODY BUTTON ---- */
 
 .RF-modalButton {
@@ -83,7 +93,8 @@
   height: 30px;
   border-radius: 5px;
   padding: 0;
+  position: relative;
+  bottom:100px;
 }
 
 /* ---- SPOT BODY BUTTON ---- */
-
