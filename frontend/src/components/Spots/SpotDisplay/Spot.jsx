@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Spot.css";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
-// import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
-import BookingForm from "../../Booking/BookingForm";
+import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
+// import BookingForm from "../../Booking/BookingForm";
 function Spot() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
@@ -95,16 +95,17 @@ function Spot() {
         <div className="spotDescription">
           <p>{spot.description}</p>
         </div>
-        {!owner && (
+        {/* {!owner && (
            <button className="RF-modalButton">
             <OpenModalButton buttonText="Create Booking" modalComponent={<BookingForm props={spot}/>}/>
-</button> )}
-            {/* {!owner && (
+</button> )} */}
+            {!owner && (
+              <button className="RF-modalButton">
               <OpenModalButton
-                buttonText="Create Booking"
+                buttonText="Make Review"
                 modalComponent={<ReviewForm props={spot} />}
-              />
-            )} */}
+              /> </button>
+            )}
 
 
         {owner && (

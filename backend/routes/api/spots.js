@@ -515,12 +515,15 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     });
 
     if (existingBooking) {
+      console.log("already here")
       return res.status(403).json({
         message: "Booking already exists for the spot on the selected dates"
       });
     }
+    const startString = start.toISOString();
+    const endString = end.toISOString();
 
-    console.log({"userId": userId, "spotId": SpotId, "startDate": start, "endDate":end});
+    console.log({"userId": userId, "spotId": SpotId, "startDate":typeof startString, "endDate":endString});
 
 
     // Create new booking
@@ -528,8 +531,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
  const newBooking = await Booking.create({
       userId,
       spotId:SpotId,
-      startDate: start,
-      endDate: end
+      startDate: startString,
+      endDate: endString
     });
 
     // everything is coming back until newBooking

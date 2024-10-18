@@ -6,6 +6,8 @@ import LoginFormModal from '../../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../../SignUp/SignUpForm';
 import * as sessionActions from '../../../store/session';
 import './Navigation.css'
+import { HiOutlinePaperAirplane } from "react-icons/hi2";
+
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -36,9 +38,10 @@ function Navigation({ isLoaded }) {
       <div className="div-ul">
         <ul className="nav-ul">
           <li className="nav-li">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <ProfileButton/>
+            <NavLink to="/"> <HiOutlinePaperAirplane />AIRBNB</NavLink>
+          </li >
+
+          <ProfileButton className="Profile" />
         </ul>
       </div>
     </div>

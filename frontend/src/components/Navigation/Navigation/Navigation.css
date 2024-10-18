@@ -7,10 +7,13 @@
 
 .nav-li {
   margin: 0 15px 0 15px;
+  position: relative;
+  right: 1271px;
 }
 
 .nav-profileButton {
   background-color: white;
+
 }
 
 a {
@@ -27,7 +30,7 @@ a {
 .div-nav {
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 94vw;
   height: 60px;
 }
 
@@ -35,4 +38,3 @@ a {
   width: 50vw;
   padding: 0px;
 }
-

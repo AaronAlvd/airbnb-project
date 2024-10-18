@@ -52,7 +52,7 @@ export const createBooking = (id, bookingData) => async (dispatch) => {
       }
 
       const data = await response.json();
-      dispatch({ type: 'CREATE_BOOKING', payload: data });
+      dispatch(addBooking(data));
   } catch (error) {
       console.error("Error in createBooking:", error);
       throw error; // This will propagate the error to the caller
