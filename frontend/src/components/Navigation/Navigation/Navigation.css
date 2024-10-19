@@ -1,9 +1,25 @@
 .nav-li {
-  position: relative; 
-  right: 20px;
+  grid-column: 1;
+  justify-self: end;
+  
 } 
 
+.button-FaUser{
+  grid-column: 3;
+  justify-self: end;
+}
 
+.nav-ul {
+  /* display: flex;
+  justify-content: space-evenly; */
+  display: grid;
+  grid-template-columns: 1.09fr 1fr 1fr 1fr;
+  list-style-type: none;
+  align-items: center;
+  margin: 20px 0 50px
+  /* padding: 50; */
+  /* width: 100%; */
+}
 
 a {
  text-decoration: none;
@@ -13,7 +29,7 @@ a {
 }
 
 .logo {
-  margin: 0 5000px;
+  
 }
 
 /*
@@ -29,14 +45,7 @@ a {
   padding: 0px;
 }  */
 
-.nav-ul {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-  align-items: center;
-  margin: 20px 620px 50px;
-  /* width: 100%; */
-}
+
 
 
 
