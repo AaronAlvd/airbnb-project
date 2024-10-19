@@ -1,14 +1,19 @@
 .grid-container {
   display: flex;
   justify-content: center;
+  /* flex-direction: column */
+  
 }
 
 .div-spotsGallery {
   display: grid;
-  width: 100%;
+  /* width: 100%; */
   grid-template-columns: 1fr 1fr 1fr 1fr; 
-  column-gap: 40px;
+  column-gap: 45px;
   row-gap: 15px;
+  
+  
+  
   
 }
 
@@ -23,13 +28,14 @@
   grid-template-areas: 
     'spotImage'
     'information';
-  width: 300px;
+  width: 280px;
   grid-template-rows: 245px 60px;
   row-gap: 5px;
-  margin: 5px
+  margin: 5px;
 }
 
 .SDA-Image {
+  /* border: .5px black solid; */
   grid-area: 'spotImage';
   height: auto;
   border-radius: 15px;

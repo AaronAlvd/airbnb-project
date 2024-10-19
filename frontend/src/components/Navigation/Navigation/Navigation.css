@@ -1,14 +1,8 @@
 .nav-li {
-  
   position: relative; 
-  
-   
 } 
 
-/* .nav-profileButton {
-  background-color: white;
 
-} */
 
 a {
  text-decoration: none;
@@ -42,3 +36,6 @@ a {
   /* padding: 0; */
   /* width: 100%; */
 }
+
+
+

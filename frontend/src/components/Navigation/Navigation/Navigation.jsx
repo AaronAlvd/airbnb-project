@@ -41,7 +41,7 @@ function Navigation({ isLoaded }) {
             <NavLink to="/"> <HiOutlinePaperAirplane />EduBnB</NavLink>
           </li >
 
-          <ProfileButton className="Profile" />
+          <ProfileButton className="Profile"/>
         </ul>
       </div>
     </div>
