@@ -67,12 +67,12 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+    <div className='tester'>
       <button onClick={toggleMenu} className="button-FaUser">
         <FaUserCircle className="FaUserCircle"/>
       </button>
       {showMenu && ulClassName()}
-    </>
+    </div>
   );
 }
 

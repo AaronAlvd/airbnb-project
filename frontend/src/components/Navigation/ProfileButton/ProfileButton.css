@@ -33,28 +33,39 @@
 
 .UL-ModalButton {
   position: absolute;
-  transform: translate(-40px, 80px);
+  /* transform: translate(-40px, 80px); */
   box-shadow: 1px 1px 5px rgb(181, 180, 180);
   border-radius: 5%;
+  margin-top: 20px;
   padding: 0;
+  left: -102px
 }
 
 .UL-ModalButton-loggedIn {
   position: absolute;
-  transform: translate(-30px, 130px);
+  /* transform: translate(-30px, 130px); */
   box-shadow: 1px 1px 5px rgb(181, 180, 180);
   border-radius: 5%;
   padding: 0;
+  margin-top: 20px;
+
+  left: -102px
+}
+
+.tester {
+  position: relative;
+  grid-column: 4;
 }
 
 .ModalButton-list {
   margin: 0;
   background-color: rgb(255, 255, 255);
-  width: 200px;
+  width: 150px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  
 }
 
 .userInfo {
