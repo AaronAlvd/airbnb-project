@@ -7,13 +7,10 @@
 
 .div-spotsGallery {
   display: grid;
-  /* width: 100%; */
+  
   grid-template-columns: 1fr 1fr 1fr 1fr; 
   column-gap: 45px;
   row-gap: 15px;
-  
-  
-  
   
 }
 
