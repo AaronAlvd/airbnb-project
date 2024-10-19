@@ -8,6 +8,7 @@ import "./Spot.css";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
 import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
 // import BookingForm from "../../Booking/BookingForm";
+import ShowCaseReviews from "../../Reviews/ShowCaseReviews";
 function Spot() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
@@ -24,6 +25,7 @@ function Spot() {
   const [owner, setOwner] = useState(false);
 
   useEffect(() => {
+    
     const fetchSpots = async () => {
       setLoading(true); // Set loading state before fetch starts
       setError(null); // Clear any previous error messages
@@ -83,7 +85,7 @@ function Spot() {
         <div className="div-mainImage" id="picture-01">
           <img src={spot.previewImage} id="image-01" />
         </div>
-
+        <ShowCaseReviews/>
         <div className="div-sideImage" id="picture-02"></div>
 
         <div className="div-sideImage" id="picture-03"></div>
@@ -99,7 +101,7 @@ function Spot() {
       <div className="div-body">
         <div className="spotDescription">
           <span>${spot.price}/Night</span>
-          <h3>Hosted by Aaron,Tyler,Bobby,Gabbs</h3>
+          <h3>Hosted by Aaron,Tyler,Bobby</h3>
           <p>{spot.description}</p>
         </div>
         {!owner && (

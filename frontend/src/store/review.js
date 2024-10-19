@@ -54,21 +54,23 @@ export const createReview = (batchReview) => async (dispatch) => {
 };
 
 export const getReviews = () => {
-  try {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try {
       const response = await csrfFetch('/api/reviews/current');
 
       if (!response.ok) {
-        throw new Error('Failed to fetch Reviews');
+        throw new Error('Failed to fetch reviews');
       }
 
       const data = await response.json();
-      dispatch(setReviews(data.Reviews))
+      dispatch(setReviews(data.Reviews));
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+      
     }
-  } catch(err) {
-    console.error("Error fetching reviews:", err)
-  }
-}
+  };
+};
+
 
 const initialState = {
   reviews: []
