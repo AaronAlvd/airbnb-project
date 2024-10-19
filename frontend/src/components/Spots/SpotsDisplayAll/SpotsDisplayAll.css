@@ -5,9 +5,9 @@
 
 .div-spotsGallery {
   display: grid;
-  width: 90vw;
-  grid-template-columns: 1fr 1fr 1fr .7fr; 
-  column-gap: 15px;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  column-gap: 40px;
   
 }
 
