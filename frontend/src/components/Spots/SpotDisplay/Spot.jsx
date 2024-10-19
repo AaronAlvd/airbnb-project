@@ -57,7 +57,7 @@ function Spot() {
   }, [showReview]);
 
   useEffect(() => {
-    if (spot.ownerId === user.id) {
+    if (user && (spot.ownerId === user.id)) {
       setOwner(true);
     }
   },[owner]);

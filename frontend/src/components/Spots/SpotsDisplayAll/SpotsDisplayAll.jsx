@@ -11,7 +11,6 @@ function SpotsDisplayAll() {
 
   // Assuming the spots are stored as an array in state.spots.spots
   const spots = useSelector((state) => state.spots.spots); // Adjust according to your state structure
-
   // Fetch spots when the component mounts
   useEffect(() => {
     dispatch(spotActions.getSpots());
