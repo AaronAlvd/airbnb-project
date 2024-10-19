@@ -24,6 +24,7 @@ function SpotsDisplayAll() {
   }
 
   return (
+    <div className="grid-container">
     <div className="div-SDA-grid">
       <div className="div-spotsGallery">
         {spots.map((spot) => {
@@ -40,6 +41,7 @@ function SpotsDisplayAll() {
           )
         })}
       </div>
+    </div>
     </div>
   );
 }

@@ -38,7 +38,7 @@ function Navigation({ isLoaded }) {
       <div className="div-ul">
         <ul className="nav-ul">
           <li className="nav-li">
-            <NavLink to="/"> <HiOutlinePaperAirplane />AIRBNB</NavLink>
+            <NavLink to="/"> <HiOutlinePaperAirplane />EduBnB</NavLink>
           </li >
 
           <ProfileButton className="Profile" />
