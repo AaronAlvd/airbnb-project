@@ -5,15 +5,15 @@
 } 
 
 .button-FaUser{
-  grid-column: 3;
-  justify-self: end;
+  grid-column: 4;
+  /* justify-self: end; */
 }
 
 .nav-ul {
   /* display: flex;
   justify-content: space-evenly; */
   display: grid;
-  grid-template-columns: 1.09fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 575px 575px 1fr;
   list-style-type: none;
   align-items: center;
   margin: 20px 0 50px
