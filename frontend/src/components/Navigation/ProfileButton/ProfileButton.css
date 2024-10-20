@@ -25,6 +25,10 @@
   padding: 0;
 }
 
+.FaUserCircle:hover { 
+  cursor: pointer;
+}
+
 .button-FaUser {
   margin-right: 15px;
   height: min-content;
