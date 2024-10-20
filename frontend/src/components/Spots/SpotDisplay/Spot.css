@@ -1,13 +1,15 @@
 .div-spot {
-  display: grid; /* Activate grid layout */
-  grid-template-areas:
-    'Title'
-    'Pictures'
-    'Body';
-  grid-template-rows: 40px auto 1fr; /* Define the heights of each row */
-  grid-gap: 10px; /* Optional: adds spacing between grid items */
-  height: 100vh; /* Set the container height to fill the viewport */
-  margin-left: 10px;
+  display: grid; 
+  
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px; 
+  height: 100px; 
+  margin-left: 10px; 
+}
+
+#location {
+  margin-left: 161px;
+  grid-column: 2;
 }
 
 .div-title {
@@ -15,6 +17,32 @@
   /* border: 1px solid black; */
   display: flex;
   align-items: center;
+  margin-left: 161px;
+  grid-column: 2;
+
+}
+
+#reviewbutton {
+  position: relative;
+  left: 161px;
+  bottom: -50px;
+  
+  width: 350px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+
+}
+
+#review {
+
+  position: absolute;
+  bottom: -480px;
+  left: 161px;
+  grid-column: 2;
+
 }
 
 
@@ -28,6 +56,9 @@
   grid-template-areas:
     "pic01 pic02 pic03 pic04"
     "pic01 pic05 pic06 pic07";
+  margin: 0 161px;
+  grid-column: 2;
+
 }
 
 #picture-01 {
@@ -35,7 +66,7 @@
 }
 #image-01 {
   width: 500px;
-  height: 300px;
+  height: 400px;
 }
 
 #picture-02 {
@@ -57,30 +88,76 @@
 
 .div-sideImage {
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .div-mainImage {
   object-fit: cover;
+  
+  
 }
+
+
+
 
 /* ---- PICTURES ---- */
 
 
-.div-body {
-  grid-area: 'Body';
-  /* border: 1px solid black; */
-  position: relative;
-  bottom:110px;
+
+
+.div-mainImage > img {
+border-radius: 15px;
 }
+
 span{
   position: relative;
   top: 10px;
 }
 
+.div-body {
+  grid-area: 'Body';
+  border: 3px solid black;
+  border-radius: 10px;
+  position: relative;
+  bottom:116px;
+  left: 1090px;
+  width: 400px;
+  height: 130px;
+  grid-column: 2;
+
+}
+
+#reservebutton {
+  bottom: 10px;
+  left: 25px;
+  width: 350px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+
+}
+
 .spotDescription{
   position: relative;
-  bottom:100px;
+  left: 161px;
+  /* bottom: -275px; */
+  top: 95px;
+  padding: 10px 0px;
+  width: 870px;
+  grid-column: 2;
+
 }
+
+#spotprice {
+  position: relative;
+  left: 25px;
+  top: -10px;
+  font-size: x-large
+  ;
+}
+
 /* ---- SPOT BODY BUTTON ---- */
 
 .RF-modalButton {
@@ -94,7 +171,8 @@ span{
   border-radius: 5px;
   padding: 0;
   position: relative;
-  bottom:100px;
+  bottom: 35px;
+  
 }
 
 /* ---- SPOT BODY BUTTON ---- */

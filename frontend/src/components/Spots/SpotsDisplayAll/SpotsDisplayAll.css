@@ -20,6 +20,10 @@
   justify-content: center;
 }
 
+.button-FaUser {
+  margin-right: 0;
+  margin-left: 47px
+}
 .SDA-box {
   display: grid;
   grid-template-areas: 

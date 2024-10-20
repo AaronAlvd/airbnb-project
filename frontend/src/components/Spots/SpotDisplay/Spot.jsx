@@ -71,21 +71,22 @@ function Spot() {
   if (!spot) return <div>Spot not found.</div>;
 
   return (
+    
     <div className="div-spot">
       <div className="div-title">
         <h2>{spot.name}</h2>
       </div>
-      <div>
+      <div id="location">
         <p>
 
-          {spot.city} ,{spot.state} ,{spot.country}
+          {spot.city}, {spot.state}, {spot.country}
         </p>
       </div>
       <div className="div-pictures">
         <div className="div-mainImage" id="picture-01">
           <img src={spot.previewImage} id="image-01" />
         </div>
-        <ShowCaseReviews/>
+        
         <div className="div-sideImage" id="picture-02"></div>
 
         <div className="div-sideImage" id="picture-03"></div>
@@ -98,22 +99,29 @@ function Spot() {
 
         <div className="div-sideImage" id="picture-07"></div>
       </div>
-      <div className="div-body">
-        <div className="spotDescription">
-          <span>${spot.price}/Night</span>
-          <h3>Hosted by Aaron,Tyler,Bobby</h3>
+      <div className="spotDescription">
+          
+          <h3>Hosted by Aaron, Tyler, & Bobby</h3>
           <p>{spot.description}</p>
         </div>
+      <div className="div-body">
+      <p id="spotprice">${spot.price}/Night</p>
         {!owner && (
           <button
+            id="reservebutton"
             className="RF-modalButton"
             onClick={() => window.alert("Feature Coming Soon!!")}
           >
             Reserve
           </button>
         )}
-        {!owner && (
-          <button className="RF-modalButton">
+        
+      </div>
+      <div id="review">
+          <ShowCaseReviews/>
+        </div>
+      {!owner && (
+          <button id="reviewbutton" className="RF-modalButton">
             <OpenModalButton
               buttonText="Make Review"
               modalComponent={<ReviewForm props={spot} />}
@@ -126,7 +134,6 @@ function Spot() {
             <OpenModalButton buttonText="Edit" />
           </button>
         )}
-      </div>
     </div>
   );
 }
