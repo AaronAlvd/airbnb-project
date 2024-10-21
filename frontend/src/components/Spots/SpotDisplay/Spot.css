@@ -24,10 +24,9 @@
 
 #reviewbutton {
   position: relative;
-  left:35px;
-  bottom: -10px;
-
-  width: 350px;
+  left:190px;
+  bottom: 225px;
+  width: 250px;
   height: 45px;
   border-radius: 1px;
   box-shadow: 2px 2px;
