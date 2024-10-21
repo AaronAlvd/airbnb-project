@@ -1,5 +1,7 @@
 import "./ShowCaseReviews.css";
-export default function ShowCaseReviews() {
+import OpenModalButton from "../../OpenModalButton/OpenModalButton";
+import ReviewForm from "../ReviewForm/ReviewForm";
+export default function ShowCaseReviews({isOwner}, {spot}) {
   return (
     <>
 
@@ -11,7 +13,14 @@ export default function ShowCaseReviews() {
           <li>#3</li>
           <li>Evvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</li>
         </ul>
-      </div>
+
+      {!isOwner && ( <button id="reviewbutton" className="RF-modalButton">
+            <OpenModalButton
+              buttonText="Make Review"
+              modalComponent={<ReviewForm props={spot}  />}
+            />{" "}
+          </button>)}
+          </div>
     </>
   );
 }

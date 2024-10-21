@@ -1,10 +1,10 @@
 .div-spot {
-  display: grid; 
-  
+  display: grid;
+
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px; 
-  height: 100px; 
-  margin-left: 10px; 
+  grid-gap: 10px;
+  height: 100px;
+  margin-left: 10px;
 }
 
 #location {
@@ -24,9 +24,9 @@
 
 #reviewbutton {
   position: relative;
-  left: 161px;
-  bottom: -50px;
-  
+  left:35px;
+  bottom: -10px;
+
   width: 350px;
   height: 45px;
   border-radius: 1px;
@@ -35,14 +35,22 @@
   grid-column: 2;
 
 }
+#reviewbutton:hover {
+    transform: translateY(-2px);
 
+  }
 #review {
-
+  height: 275px;
   position: absolute;
   bottom: -480px;
   left: 161px;
   grid-column: 2;
-
+  border: 3px solid black;
+  border-radius:15px ;
+  -webkit-border-radius:15px ;
+  -moz-border-radius:15px ;
+  -ms-border-radius:15px ;
+  -o-border-radius:15px ;
 }
 
 
@@ -93,8 +101,8 @@
 
 .div-mainImage {
   object-fit: cover;
-  
-  
+
+
 }
 
 
@@ -136,7 +144,11 @@ span{
   box-shadow: 2px 2px;
   background-color: red;
   grid-column: 2;
-
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#reservebutton:hover{
+  transform: translateY(-2px);
+  cursor:pointer;
 }
 
 .spotDescription{
@@ -172,7 +184,7 @@ span{
   padding: 0;
   position: relative;
   bottom: 35px;
-  
+
 }
 
 /* ---- SPOT BODY BUTTON ---- */

@@ -5,7 +5,7 @@ import { useSelector, useDispatch} from "react-redux";
 import { createReview } from "../../../store/review";
 import { useModal } from '../../../context/modal';
 
-export default function ReviewForm({props}) {
+export default function ReviewForm({props},{ButtonProp}) {
   const user = useSelector((state) => state.session.user);
 
   const [review, setReview] = useState("");

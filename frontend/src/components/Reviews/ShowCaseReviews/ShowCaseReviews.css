@@ -1,24 +1,18 @@
 .Review-list {
-    background-color: #f9f9f9;
-    height: fit-content;
+    background-color: transparent;
+    height: 275px;
     border-radius: 15px;
     width: auto;
     max-width: 500px;
     padding: 20px;
-    margin: 20px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    bottom: 165px;
+  
+
+
   }
 
-  .Review-list:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
+
   .title {
-    border-bottom: 2px solid #333; 
+    border-bottom: 2px solid #333;
     padding-bottom: 5px;
     display: inline-block;
 }
