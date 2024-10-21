@@ -12,11 +12,11 @@ import ShowCaseReviews from "../../Reviews/ShowCaseReviews";
 function Spot() {
   const dispatch = useDispatch();
   const { spotId } = useParams();
-  const spots = useSelector((state) => state.spots.spots);
+  const spot = useSelector((state) => state.spots.spot);
   const user = useSelector((state) => state.session.user);
   const bookings = useSelector((state) => state.bookings.bookings);
 
-  const spot = spots.find((spot) => spot.id === Number(spotId));
+  // const spot = spots.find((spot) => spot.id === Number(spotId));
   console.log(spot);
 
   const [loading, setLoading] = useState(true);
@@ -34,12 +34,12 @@ function Spot() {
       try {
         if (user) {
           await Promise.all([
-            dispatch(spotActions.getSpots()),
-            dispatch(reviewActions.getAllReviews(spotId)),
+            // dispatch(spotActions.getSpots()),
+            dispatch(spotActions.getSingleSpot(spotId)),
             dispatch(bookingActions.getBookings()),
           ]);
         } else {
-          dispatch(spotActions.getSpots());
+          dispatch(spotActions.getSingleSpot(spotId));
         }
       } catch (err) {
         setError("Failed to load spots or bookings."); // General error message
@@ -85,7 +85,7 @@ function Spot() {
       </div>
       <div className="div-pictures">
         <div className="div-mainImage" id="picture-01">
-          <img src={spot.previewImage} id="image-01" />
+          <img src={spot.SpotImages[0].url} id="image-01"/>
         </div>
 
         <div className="div-sideImage" id="picture-02"></div>
