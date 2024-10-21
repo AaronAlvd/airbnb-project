@@ -66,7 +66,26 @@ export const getReviews = () => {
       dispatch(setReviews(data.Reviews));
     } catch (err) {
       console.error("Error fetching reviews:", err);
-      
+
+    }
+  };
+};
+export const getAllReviews = (spotId) => {
+  // console.log("GAR",spotId)
+  return async (dispatch) => {
+    try {
+      const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch reviews');
+      }
+
+      const data = await response.json();
+       console.log("Data",data)
+      dispatch(setReviews(data.Reviews));
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+
     }
   };
 };

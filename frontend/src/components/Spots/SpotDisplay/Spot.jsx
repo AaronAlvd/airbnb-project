@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Spot.css";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
-import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
+// import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
 // import BookingForm from "../../Booking/BookingForm";
 import ShowCaseReviews from "../../Reviews/ShowCaseReviews";
 function Spot() {
@@ -35,7 +35,7 @@ function Spot() {
         if (user) {
           await Promise.all([
             dispatch(spotActions.getSpots()),
-            dispatch(reviewActions.getReviews()),
+            dispatch(reviewActions.getAllReviews(spotId)),
             dispatch(bookingActions.getBookings()),
           ]);
         } else {
@@ -120,7 +120,7 @@ function Spot() {
       </div>
       <div id="review">
           <ShowCaseReviews isOwner={owner} spot={spot}/>
-         
+
         </div>
 
 
