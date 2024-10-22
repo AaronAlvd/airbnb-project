@@ -38,8 +38,43 @@ input {
 }
 
 .location {
-    padding-bottom: 25px;
+    padding-bottom: 40px;
     border-bottom: 3px solid black;
     width: 398px
     
+}
+
+#lat-box {
+    margin-top: 10px;
+    
+}
+#lng-box {
+    margin-top: 10px;
+    justify-self: end;
+}
+#latlng-box {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 20px 20px;
+    
+}
+
+#lat {
+    width: 170px;
+    margin-top: 5px;
+    grid-column: 1;
+    grid-row: 2;
+}
+#lat-header {
+    grid-row: 1;
+}
+#lng {
+    width: 170px;
+    margin-top: 5px;
+    grid-column: 2;
+    grid-row: 2;
+
+}
+#lng-header {
+    grid-row: 1;
 }

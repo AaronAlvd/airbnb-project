@@ -113,20 +113,25 @@ function SpotFormPage () {
             </div>
             <input type="text" placeholder='Name' name="name" value={formData.name} onChange={(e) => handleChange(e)}/>
           
+          <div id="latlng-box">
 
-          <div className='spacer'>
-            <label className="spotForm-inputLabel">Latitude</label> 
-            </div>
-            <input type="text" placeholder='Lat' name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
-         
+              <div id="lat-box">
+                <div>
+                  <label id="lat-header"className="spotForm-inputLabel">Latitude</label> 
+                </div>
+                <input id="lat"type="text" placeholder='Lat' name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
+              </div>
+              
+              <div id="lng-box">
+                <div>
+                  <label id="lng-header"className="spotForm-inputLabel">Longitude</label>
+                </div>
+                  <input id="lng"type="text" placeholder='Lng' name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
+                </div>
+              </div>
 
-          <div className='spacer'>
-            <label className="spotForm-inputLabel">Longitude</label>
-            </div>
-            <input type="text" placeholder='Lng' name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
-          
-            </div>
-          
+          </div> 
+
           <div className='spacer'>
             <p className='form-header'>Describe your place to guest.</p> 
             </div>
