@@ -17,7 +17,7 @@ function LoginFormPage() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  if (sessionUser) return <Navigate to="/" replace={true} />;
+  // if (sessionUser) return <Navigate to="/" replace={true} />; causing nav errors after login/signup
   
 
   const handleSubmit = (e) => {
