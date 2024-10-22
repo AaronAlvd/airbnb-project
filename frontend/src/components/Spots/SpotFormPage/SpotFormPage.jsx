@@ -149,7 +149,7 @@ function SpotFormPage () {
               <div className='spacer'>
                 <label className="spotForm-inputLabel">Price</label>
                 </div>
-                <input type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
+                <input id="spot-form-price-input"type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
           </div>
 
           <div id="spot-form-submit-button-box">

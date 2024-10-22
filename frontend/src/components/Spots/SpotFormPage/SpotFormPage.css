@@ -88,6 +88,9 @@ input {
     padding-bottom: 25px;
     border-bottom: 3px solid black;
 }
+#spot-form-price-input {
+    width: 392px
+}
 
 #spot-form-submit-button-box {
     display: flex;
