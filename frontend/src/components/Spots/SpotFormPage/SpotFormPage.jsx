@@ -59,7 +59,7 @@ function SpotFormPage () {
         <div className='location'>
           <div className='spacer'>
             <p className='form-header'>Where's your place located?</p>
-            <p className='form-sub-header'>Guest will only get your exact location onve they've booked a reservation.</p>
+            <p className='form-sub-header'>Guest will only get your exact location once they've booked a reservation.</p>
           </div>
           <div className='spacer'>
                       <label className="spotForm-inputLabel">Country</label> </div>
@@ -133,7 +133,7 @@ function SpotFormPage () {
           </div> 
 
           <div className='spacer'>
-            <p className='form-header'>Describe your place to guest.</p> 
+            <p className='form-header'>Describe your place to a guest.</p> 
             </div>
             <p className='form-sub-header'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
 
