@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import * as spotActions from '../../../store/spots';
+import './SpotFormPage.css'
 
 function SpotFormPage () {
   const [formData, setFormData] = useState({
@@ -51,22 +52,25 @@ function SpotFormPage () {
   };
 
   return (
-    <div>
+    <div className='form-container'>
       <div className="div-spotForm">
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <label className="spotForm-inputLabel">Address</label>
-            <input type="text" name="address" value={formData.address} onChange={(e) => handleChange(e)}/>
-          </div>
 
-          <div>
-            <label className="spotForm-inputLabel">City</label>
-            <input type="text" name="city" value={formData.city} onChange={(e) => handleChange(e)}/>
+        <div className='location'>
+          <div className='spacer'>
+            <p className='form-header'>Where's your place located?</p>
+            <p className='form-sub-header'>Guest will only get your exact location onve they've booked a reservation.</p>
           </div>
+          <div className='spacer'>
+                      <label className="spotForm-inputLabel">Country</label> </div>
+                      <select className='scroll-input' value={formData.country} name="country" onChange={(e) => handleChange(e)}>
+                        <option>Select a country...</option>
+                        <option>United States</option>
+                      </select>
 
-          <div>
-            <label className="spotForm-inputLabel">State</label>
-            <select name="state" value={formData.state} onChange={(e) => handleChange(e)}>
+                    <div className='spacer'>
+            <label className="spotForm-inputLabel">State</label></div>
+            <select className='scroll-input' name="state" value={formData.state} onChange={(e) => handleChange(e)}>
               <option value="">Select a state...</option> <option value="AL">Alabama</option> <option value="AK">Alaska</option> 
               <option value="AZ">Arizona</option> <option value="AR">Arkansas</option> <option value="CA">California</option>
               <option value="CO">Colorado</option> <option value="CT">Connecticut</option>
@@ -86,42 +90,63 @@ function SpotFormPage () {
               <option value="WA">Washington</option> <option value="WV">West Virginia</option> <option value="WI">Wisconsin</option>
               <option value="WY">Wyoming</option>
             </select>
-          </div>
+          
 
-          <div>
-            <label className="spotForm-inputLabel">Country</label>
-            <select value={formData.country} name="country" onChange={(e) => handleChange(e)}>
-              <option>Select a country...</option>
-              <option>United States</option>
-            </select>
-          </div>
+          <div className='spacer'>
 
-          <div>
+            <label className="spotForm-inputLabel" >Address</label>
+            </div>
+            <input type="text" name="address" placeholder='Address' value={formData.address} onChange={(e) => handleChange(e)}/>
+          
+
+          <div className='spacer'>
+            <label className="spotForm-inputLabel">City</label>
+          </div>
+          <input type="text" placeholder='City' name="city" value={formData.city} onChange={(e) => handleChange(e)}/>
+          
+
+         
+          
+
+          <div className='spacer'> 
             <label className="spotForm-inputLabel">Name</label>
-            <input type="text" name="name" value={formData.name} onChange={(e) => handleChange(e)}/>
-          </div>
+            </div>
+            <input type="text" placeholder='Name' name="name" value={formData.name} onChange={(e) => handleChange(e)}/>
+          
 
-          <div>
-            <label className="spotForm-inputLabel">lat</label>
-            <input type="text" name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
-          </div>
+          <div className='spacer'>
+            <label className="spotForm-inputLabel">Latitude</label> 
+            </div>
+            <input type="text" placeholder='Lat' name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
+         
 
-          <div>
-            <label className="spotForm-inputLabel">lng</label>
-            <input type="text" name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
-          </div>
+          <div className='spacer'>
+            <label className="spotForm-inputLabel">Longitude</label>
+            </div>
+            <input type="text" placeholder='Lng' name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
+          
+            </div>
+          
+          <div className='spacer'>
+            <p className='form-header'>Describe your place to guest.</p> 
+            </div>
+            <p className='form-sub-header'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
 
-          <div>
+         
+          
+          <div className='spacer'>
             <label className="spotForm-inputLabel">Description</label>
-            <textarea name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
-          </div>
+             </div>
+            <textarea id="location-description" placeholder="Please write at least 30 characters"name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
+         
 
-          <div>
+          <div className='spacer'>
             <label className="spotForm-inputLabel">Price</label>
-            <input type="text" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
-          </div>
+             </div>
+            <input type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
+         
 
-          <div>
+          <div className='spacer'>
             <button type="submit">Submit</button>
           </div>
 
