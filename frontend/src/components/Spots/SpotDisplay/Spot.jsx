@@ -97,26 +97,38 @@ function Spot() {
         <div className="div-body">
           <div className="div-upperBody">
             <div className="div-upperBodyLeft">
-              <div className="spotDescription"><p>{spot.description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi molestiae labore animi, aspernatur quibusdam sapiente quas nulla repellendus doloremque voluptate tempora asperiores vel, odio architecto nobis sit consectetur accusantium a!</p></div>
+              <div className="spotDescription">
+                <h3 className="SD-host">Hosted by Aaron Alvarado</h3>
+                <p>{spot.description}</p>
+              </div>
             </div>
             <div className="div-upperBodyRight">
               <div className="div-spotReserve">
                 <div className="div-spotReserveTop">
                   <div className="div-SRT-left">
-                    <span className="spotReserve"><p className="spotReserve SR-price">${spot.price}</p><small>night</small></span>
+                    <span className="spotReserve"><p className="spotReserve SR-price">${spot.price}</p><small className="SD-subscript">night</small></span>
                   </div> 
                   <div className="div-SRT-right">
-                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating}</p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SDA-icon"icon={faStar}/></p>}
-
-                  </div>
+                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating}</p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
+                    <p className="spotReserve">{spotReviews.length} {spotReviews.length > 1 ? "Reviews" : "Review"}</p>
+                  </div>  
                 </div>
+                  <div>
+                    <button className="SD-reserveButton">Reserve</button>
+                  </div>
               </div>
-              {showReview && <button className="RF-modalButton">
+              {/* {showReview && <button className="SD-Button">
                 <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
               </button>}
-              {owner && <button className="RF-modalButton">
+              {owner && <button className="SD-Button">
                 <OpenModalButton buttonText="Edit"/>
-              </button>}
+              </button>} */}
+            </div>
+          </div>
+          <div className="div-lowerBody">
+            <div className="div-lowerBodyTitle">
+              {spot.avgRating ? <p className="LB-Reviews">{spot.avgRating}</p> : <p className="LB-Reviews"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
+              <p className="LB-Reviews">{spotReviews.length} {spotReviews.length > 1 ? "Reviews" : "Review"}</p>
             </div>
           </div>
         </div>

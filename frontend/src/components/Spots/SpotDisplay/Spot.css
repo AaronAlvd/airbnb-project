@@ -77,7 +77,7 @@
 
 /* ---- SPOT BODY BUTTONS ---- */
 
-.RF-modalButton {
+.SD-Button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,22 +89,39 @@
   padding: 0;
 }
 
+.SD-reserveButton {
+  width: 100%;
+  height: 35px;
+  border: 2px solid black;
+  background-color: rgb(211, 216, 220);
+  border-radius: 5px;
+  margin: 15px 0 15px 0;
+  font-size: 16px;
+}
+
 /* ---- SPOT BODY BUTTONS ---- */
 
 
 /* ---- SPOT BODY ---- */
 
+.SD-host {
+  margin: 0;
+}
+
 .div-upperBody {
   display: flex;
   height: 200px;
+  border-bottom: 2px solid black;
 }
 
 .div-upperBodyLeft {
-  width: 65vw;
+  width: 65%;
 }
 
 .div-upperBodyRight {
-  width: 35vw;
+  width: 35%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .div-spotReserve {
@@ -112,6 +129,8 @@
   border: 1px solid black;
   border-radius: 10px;
   padding: 15px;
+  height: min-content;
+  margin-right: 20px;
 }
 
 .div-spotReserveTop {
@@ -121,12 +140,13 @@
 .spotReserve {
   margin: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .SR-price {
-  font-weight: bold;
-  margin-right: 5px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 2px;
 }
 
 .div-SRT-left {
@@ -135,12 +155,25 @@
 }
 
 .div-SRT-right {
-  width: 50%;
   display: flex;
   justify-content: end;
 }
-  
 
+.SD-icon {
+  margin: 0 10px 0 5px;
+}
+
+.SD-subscript {
+  transform: translate(0, 2px);
+}
+
+.div-lowerBodyTitle {
+  display: flex;
+}
+
+.LB-Reviews {
+ font-size: 20px;
+}
 
 /* ---- SPOT BODY ---- */
 
