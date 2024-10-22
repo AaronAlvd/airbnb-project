@@ -33,7 +33,7 @@ input {
 }
 
 #location-description {
-    width: 100%;
+    width: 394px;
     height: 100px
 }
 
@@ -54,13 +54,14 @@ input {
 }
 #latlng-box {
     display: grid;
-    grid-template-columns: 200px 200px;
+    grid-template-columns: 199px 199px;
     grid-template-rows: 20px 20px;
+    
     
 }
 
 #lat {
-    width: 170px;
+    width: 169px;
     margin-top: 5px;
     grid-column: 1;
     grid-row: 2;
@@ -69,7 +70,7 @@ input {
     grid-row: 1;
 }
 #lng {
-    width: 170px;
+    width: 169px;
     margin-top: 5px;
     grid-column: 2;
     grid-row: 2;
@@ -77,4 +78,13 @@ input {
 }
 #lng-header {
     grid-row: 1;
+}
+#spot-form-description-box {
+    padding-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+#spot-form-price-box {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid black;
 }

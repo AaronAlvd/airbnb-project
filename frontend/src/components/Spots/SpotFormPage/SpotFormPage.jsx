@@ -138,18 +138,19 @@ function SpotFormPage () {
             <p className='form-sub-header'>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
 
          
-          
-          <div className='spacer'>
-            <label className="spotForm-inputLabel">Description</label>
-             </div>
-            <textarea id="location-description" placeholder="Please write at least 30 characters"name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
-         
+          <div id="spot-form-description-box">
+              <div className='spacer'>
+                <label className="spotForm-inputLabel">Description</label>
+              </div>
+              <textarea id="location-description" placeholder="Please write at least 30 characters"name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
+          </div>
 
-          <div className='spacer'>
-            <label className="spotForm-inputLabel">Price</label>
-             </div>
-            <input type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
-         
+          <div id="spot-form-price-box">
+              <div className='spacer'>
+                <label className="spotForm-inputLabel">Price</label>
+                </div>
+                <input type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
+          </div>
 
           <div className='spacer'>
             <button type="submit">Submit</button>
