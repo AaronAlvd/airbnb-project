@@ -34,11 +34,13 @@ function Navigation({ isLoaded }) {
 
   return (
     <div className="div-nav">
-      <div className="logo"></div>
+      <div className="logo">
+        
+      </div>
       <div className="div-ul">
         <ul className="nav-ul">
           <li className="nav-li">
-            <NavLink to="/"> <HiOutlinePaperAirplane />EduBnB</NavLink>
+            <NavLink to="/"><img id="logo" src="/edubnblogo.png" alt="EduBnB Logo" /></NavLink>
           </li >
 
           <ProfileButton className="Profile"/>
