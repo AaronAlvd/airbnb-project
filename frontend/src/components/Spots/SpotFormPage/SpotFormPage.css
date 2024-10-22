@@ -88,3 +88,18 @@ input {
     padding-bottom: 25px;
     border-bottom: 3px solid black;
 }
+
+#spot-form-submit-button-box {
+    display: flex;
+    justify-content: center;
+}
+#spot-form-submit-button {
+    margin-top: 15px;
+    width: 100px;
+    
+    height: 25px;
+    border-radius: 1px;
+    box-shadow: 2px 2px;
+    background-color: red;
+    cursor: pointer;
+}

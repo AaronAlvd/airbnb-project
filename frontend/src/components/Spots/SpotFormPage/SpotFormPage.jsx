@@ -152,10 +152,11 @@ function SpotFormPage () {
                 <input type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
           </div>
 
-          <div className='spacer'>
-            <button type="submit">Submit</button>
+          <div id="spot-form-submit-button-box">
+              <div className='spacer'>
+                <button id="spot-form-submit-button"type="submit">Submit</button>
+              </div>
           </div>
-
         </form>
       </div>
     </div>
