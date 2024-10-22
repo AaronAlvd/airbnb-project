@@ -10,34 +10,12 @@ import './Navigation.css'
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  // let sessionLinks;
-  // if (sessionUser) {
-  //   sessionLinks = (
-  //     <li>
-  //       <ProfileButton user={sessionUser} className="nav-profileButtons"/>
-  //     </li>
-  //   );
-  // } else {
-  //   sessionLinks = (
-  //     <>
-  //     <li>
-  //       <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
-  //     </li>
-  //     <li>
-  //       <OpenModalButton className="ModalButton" buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
-  //     </li>
-  //     </>
-  //   );
-  // }
-
   return (
     <div className="div-nav">
       <div className="logo"></div>
       <div className="div-ul">
         <ul className="nav-ul">
-          <li className="nav-li">
-            <NavLink to="/">Home</NavLink>
-          </li>
+          <li className="nav-li"><NavLink to="/spotformpage"><p className="userInfo">Create a New Spot</p></NavLink></li>
           <ProfileButton/>
         </ul>
       </div>

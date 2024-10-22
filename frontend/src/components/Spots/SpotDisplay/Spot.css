@@ -5,9 +5,9 @@
     'Pictures'
     'Body';
   grid-template-rows: 40px auto 1fr; /* Define the heights of each row */
-  grid-gap: 10px; /* Optional: adds spacing between grid items */
+  grid-gap: 10px;
   height: 100vh; /* Set the container height to fill the viewport */
-  margin-left: 10px;
+  margin: 0 30px 0 30px
 }
 
 .div-title {
@@ -22,20 +22,21 @@
 
 .div-pictures {
   grid-area: 'Pictures';
+  height: 55vh;
   display: grid;
-  grid-template-columns: 500px 300px 300px 300px;
-  grid-template-rows: 150px 150px;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: 
-    "pic01 pic02 pic03 pic04"
-    "pic01 pic05 pic06 pic07";
+    "pic01 pic02 pic03"
+    "pic01 pic04 pic05";
 }
 
 #picture-01 {
   grid-area: pic01;
 }
 #image-01 {
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 
 #picture-02 {
@@ -57,10 +58,13 @@
 
 .div-sideImage {
   object-fit: cover;
+  border: 1px solid black;
+  margin: 1px;
 }
 
 .div-mainImage {
   object-fit: cover;
+  margin: 1px;
 }
 
 /* ---- PICTURES ---- */
@@ -71,7 +75,7 @@
   /* border: 1px solid black; */
 }
 
-/* ---- SPOT BODY BUTTON ---- */
+/* ---- SPOT BODY BUTTONS ---- */
 
 .RF-modalButton {
   display: flex;
@@ -85,5 +89,59 @@
   padding: 0;
 }
 
-/* ---- SPOT BODY BUTTON ---- */
+/* ---- SPOT BODY BUTTONS ---- */
+
+
+/* ---- SPOT BODY ---- */
+
+.div-upperBody {
+  display: flex;
+  height: 200px;
+}
+
+.div-upperBodyLeft {
+  width: 65vw;
+}
+
+.div-upperBodyRight {
+  width: 35vw;
+}
+
+.div-spotReserve {
+  width: 270px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.div-spotReserveTop {
+  display: flex;
+}
+
+.spotReserve {
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.SR-price {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.div-SRT-left {
+  width: 50%;
+  display: flex;
+}
+
+.div-SRT-right {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
+  
+
+
+/* ---- SPOT BODY ---- */
+
 

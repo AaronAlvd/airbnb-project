@@ -2,6 +2,8 @@ import * as spotActions from "../../../store/spots"; // Import your actions
 import * as bookingActions from '../../../store/booking';
 import * as reviewActions from '../../../store/review';
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Spot.css";
@@ -19,6 +21,7 @@ function Spot() {
   const [error, setError] = useState(null);
   const [showReview, setShowReview] = useState(false);
   const [owner, setOwner] = useState(false);
+  const spotReviews = useSelector((state) => state.reviews.reviews)
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -30,10 +33,12 @@ function Spot() {
           await Promise.all([
             dispatch(spotActions.getSpots()),
             dispatch(reviewActions.getReviews()),
+            dispatch(reviewActions.getSpotReviews(spotId)),
             dispatch(bookingActions.getBookings())
           ]);
         } else {
-          dispatch(spotActions.getSpots())
+          dispatch(spotActions.getSpots()),
+          dispatch(reviewActions.getSpotReviews(spotId))
         }
       } catch (err) {
         setError("Failed to load spots or bookings.");  // General error message
@@ -57,7 +62,7 @@ function Spot() {
   }, [showReview]);
 
   useEffect(() => {
-    if (user && (spot.ownerId === user.id)) {
+    if (user && spot && (spot.ownerId === user.id)) {
       setOwner(true);
     }
   },[owner]);
@@ -77,6 +82,7 @@ function Spot() {
           </div>
 
           <div  className="div-sideImage" id="picture-02">
+
           </div>
 
           <div  className="div-sideImage" id="picture-03">
@@ -87,21 +93,32 @@ function Spot() {
 
           <div  className="div-sideImage" id="picture-05">
           </div>
-
-          <div  className="div-sideImage" id="picture-06">
-          </div>
-
-          <div  className="div-sideImage" id="picture-07">
-          </div>
         </div>
         <div className="div-body">
-          <div className="spotDescription"><p>{spot.description}</p></div>
-          {showReview && <button className="RF-modalButton">
-            <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
-          </button>}
-          {owner && <button className="RF-modalButton">
-            <OpenModalButton buttonText="Edit"/>
-          </button>}
+          <div className="div-upperBody">
+            <div className="div-upperBodyLeft">
+              <div className="spotDescription"><p>{spot.description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi molestiae labore animi, aspernatur quibusdam sapiente quas nulla repellendus doloremque voluptate tempora asperiores vel, odio architecto nobis sit consectetur accusantium a!</p></div>
+            </div>
+            <div className="div-upperBodyRight">
+              <div className="div-spotReserve">
+                <div className="div-spotReserveTop">
+                  <div className="div-SRT-left">
+                    <span className="spotReserve"><p className="spotReserve SR-price">${spot.price}</p><small>night</small></span>
+                  </div> 
+                  <div className="div-SRT-right">
+                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating}</p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SDA-icon"icon={faStar}/></p>}
+
+                  </div>
+                </div>
+              </div>
+              {showReview && <button className="RF-modalButton">
+                <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
+              </button>}
+              {owner && <button className="RF-modalButton">
+                <OpenModalButton buttonText="Edit"/>
+              </button>}
+            </div>
+          </div>
         </div>
       </div>
   );

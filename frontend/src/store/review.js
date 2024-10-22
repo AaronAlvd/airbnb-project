@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
-const CREATE_REVIEW = 'review/CREATE_REVIEW';
-const SET_REVIEWS = 'review/SET_REVIEWS';
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW';
+const SET_REVIEWS = 'reviews/SET_REVIEWS';
 
 const setReview = (review) => {
   return {
@@ -52,6 +52,23 @@ export const createReview = (batchReview) => async (dispatch) => {
     throw new Error("An unexpected error occurred. Please try again.");
   }
 };
+
+export const getSpotReviews = (spotId) => {
+  try {
+    return async (dispatch) => {
+      const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch Reviews');
+      }
+
+      const data = await response.json();
+      dispatch(setReviews(data.Reviews))
+    }
+  } catch(err) {
+    console.error("Error fetching reviews:", err)
+  }
+}
 
 export const getReviews = () => {
   try {
