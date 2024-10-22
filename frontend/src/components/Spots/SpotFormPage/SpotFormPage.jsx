@@ -142,7 +142,7 @@ function SpotFormPage () {
               <div className='spacer'>
                 <label className="spotForm-inputLabel">Description</label>
               </div>
-              <textarea id="location-description" placeholder="Please write at least 30 characters"name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
+              <textarea id="location-description" placeholder="Please write at least 30 characters."name="description" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
           </div>
 
           <div id="spot-form-price-box">
