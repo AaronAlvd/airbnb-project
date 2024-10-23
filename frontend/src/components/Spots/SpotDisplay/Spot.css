@@ -24,14 +24,16 @@
 
 #reviewbutton {
   position: relative;
-  left:190px;
-  bottom: 225px;
+
+  left:150px;
+  bottom: 50px;
   width: 250px;
   height: 45px;
   border-radius: 1px;
   box-shadow: 2px 2px;
   background-color: red;
   grid-column: 2;
+
 
 }
 #reviewbutton:hover {
@@ -50,6 +52,7 @@
   -moz-border-radius:15px ;
   -ms-border-radius:15px ;
   -o-border-radius:15px ;
+  overflow-y: hidden;
 }
 
 

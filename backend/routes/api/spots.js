@@ -425,6 +425,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     }
 
     const spot = await Spot.findByPk(spotId);
+    
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }
@@ -433,7 +434,8 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
       userId,
       spotId,
       review,
-      stars
+      stars,
+
     });
 
     res.status(201).json({
@@ -443,7 +445,8 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
       review: newReview.review,
       stars: newReview.stars,
       createdAt: newReview.createdAt,
-      updatedAt: newReview.updatedAt
+      updatedAt: newReview.updatedAt,
+
     });
   } catch (error) {
 

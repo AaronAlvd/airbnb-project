@@ -1,14 +1,22 @@
 .Review-list {
-    background-color: transparent;
-    height: 275px;
-    border-radius: 15px;
-    width: auto;
-    max-width: 500px;
-    padding: 20px;
-    overflow-y: auto; 
+  background-color: transparent;
+  height: 275px;
+  border-radius: 15px;
+  width: 500px;
+  max-width: 500px;
+  padding: 20px;
+  overflow-y: scroll ;
+}
+
+.Review-list::-webkit-scrollbar {
+  width: 75px;
+   background: transparent;
+}
+.Review-list::-webkit-scrollbar:hover {
+cursor: pointer;
+}
 
 
-  }
 
 
   .title {
