@@ -33,6 +33,7 @@ export default function ShowCaseReviews({ spot }) {
           reviews.map((review) => (
             <ListItem
               key={review.id}
+              userId={review.userId}
               firstname={review.User.firstName} // Adjust based on your data structure
               review={review.review}
               starsRating={review.stars} // Adjust based on your data structure
