@@ -4,7 +4,7 @@
     'Title'
     'Pictures'
     'Body';
-  grid-template-rows: 40px auto 1fr; /* Define the heights of each row */
+  grid-template-rows: 50px auto 1fr; /* Define the heights of each row */
   grid-gap: 10px;
   height: 100vh; /* Set the container height to fill the viewport */
   margin: 0 30px 0 30px
@@ -13,8 +13,16 @@
 .div-title {
   grid-area: 'Title';
   /* border: 1px solid black; */
-  display: flex;
   align-items: center;
+}
+
+.spotTitleName{
+  margin: 0 0 7px 0;
+}
+
+.spotTitlePlace {
+  margin: 7px 0 0 0;
+  font-size: 15px;
 }
 
 
@@ -197,6 +205,11 @@
 .div-reviewTop {
   display: flex;
   justify-content: space-between;
+  height: min-content;
+}
+
+.reviewTop {
+  margin: 15px 0 5px 0;
 }
 /* ---- SPOT BODY ---- */
 

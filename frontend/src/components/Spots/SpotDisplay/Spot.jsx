@@ -71,11 +71,19 @@ function Spot() {
     } else {
       return reviews.length > 1 ? 
         reviews.map((review) => {
+          const createdAt = new Date(review.createdAt);
+          const traditionalDate = createdAt.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+
           return (
             <div className="div-spotReview">
               <div className="div-reviewTop">
-                <h3>{review.User.firstName} {review.User.lastName}</h3><h3>{review.stars}<FontAwesomeIcon className="SD-icon"icon={faStar}/></h3>
+                <h3 className="reviewTop">{review.User.firstName} {review.User.lastName}</h3><h3 className="reviewTop">{review.stars}<FontAwesomeIcon className="SD-icon"icon={faStar}/></h3>
               </div>
+              <small>{traditionalDate}</small>
               <p>{review.review}</p>
             </div>
           )
@@ -93,7 +101,8 @@ function Spot() {
   return (
       <div className="div-spot">
         <div className="div-title">
-          <h2>{spot.name}</h2>
+          <h2 className="spotTitleName">{spot.name}</h2>
+          <p className="spotTitlePlace">{spot.city}, {spot.state}, {spot.country}</p>
         </div>
         <div className="div-pictures">
           <div  className="div-mainImage" id="picture-01">
