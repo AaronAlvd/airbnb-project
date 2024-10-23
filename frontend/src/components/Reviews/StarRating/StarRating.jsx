@@ -24,7 +24,7 @@ export default function StarRating() {
             />
             <label htmlFor={`star-${currentRate}`}>
               <FaStar
-                color={currentRate <= rating ? "yellow" : "grey"}
+                color={currentRate <= rating ? "gold" : "grey"}
                 style={{ cursor: 'pointer' }} // Change cursor to pointer
               />
             </label>

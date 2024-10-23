@@ -2,14 +2,14 @@
   background-color: transparent;
   height: 275px;
   border-radius: 15px;
-  width: 500px;
-  max-width: 500px;
+  width: 475px;
+  max-width: 600px;
   padding: 20px;
   overflow-y: scroll ;
 }
 
 .Review-list::-webkit-scrollbar {
-  width: 75px;
+  width: 65px;
    background: transparent;
 }
 .Review-list::-webkit-scrollbar:hover {
