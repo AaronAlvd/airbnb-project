@@ -291,7 +291,6 @@ router.get('/', async (req, res, next) => {
         }
       ],
       group: ['Spot.id', 'SpotImages.id'], // Group by Spot.id and SpotImages.id to avoid SQL error
-      // limit: size,
       offset: (page - 1) * size,
     });
 
@@ -304,6 +303,8 @@ router.get('/', async (req, res, next) => {
     const formattedSpots = {
       Spots: spots.map(spot => {
         const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].preview : null;
+
+        return { spot }
 
         return {
           id: spot.id,
@@ -319,7 +320,7 @@ router.get('/', async (req, res, next) => {
           price: spot.price,
           createdAt: spot.createdAt,
           updatedAt: spot.updatedAt,
-          avgRating: spot.avgStarRating ? parseFloat(spot.avgStarRating) : null,
+          avgRating: spot.avgStarRating ? parseFloat(spot.avgStarRating).toFixed(2) : null,
           previewImage
         };
       }),

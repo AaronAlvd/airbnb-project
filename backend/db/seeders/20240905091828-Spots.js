@@ -17,7 +17,12 @@ module.exports = {
         lat: 37.7645358,
         lng: -122.4730327,
         name: "App Academy",
-        description: "Place where web developers are created",
+        description: `Each meticulously curated home in our Airbnb-inspired platform offers a welcoming sanctuary for travelers and explorers 
+                      alike, designed to blend modern comforts with local charm. From cozy urban lofts adorned with contemporary art and skyline 
+                      views to rustic countryside cottages nestled among rolling hills and vineyards, every residence promises a unique and 
+                      immersive experience. Discover spaces thoughtfully furnished for relaxation and productivity, whether you seek a bustling 
+                      city center retreat or a tranquil escape off the beaten path. Each home is a testament to our commitment to providing 
+                      unforgettable stays where comfort meets adventure.`,
         price: 123,
       },
       {

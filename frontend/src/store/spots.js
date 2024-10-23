@@ -27,7 +27,28 @@ export const getSpots = () => {
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(setSpots(data.Spots)); // Dispatch the action with the fetched spots
+        const formattedSpots = data.Spots.map((data) => {
+          const previewImage = data.spot.SpotImages[0].preview
+
+          return {
+            id: data.spot.id,
+            ownerId: data.spot.userId,
+            address: data.spot.address,
+            city: data.spot.city,
+            state: data.spot.state,
+            country: data.spot.country,
+            lat: data.spot.lat,
+            lng: data.spot.lng,
+            name: data.spot.name,
+            description: data.spot.description,
+            price: data.spot.price,
+            createdAt: data.spot.createdAt,
+            updatedAt: data.spot.updatedAt,
+            avgRating: data.spot.avgStarRating.toFixed(2),
+            previewImage
+          };
+        })
+        dispatch(setSpots(formattedSpots)); // Dispatch the action with the fetched spots
         return data;
       } else {
         // Handle non-200 responses

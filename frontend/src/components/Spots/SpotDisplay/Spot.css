@@ -58,7 +58,6 @@
 
 .div-sideImage {
   object-fit: cover;
-  border: 1px solid black;
   margin: 1px;
 }
 
@@ -110,7 +109,7 @@
 
 .div-upperBody {
   display: flex;
-  height: 200px;
+  height: min-content;
   border-bottom: 2px solid black;
 }
 
@@ -125,8 +124,8 @@
 }
 
 .div-spotReserve {
-  width: 270px;
-  border: 1px solid black;
+  width: 65%;
+  border: 2px solid black;
   border-radius: 10px;
   padding: 15px;
   height: min-content;
@@ -135,6 +134,7 @@
 
 .div-spotReserveTop {
   display: flex;
+  justify-content: space-between;
 }
 
 .spotReserve {
@@ -150,17 +150,18 @@
 }
 
 .div-SRT-left {
-  width: 50%;
   display: flex;
 }
 
 .div-SRT-right {
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .SD-icon {
   margin: 0 10px 0 5px;
+  color: rgb(249, 215, 65);
 }
 
 .SD-subscript {
@@ -169,12 +170,34 @@
 
 .div-lowerBodyTitle {
   display: flex;
+  align-items: center;
 }
 
 .LB-Reviews {
  font-size: 20px;
+ margin-right: 5px;
 }
 
+.div-spotReview {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 70%;
+  height: 150px;
+  margin-bottom: 15px;
+  padding: 0 15px 0 15px;
+}
+
+.spotRating-divider {
+  margin: 0 10px 0 0px;
+  width: 2px;
+  height: 20px;
+  background-color: black;
+}
+
+.div-reviewTop {
+  display: flex;
+  justify-content: space-between;
+}
 /* ---- SPOT BODY ---- */
 
 

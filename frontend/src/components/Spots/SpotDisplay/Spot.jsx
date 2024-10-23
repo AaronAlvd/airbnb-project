@@ -7,8 +7,6 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Spot.css";
-import OpenModalButton from '../../OpenModalButton/OpenModalButton';
-import ReviewForm from "../../Reviews/ReviewForm/ReviewForm";
 
 function Spot() {
   const dispatch = useDispatch();
@@ -21,7 +19,7 @@ function Spot() {
   const [error, setError] = useState(null);
   const [showReview, setShowReview] = useState(false);
   const [owner, setOwner] = useState(false);
-  const spotReviews = useSelector((state) => state.reviews.reviews)
+  const reviews = useSelector((state) => state.reviews.reviews)
 
   useEffect(() => {
     const fetchSpots = async () => {
@@ -67,6 +65,27 @@ function Spot() {
     }
   },[owner]);
 
+  const showReviews = () => {
+    if (!reviews) {
+      return null
+    } else {
+      return reviews.length > 1 ? 
+        reviews.map((review) => {
+          return (
+            <div className="div-spotReview">
+              <div className="div-reviewTop">
+                <h3>{review.User.firstName} {review.User.lastName}</h3><h3>{review.stars}<FontAwesomeIcon className="SD-icon"icon={faStar}/></h3>
+              </div>
+              <p>{review.review}</p>
+            </div>
+          )
+        }) : 
+        (<div className="div-spotReview">
+          <h3>{reviews[0].User.firstName}</h3>
+        </div>)
+    }
+  }
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!spot) return <div>Spot not found.</div>;
@@ -109,8 +128,8 @@ function Spot() {
                     <span className="spotReserve"><p className="spotReserve SR-price">${spot.price}</p><small className="SD-subscript">night</small></span>
                   </div> 
                   <div className="div-SRT-right">
-                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating}</p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
-                    <p className="spotReserve">{spotReviews.length} {spotReviews.length > 1 ? "Reviews" : "Review"}</p>
+                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating} <FontAwesomeIcon className="SD-icon"icon={faStar}/></p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
+                    <span className="spotRating-divider"/><p className="spotReserve">{reviews.length} {reviews.length > 1 ? "Reviews" : "Review"}</p>
                   </div>  
                 </div>
                   <div>
@@ -127,8 +146,11 @@ function Spot() {
           </div>
           <div className="div-lowerBody">
             <div className="div-lowerBodyTitle">
-              {spot.avgRating ? <p className="LB-Reviews">{spot.avgRating}</p> : <p className="LB-Reviews"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
-              <p className="LB-Reviews">{spotReviews.length} {spotReviews.length > 1 ? "Reviews" : "Review"}</p>
+              {spot.avgRating ? <p className="LB-Reviews">{spot.avgRating} <FontAwesomeIcon className="SD-icon"icon={faStar}/></p> : <p className="LB-Reviews"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
+              <span className="spotRating-divider"/><p className="LB-Reviews">{reviews.length }</p><p>{reviews.length > 1 ? "Reviews" : "Review"}</p>
+            </div>
+            <div className="div-lowerBodyReviews">
+              {showReviews()}
             </div>
           </div>
         </div>
