@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 const ListItem = ({userId, firstname, review, starsRating, onDelete }) => {
 const user = useSelector((state) => state.session.user);
+
   return (
     <li className="list-item">
       <div className="username">{firstname}</div>

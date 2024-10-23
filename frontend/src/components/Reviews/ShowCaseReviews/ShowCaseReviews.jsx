@@ -37,7 +37,7 @@ export default function ShowCaseReviews({ spot }) {
               firstname={review.User.firstName} // Adjust based on your data structure
               review={review.review}
               starsRating={review.stars} // Adjust based on your data structure
-              onDelete={() => console.log(`Delete review with ID: ${review.id}`)} // Replace with delete action
+              onDelete={() => window.alert(` Feature Coming Soon For Delete review with ID: ${review.id}`)} // Replace with delete action
             />
           ))
         ) : (
