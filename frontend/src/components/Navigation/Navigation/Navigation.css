@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.nav-logo{
+  width: 200px;
+  height: 50px;
+  object-fit: cover;
+  margin: 15px;
+}
+
 .nav-li {
   margin: 0 15px 0 15px;
 }

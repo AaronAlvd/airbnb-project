@@ -1,0 +1,98 @@
+.div-spotForm {
+  border: 1px solid black;
+  width: 500px;
+  height: min-content;
+  display: flex;
+}
+
+.spotForm {
+  padding: 20px;
+}
+
+.div-inputSpotForm {
+  display: flex;
+  align-items: flex-end;
+  margin: 20px;
+  padding: 10px 0 10px 0;
+}
+
+.div-ISF-button {
+  justify-content: center;
+}
+
+.div-inputSpotForm03 {
+  display: flex;
+  align-items: flex-end;
+  margin: 20px;
+  padding: 10px 0 10px 0;
+}
+
+.div-spotFormLocation {
+  display: flex;
+}
+
+.SFI-h2 {
+  margin: 0;
+  margin-right: 20px;
+  margin-left: 4px;
+}
+
+.spotForm-inputLabel {
+  position: absolute;
+  transform: translate(0, -25px);
+}
+
+.SFIL-02 {
+  transform: translate(0px, -20px);
+}
+
+.formInput {
+  border: 2px solid black;
+  padding: 3px;
+}
+
+.formInputCity {
+  width: 220px;
+}
+
+.formInput01 {
+  width: 300px;
+}
+
+.formInput03 {
+  width: 175px;
+}
+
+.formInput07 {
+  resize: none;
+}
+
+.SFL-07 {
+  position: absolute;
+  transform: translate(0, -43px);
+}
+
+.spotFormButton {
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 3px;
+}
+
+.outerDiv-spotForm {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+/* ----- ERRORS ------ */
+
+.SFL-countryError {
+  position: absolute;
+  color: red;
+  transform: translate(70px, -9px);
+}
+
+/* ----- ERRORS ------ */
+

@@ -25,7 +25,10 @@ function LoginFormPage() {
     setErrors({});
 
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+    .then(() => {
+      closeModal
+      window.location.reload();
+    })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
