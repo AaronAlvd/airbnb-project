@@ -1,9 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as spotActions from '../../../store/spots';
 import './SpotFormPage.css';
 
 function SpotFormPage () {
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -15,10 +19,6 @@ function SpotFormPage () {
     description: "",
     price: ""
   })
-
-  const [errors, setErrors] = useState({});
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +47,9 @@ function SpotFormPage () {
         price
     }))
     .then(() => {
+      if (!errors.address || !errors.state || !errors.city || !errors.price || !errors.description || !errors.name) {
+        navigate('/');
+      }
       console.log(formData)
     }) 
     .catch(async (res) => {

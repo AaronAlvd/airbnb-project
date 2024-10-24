@@ -551,8 +551,8 @@ router.post('/', requireAuth, async (req, res, next) => {
     if (!city) errors.city = "City is required";
     if (!state) errors.state = "State is required";
     if (!country) errors.country = "Country is required";
-    if (lat === undefined || lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
-    if (lng === undefined || lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
+    if (lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
+    if (lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
     if (!name || name.length > 50) errors.name = "Name must be less than 50 characters";
     if (!description) errors.description = "Description is required";
     if (price === undefined || price <= 0) errors.price = "Price per day must be a positive number";
@@ -566,7 +566,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 
     const newSpot = await Spot.create({
       userId: req.user.id,
-      address, city, state, country, lat, lng, name, description, price
+      address, city, state, country, lat: lat || null, lng: lng || null, name, description, price
     });
 
     // Helper function to format date as "YYYY-MM-DD HH:mm:ss"
@@ -588,8 +588,8 @@ router.post('/', requireAuth, async (req, res, next) => {
         city: newSpot.city,
         state: newSpot.state,
         country: newSpot.country,
-        lat: newSpot.lat,
-        lng: newSpot.lng,
+        lat: newSpot.lat || null,
+        lng: newSpot.lng || null,
         name: newSpot.name,
         description: newSpot.description,
         price: newSpot.price,
