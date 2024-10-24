@@ -16,39 +16,23 @@ function SpotFormPage () {
     price: ""
   })
 
-  const [errors, setErrors] = useState({
-    address: false,
-    city: false,
-    state: false,
-    country: false,
-    name: false,
-    description: false,
-    price: false,
-  });
-
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (hasSubmitted) {
-      setErrors({
-        address: formData.address === '',
-        city: formData.city === '',
-        state: formData.state === '',
-        country: formData.country === '',
-        name: formData.name === '',
-        description: formData.description === '',
-        price: formData.price === '',
-      });
-   }
-  }, [hasSubmitted])
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setHasSubmitted(true);
 
     const { address, lng, lat, city, state, country, description, price, name} = formData;
+
+    setErrors({
+      address: address === "",
+      city: city === "",
+      state: state === "",
+      description: description === "",
+      price: price === "",
+      name: name === "",
+    })
 
     return dispatch(
       spotActions.createSpot({
@@ -64,10 +48,12 @@ function SpotFormPage () {
     }))
     .then(() => {
       console.log(formData)
-      window.location.reload()
     }) 
     .catch(async (res) => {
       const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
     });
   }
 
@@ -90,18 +76,18 @@ function SpotFormPage () {
       <div className="div-spotForm">
         <form className="spotForm" onSubmit={(e) => handleSubmit(e)}>
           <div className="div-inputSpotForm">
-            <label className="spotForm-inputLabel">Address</label> {errors.address && <p className="SFL-countryError">Address is required</p>}
+            <label className="spotForm-inputLabel">Address</label> {errors.address && <p className='SFL-addressError'>Address is required</p>}
             <input type="text" name="address" className="formInput formInput01" value={formData.address} onChange={(e) => handleChange(e)}/>
           </div>
 
           <div className='div-spotFormLocation div-inputSpotForm'>
             <div className="">
-              <label className="SFIL-02">City</label> {errors.city && <p className="SFL-countryError">City is required</p>}
+              <label className="SFIL-02">City</label> {errors.city && <p className='SFL-cityStateError'>City is required</p>}
               <input type="text" name="city" className="formInput formInputCity" value={formData.city} onChange={(e) => handleChange(e)}/>
             </div>
             <h2 className="SFI-h2">,</h2>
             <div className="">
-              <label className="SFIL-02">State</label>
+              <label className="SFIL-02">State</label> {errors.state && <p className='SFL-cityStateError'>State is required</p>}
               <input type="text" name="state" className="formInput" value={formData.state} onChange={(e) => handleChange(e)}/>
             </div>
           </div>
@@ -113,7 +99,7 @@ function SpotFormPage () {
 
           <div className="div-inputSpotForm03" >
             <div className="">
-              <label className="SFIL-02">lat</label>
+              <label className="SFIL-02">lat</label> 
               <input type="text" name="lat" className="formInput formInput03" value={formData.lat} onChange={(e) => handleChange(e)}/>
             </div>
             <h2 className="SFI-h2">,</h2>
@@ -124,18 +110,18 @@ function SpotFormPage () {
           </div>
 
           <div className="div-inputSpotForm">
-            <label className="spotForm-inputLabel">Name</label>
-            <input type="text" name="name" className="formInput" value={formData.name} onChange={(e) => handleChange(e)}/>
+            <label className="spotForm-inputLabel">Name</label> {errors.name && <p className='SFL-nameError'>Name is required</p>}
+            <input type="text" name="name" className="formInput formInput01" value={formData.name} onChange={(e) => handleChange(e)}/>
           </div>
 
           <div className="div-inputSpotForm">
-            <label className="SFL-07">Description</label>
+            <label className="SFL-07">Description</label> {errors.description && <p className='SFL-descriptionError'>Description is required</p>}
             <textarea name="description" className="formInput formInput07" value={formData.description} onChange={(e) => handleChange(e)}></textarea>
           </div>
 
           <div className="div-inputSpotForm">
-            <label className="spotForm-inputLabel">Price</label>
-            <input type="text" name="price" className="formInput" value={formData.price} onChange={(e) => handleChange(e)}></input>
+            <label className="spotForm-inputLabel">Price</label> {errors.price && <p className='SFL-priceError'>Price is required</p>}
+            <input type="text" name="price" className="formInput formInput01" value={formData.price} onChange={(e) => handleChange(e)}></input>
           </div>
 
           <div className="div-inputSpotForm div-ISF-button">
