@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-
+import * as spotActions from "./spots";
 const CREATE_REVIEW = 'review/CREATE_REVIEW';
 const SET_REVIEWS = 'review/SET_REVIEWS';
 
@@ -86,6 +86,23 @@ export const getAllReviews = (spotId) => {
     } catch (err) {
       console.error("Error fetching reviews:", err);
 
+    }
+  };
+};
+export const DeleteReview = (reviewId) => {
+  return async (dispatch) => {
+    try {
+      const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete review');
+      }
+
+      dispatch(spotActions.getSingleSpot());
+    } catch (err) {
+      console.error("Error deleting review:", err);
     }
   };
 };

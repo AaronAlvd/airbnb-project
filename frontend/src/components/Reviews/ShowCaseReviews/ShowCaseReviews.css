@@ -16,6 +16,24 @@
 cursor: pointer;
 }
 
+/* OpenModalButton.css */
+
+.modalButton {
+  position: relative;
+  left: 70px;
+  /* bottom: 50px; */
+  width: 250px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+  cursor: pointer; /* Optional: changes cursor to pointer */
+}
+
+.modalButton:hover {
+  background-color: darkred; /* Optional: hover effect */
+}
 
 
 
