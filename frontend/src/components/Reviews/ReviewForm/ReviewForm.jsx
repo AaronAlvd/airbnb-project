@@ -1,7 +1,7 @@
 import "./ReviewForm.css";
 import StarRating from "../StarRating";
 import * as spotActions from "../../../store/spots"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createReview } from "../../../store/review";
 import { useModal } from '../../../context/modal';

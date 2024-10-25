@@ -15,6 +15,8 @@ function SpotFormPage () {
     description: "",
     price: ""
   })
+  
+  const [setErrors] = useState({});
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -58,8 +60,8 @@ function SpotFormPage () {
 
         <div className='location'>
           <div className='spacer'>
-            <p className='form-header'>Where's your place located?</p>
-            <p className='form-sub-header'>Guest will only get your exact location once they've booked a reservation.</p>
+            <p className='form-header'>Where&apos;s your place located?</p>
+            <p className='form-sub-header'>Guest will only get your exact location once they&apos;ve booked a reservation.</p>
           </div>
           <div className='spacer'>
                       <label className="spotForm-inputLabel">Country</label> </div>
