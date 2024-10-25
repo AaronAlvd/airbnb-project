@@ -30,7 +30,7 @@ function SpotsDisplayAll() {
         {spots.map((spot) => {
           return (
             <div className="SDA-box" key={spot.id} onClick={() => handleClick(spot.id)}>
-              <img className="SDA-Image"src={spot.previewImage || '../../../public/edubnbfavicon.png'}/>
+              <img className="SDA-Image"src={spot.previewImage}/>
               <div className="div-SDA-info">
                 <span className="SDA-Location"><p className="SDA-info-p">{spot.city}, {spot.state}</p></span>
                 {spot.avgRating ? <span className="SDA-Rating"><p className="SDA-info-p">{spot.avgRating}<FontAwesomeIcon className="SDA-icon"icon={faStar}/></p></span> :
