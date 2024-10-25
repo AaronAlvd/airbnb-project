@@ -46,7 +46,7 @@ if (isProduction) {
 
   // Serve the index.html file for any route that doesn't match an API route
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
   });
 }
 

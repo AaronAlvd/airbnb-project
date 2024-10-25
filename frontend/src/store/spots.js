@@ -150,29 +150,37 @@ const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SPOTS:
       return { ...state, spots: action.payload };
+
     case ADD_SPOT: {
-      const newState = {...state};
+      const newState = { ...state };
       newState.spots[action.payload.id] = action.payload;
       return newState;
     }
-    case DELETE_SPOT:
+
+    case DELETE_SPOT: {
       // Filter out the spot with the given ID from state.spots
-      const updatedSpots = state.spots.filter(spot => spot.id !== action.payload.spotId);
+      const updatedSpots = state.spots.filter((spot) => spot.id !== action.payload.spotId);
 
       // Return updated state with the filtered spots
       return {
         ...state,
         spots: updatedSpots,
       };
-      case SET_SPOT:
-        return {...state , spot: action.payload || {}}
-      case SET_SPOT_REVIEWS:
-        const sortedReviews = action.payload.sort((a,b)=> new Date(b.createdAt ) - new Date(a.createdAt))
-        console.log('sortedReview', sortedReviews)
-        return {...state , spot:{...state.spot, Reviews:sortedReviews}}
+    }
+
+    case SET_SPOT:
+      return { ...state, spot: action.payload || {} };
+
+    case SET_SPOT_REVIEWS: {
+      const sortedReviews = action.payload.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      console.log('sortedReview', sortedReviews);
+      return { ...state, spot: { ...state.spot, Reviews: sortedReviews } };
+    }
+
     default:
       return state;
   }
 };
+
 
 export default spotReducer;

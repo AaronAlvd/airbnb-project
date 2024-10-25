@@ -4,6 +4,8 @@ import * as spotActions from '../../../store/spots';
 import './SpotFormPage.css'
 
 function SpotFormPage () {
+  
+
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -15,6 +17,7 @@ function SpotFormPage () {
     description: "",
     price: ""
   })
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -56,10 +59,15 @@ function SpotFormPage () {
       <div className="div-spotForm">
         <form onSubmit={(e) => handleSubmit(e)}>
 
+         {/* Displaying errors if any */}
+         {errors && Object.keys(errors).map((key, index) => (
+            <div key={index} className="error-message">{errors[key]}</div>
+          ))}
+
         <div className='location'>
           <div className='spacer'>
-            <p className='form-header'>Where's your place located?</p>
-            <p className='form-sub-header'>Guest will only get your exact location once they've booked a reservation.</p>
+            <p className='form-header'>Where&apos;s your place located?</p>
+            <p className='form-sub-header'>Guest will only get your exact location once they&apos;ve booked a reservation.</p>
           </div>
           <div className='spacer'>
                       <label className="spotForm-inputLabel">Country</label> </div>

@@ -8,7 +8,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../../store/session';
 import './ProfileButton.css'
 
-function ProfileButton({ user }) {
+function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
