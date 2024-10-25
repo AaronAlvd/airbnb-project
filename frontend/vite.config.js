@@ -10,11 +10,12 @@ export default defineConfig(({ mode }) => ({
       failOnError: mode === "production",
     }),
   ],
-  ...(mode === 'development' && {
-    server: {
-      proxy: {
-        '/api': 'http://localhost:8000',
-      },
+  server: {
+    proxy: {
+      '/api': mode === 'development' ? 'http://localhost:8000' : '', // No proxy needed in production
     },
-  }),
+  },
+  build: {
+    outDir: 'dist', // Ensure this matches where your Express server expects the built files
+  },
 }));
