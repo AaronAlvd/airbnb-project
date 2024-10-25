@@ -1,0 +1,108 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.div-spotForm {
+    /* border: 3px solid black; */
+    width: 400px
+}
+
+.form-header {
+    margin: 10px 0 10px 0;
+    font-size: large;
+    font-weight: 600;
+}
+.form-sub-header {
+    font-size: medium;
+    margin: 0;
+}
+
+.spacer {
+    padding: 10px 0px 5px 0px
+}
+
+.scroll-input {
+    width: 398px;
+    height: 22px;
+}
+
+input {
+    width: 390px;
+   
+}
+
+#location-description {
+    width: 394px;
+    height: 100px
+}
+
+.location {
+    padding-bottom: 40px;
+    border-bottom: 3px solid black;
+    width: 398px
+    
+}
+
+#lat-box {
+    margin-top: 10px;
+    
+}
+#lng-box {
+    margin-top: 10px;
+    justify-self: end;
+}
+#latlng-box {
+    display: grid;
+    grid-template-columns: 199px 199px;
+    grid-template-rows: 20px 20px;
+    
+    
+}
+
+#lat {
+    width: 169px;
+    margin-top: 5px;
+    grid-column: 1;
+    grid-row: 2;
+}
+#lat-header {
+    grid-row: 1;
+}
+#lng {
+    width: 169px;
+    margin-top: 5px;
+    grid-column: 2;
+    grid-row: 2;
+
+}
+#lng-header {
+    grid-row: 1;
+}
+#spot-form-description-box {
+    padding-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+#spot-form-price-box {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid black;
+}
+#spot-form-price-input {
+    width: 392px
+}
+
+#spot-form-submit-button-box {
+    display: flex;
+    justify-content: center;
+}
+#spot-form-submit-button {
+    margin-top: 15px;
+    width: 100px;
+    
+    height: 25px;
+    border-radius: 1px;
+    box-shadow: 2px 2px;
+    background-color: red;
+    cursor: pointer;
+}

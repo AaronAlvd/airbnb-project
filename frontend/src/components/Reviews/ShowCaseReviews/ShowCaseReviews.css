@@ -1,0 +1,44 @@
+.Review-list {
+  background-color: transparent;
+  height: 275px;
+  border-radius: 15px;
+  width: 475px;
+  max-width: 600px;
+  padding: 20px;
+  overflow-y: scroll ;
+}
+
+.Review-list::-webkit-scrollbar {
+  width: 65px;
+   background: transparent;
+}
+.Review-list::-webkit-scrollbar:hover {
+cursor: pointer;
+}
+
+/* OpenModalButton.css */
+
+.modalButton {
+  position: relative;
+  left: 70px;
+  /* bottom: 50px; */
+  width: 250px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+  cursor: pointer; /* Optional: changes cursor to pointer */
+}
+
+.modalButton:hover {
+  background-color: darkred; /* Optional: hover effect */
+}
+
+
+
+  .title {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    display: inline-block;
+}

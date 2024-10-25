@@ -6,6 +6,10 @@ import './index.css';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
+// import * as spotActions from './store/spots';
+
+import { ModalProvider, Modal } from './context/modal';
+// import { BrowserRouter } from 'react-router-dom';
 
 (async () => {
   const store = configureStore();
@@ -19,16 +23,20 @@ import * as sessionActions from './store/session';
     window.csrfFetch = csrfFetch;
     window.store = store;
     window.sessionActions = sessionActions;
+    // window.spotActions = spotActions;
   }
 
   // Render the application once the store is ready
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <ModalProvider>
+        <Provider store={store}>
+          <App/>
+          <Modal />
+        </Provider>
+      </ModalProvider>
     </React.StrictMode>
   );
 })();
 
-// This works 
+// This works

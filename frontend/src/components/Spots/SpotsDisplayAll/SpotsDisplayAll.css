@@ -1,0 +1,84 @@
+.grid-container {
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column */
+  
+}
+
+.div-spotsGallery {
+  display: grid;
+  
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  column-gap: 45px;
+  row-gap: 15px;
+  
+}
+
+
+.div-SDA-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.button-FaUser {
+  margin-right: 0;
+  margin-left: 47px
+}
+.SDA-box {
+  display: grid;
+  grid-template-areas: 
+    'spotImage'
+    'information';
+  width: 280px;
+  grid-template-rows: 245px 60px;
+  row-gap: 5px;
+  margin: 5px;
+}
+
+.SDA-Image {
+  /* border: .5px black solid; */
+  grid-area: 'spotImage';
+  height: auto;
+  border-radius: 15px;
+  width: 281px;
+  height: 245px;
+  object-fit: cover; 
+  object-position: center; 
+}
+
+
+.div-SDA-info {
+  grid-area: 'information';
+}
+
+.SDA-Location {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.SDA-Name {
+  font-size: 13px;
+}
+
+.SDA-Price {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.SDA-info-p{
+  margin: 0;
+}
+
+.SDA-icon {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.SDA-Rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+ 

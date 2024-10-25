@@ -1,0 +1,192 @@
+.div-spot {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  height: 100px;
+  margin-left: 10px;
+}
+
+#location {
+  margin-left: 161px;
+  grid-column: 2;
+}
+
+.div-title {
+  grid-area: 'Title';
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  margin-left: 161px;
+  grid-column: 2;
+
+}
+
+#reviewbutton {
+  position: relative;
+
+  left:150px;
+  bottom: 50px;
+  width: 250px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+
+
+}
+#reviewbutton:hover {
+    transform: translateY(-2px);
+
+  }
+#review {
+  height: 275px;
+  position: absolute;
+  bottom: -480px;
+  left: 161px;
+  grid-column: 2;
+  border: 3px solid black;
+  border-radius:15px ;
+  -webkit-border-radius:15px ;
+  -moz-border-radius:15px ;
+  -ms-border-radius:15px ;
+  -o-border-radius:15px ;
+  overflow-y: hidden;
+}
+
+
+/* ---- PICTURES ---- */
+
+.div-pictures {
+  grid-area: 'Pictures';
+  display: grid;
+  grid-template-columns: 500px 300px 300px 300px;
+  grid-template-rows: 150px 150px;
+  grid-template-areas:
+    "pic01 pic02 pic03 pic04"
+    "pic01 pic05 pic06 pic07";
+  margin: 0 161px;
+  grid-column: 2;
+
+}
+
+#picture-01 {
+  grid-area: pic01;
+}
+#image-01 {
+  width: 500px;
+  height: 400px;
+}
+
+#picture-02 {
+  grid-area: pic02;
+
+}
+#picture-03 {
+  grid-area: pic03;
+
+}
+#picture-04 {
+  grid-area: pic04;
+
+}
+#picture-05 {
+  grid-area: pic05;
+
+}
+
+.div-sideImage {
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.div-mainImage {
+  object-fit: cover;
+
+
+}
+
+
+
+
+/* ---- PICTURES ---- */
+
+
+
+
+.div-mainImage > img {
+border-radius: 15px;
+}
+
+span{
+  position: relative;
+  top: 10px;
+}
+
+.div-body {
+  grid-area: 'Body';
+  border: 3px solid black;
+  border-radius: 10px;
+  position: relative;
+  bottom:89px;
+  left: 1110px;
+  width: 335px;
+  height: 130px;
+  grid-column: 2;
+
+}
+
+#reservebutton {
+  bottom: 10px;
+  left: 25px;
+  width: 283px;
+  height: 45px;
+  border-radius: 1px;
+  box-shadow: 2px 2px;
+  background-color: red;
+  grid-column: 2;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#reservebutton:hover{
+  transform: translateY(-2px);
+  cursor:pointer;
+}
+
+.spotDescription{
+  position: relative;
+  left: 161px;
+  /* bottom: -275px; */
+  top: 95px;
+  padding: 10px 0px;
+  width: 870px;
+  grid-column: 2;
+
+}
+
+#spotprice {
+  position: relative;
+  left: 25px;
+  top: -10px;
+  font-size: x-large
+  ;
+}
+
+/* ---- SPOT BODY BUTTON ---- */
+
+.RF-modalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  background-color: rgb(231, 232, 234);
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0;
+  position: relative;
+  bottom: 35px;
+
+}
+
+/* ---- SPOT BODY BUTTON ---- */

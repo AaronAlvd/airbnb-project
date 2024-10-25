@@ -5,6 +5,8 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const path = require('path');  // Required for serving static files
+
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 const routes = require('./routes');
@@ -38,6 +40,17 @@ app.use(
 
 app.use(routes);
 
+// Serve static frontend files if in production
+if (isProduction) {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  // Serve the index.html file for any route that doesn't match an API route
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+  });
+}
+
+// Catch unhandled requests and forward to error handler
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
@@ -46,8 +59,8 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
+// Process Sequelize errors
 app.use((err, _req, _res, next) => {
-  // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
     let errors = {};
     for (let error of err.errors) {
@@ -59,7 +72,7 @@ app.use((err, _req, _res, next) => {
   next(err);
 });
 
-//rewrite to get rid of the stack when deployed to render
+// Error handling middleware
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);
@@ -67,7 +80,6 @@ app.use((err, _req, res, _next) => {
   if (isProduction) {
     // In production, exclude stack from the response
     res.json({
-      //title: err.title || 'Server Error',
       message: err.message,
       errors: err.errors,
     });

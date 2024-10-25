@@ -1,0 +1,60 @@
+.nav-li {
+  grid-column: 1;
+  justify-self: end;
+  margin-right: 35px;
+  
+  
+  
+} 
+
+.button-FaUser{
+  grid-column: 4;
+  /* justify-self: end; */
+}
+
+
+
+.nav-ul {
+  /* display: flex;
+  justify-content: space-evenly; */
+  display: grid;
+  grid-template-columns: 1fr 560px 560px 1fr;
+  list-style-type: none;
+  align-items: center;
+  padding: 0;
+  /* margin: 20px 0 19px 0px; */
+  /* border-bottom: 1px solid black; */
+  /* padding: 50; */
+  /* width: 100%; */
+}
+
+
+
+a {
+ text-decoration: none;
+ color: black;
+ font-family: 'Helvetica',sans-serif;
+ font-size: 16px;
+}
+
+#logo {
+  width: 50px
+}
+
+
+.div-nav {
+  
+  margin: 18px 162px;
+  
+}
+  
+  /*
+.div-ul {
+  width: 50vw;
+  padding: 0px;
+}  */
+
+
+
+
+

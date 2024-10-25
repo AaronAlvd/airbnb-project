@@ -1,0 +1,93 @@
+
+.hidden {
+  display: none;
+}
+
+.pbl-bottom {
+  /* border-radius: 0 0 5px 5px; */
+  
+}
+
+.pbl-top {
+  border-radius: 5px 5px 0 0;
+  
+}
+
+.pb-logout {
+  font-size: 16px;
+  background-color: white;
+  border: none;
+  padding-left: 0px;
+}
+
+.FaUserCircle {
+  font-size: 30px;
+  padding: 0;
+}
+
+.FaUserCircle:hover { 
+  cursor: pointer;
+}
+
+.button-FaUser {
+  margin-right: 15px;
+  height: min-content;
+  width: min-content;
+  border: none;
+  background-color: white;
+  transform: translate(0px, 3px);
+}
+
+.UL-ModalButton {
+  position: absolute;
+  /* transform: translate(-40px, 80px); */
+  box-shadow: 1px 1px 5px rgb(181, 180, 180);
+  border-radius: 5%;
+  margin-top: 21px;
+  padding: 0;
+  left: -66px
+}
+
+.UL-ModalButton-loggedIn {
+  position: absolute;
+  /* transform: translate(-30px, 130px); */
+  box-shadow: 1px 1px 5px rgb(181, 180, 180);
+  border-radius: 5%;
+  padding: 0;
+  margin-top: 21px;
+
+  left: -66px
+}
+
+#createspotmenu {
+  /* border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; */
+  border-radius: 0 0 5px 5px
+}
+
+#signupmenu {
+    border-radius: 0 0 5px 5px;
+
+}
+.tester {
+  position: relative;
+  grid-column: 4;
+}
+
+.ModalButton-list {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  width: 125px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  
+ 
+  
+  
+}
+
+.userInfo {
+  margin-left: 15px;
+}
