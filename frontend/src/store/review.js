@@ -89,7 +89,7 @@ export const getAllReviews = (spotId) => {
     }
   };
 };
-export const DeleteReview = (reviewId) => {
+export const DeleteReview = (spotId,reviewId) => {
   return async (dispatch) => {
     try {
       const response = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -100,7 +100,8 @@ export const DeleteReview = (reviewId) => {
         throw new Error('Failed to delete review');
       }
 
-      dispatch(spotActions.getSingleSpot());
+     return dispatch(spotActions.getSingleSpot(spotId));
+
     } catch (err) {
       console.error("Error deleting review:", err);
     }

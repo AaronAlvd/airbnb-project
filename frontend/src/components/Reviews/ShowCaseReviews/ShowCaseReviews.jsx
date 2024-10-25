@@ -1,19 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import * as reviewActions from "../../../store/review";
-import ListItem from "../ListItem"; // Adjust the import path
-// import OpenModalButton from "../../OpenModalButton/OpenModalButton";
+import ListItem from "../ListItem";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import "./ShowCaseReviews.css";
 import OpenModalBtnReview from "../../OpenModalButton/OpenModalBtnReview";
 
 export default function ShowCaseReviews({ spot }) {
   const dispatch = useDispatch();
-  const reviews = spot?.Reviews || []; // Safely handle reviews
+  const reviews = spot?.Reviews || [];
   const user = useSelector((state) => state.session.user);
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // State for error messages
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (spot && user) {
@@ -21,12 +21,21 @@ export default function ShowCaseReviews({ spot }) {
     }
   }, [spot, user]);
 
+  useEffect(() => {
+    // You can use this effect to trigger side effects after loading
+    if (loaded) {
+      setLoaded(false); // Reset loaded state for next submission
+    }
+  }, [loaded]);
+
   const handleDelete = async (reviewId) => {
     setLoading(true);
     setError(null);
     try {
-      await dispatch(reviewActions.DeleteReview(reviewId));
-      window.alert(`Review deleted with id of ${reviewId}`);
+      const spotId = spot.id;
+      console.log("SpotId", spotId);
+      await dispatch(reviewActions.DeleteReview(spotId, reviewId));
+      setLoaded(true); // Trigger re-render if needed
     } catch (error) {
       console.error("Failed to delete review:", error);
       setError("Error deleting review. Please try again.");
@@ -38,11 +47,11 @@ export default function ShowCaseReviews({ spot }) {
   return (
     <div className="Review-list">
       <h2 className="title">Reviews</h2>
-      {!isOwner && (<>
+      {!isOwner && (
         <OpenModalBtnReview
           buttonText="Make Review"
-          modalComponent={<ReviewForm props={spot} />}
-        /></>
+          modalComponent={<ReviewForm props={spot}  />}
+        />
       )}
 
       {error && <p className="error">{error}</p>}
@@ -57,7 +66,7 @@ export default function ShowCaseReviews({ spot }) {
               review={review.review}
               starsRating={review.stars}
               onDelete={() => handleDelete(review.id)}
-              loading={loading} // Optionally pass loading state to ListItem if needed
+              loading={loading} // Optional: Pass loading state to ListItem if needed
             />
           ))
         ) : (
