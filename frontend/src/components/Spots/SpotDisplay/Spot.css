@@ -128,7 +128,16 @@
 .div-upperBodyRight {
   width: 35%;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+
+.div-SD-buttons {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
 }
 
 .div-spotReserve {

@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import OpenModalButton from '../../OpenModalButton/OpenModalButton';
+import ReviewForm from '../../Reviews/ReviewForm/ReviewForm'
 import "./Spot.css";
 
 function Spot() {
@@ -142,15 +144,17 @@ function Spot() {
                   </div>  
                 </div>
                   <div>
-                    <button className="SD-reserveButton">Reserve</button>
+                    <button className="SD-reserveButton" onClick={() => window.alert("Feature coming soon")}>Reserve</button>
                   </div>
               </div>
-              {/* {showReview && <button className="SD-Button">
-                <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
-              </button>}
-              {owner && <button className="SD-Button">
-                <OpenModalButton buttonText="Edit"/>
-              </button>} */}
+              <div className="div-SD-buttons">
+                {showReview && <button className="SD-Button">
+                  <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
+                </button>}
+                {owner && <button className="SD-Button">
+                  <OpenModalButton buttonText="Edit"/>
+                </button>}
+              </div>
             </div>
           </div>
           <div className="div-lowerBody">
