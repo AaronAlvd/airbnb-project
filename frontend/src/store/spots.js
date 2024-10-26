@@ -42,7 +42,7 @@ export const getSpots = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
+        console.log('from get spots action', data)
         dispatch(setSpots(data.Spots)); // Dispatch the action with the fetched spots
         return data;
       } else {
