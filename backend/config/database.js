@@ -17,7 +17,7 @@ module.exports = {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
-    seederStoragePath: path.resolve(__dirname, '../db/seeders'), // specify the correct path if needed
+    seederStoragePath: path.resolve(__dirname, '../backend/db/seeders'), // specify the correct path if needed
     dialectOptions: {
       ssl: {
         require: true,
