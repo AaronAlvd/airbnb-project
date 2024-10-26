@@ -1,4 +1,6 @@
 const express = require('express');
+// Example in app.js or index.js
+require('dotenv').config(); // Ensure dotenv is loaded if needed
 require('express-async-errors');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -37,6 +39,12 @@ app.use(
     }
   })
 );
+
+
+console.log("Database URL:", process.env.DATABASE_URL); // Log the database URL
+console.log("Environment:", process.env.NODE_ENV); // Log the environment (development or production)
+console.log("Other Environment Variable:", process.env.OTHER_VAR); // Add any other variables you need to check
+
 
 app.use(routes);
 
