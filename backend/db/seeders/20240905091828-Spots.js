@@ -36,8 +36,7 @@ module.exports = {
         lng: -118.328661,
         name: "Code Camp",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 456
       },
       {
@@ -51,8 +50,7 @@ module.exports = {
         lng: -122.333056,
         name: "Tech University",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 789
       },
       {
@@ -66,8 +64,7 @@ module.exports = {
         lng: -97.743057,
         name: "Fullstack Academy",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 350,
       },
       {
@@ -81,8 +78,7 @@ module.exports = {
         lng: -121.886329,
         name: "Silicon Valley University",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 650,
       },
       {
@@ -96,8 +92,7 @@ module.exports = {
         lng: -74.005974,
         name: "NYC Tech School",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 800,
       },
       {
@@ -111,8 +106,7 @@ module.exports = {
         lng: -87.629799,
         name: "Chicago Coding Institute",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 450,
       },
       {
@@ -126,8 +120,7 @@ module.exports = {
         lng: -71.058884,
         name: "Boston Engineering Academy",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 600,
       },
       {
@@ -141,8 +134,7 @@ module.exports = {
         lng: -104.990251,
         name: "Data Science School",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 700,
       },
       {
@@ -156,8 +148,7 @@ module.exports = {
         lng: -80.1918,
         name: "Cloud Computing Academy",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 750,
       },
       {
@@ -171,8 +162,7 @@ module.exports = {
         lng: -84.3880,
         name: "AI Development Institute",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 900,
       },
       {
@@ -186,8 +176,7 @@ module.exports = {
         lng: -77.0369,
         name: "Cybersecurity Academy",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 850,
       },
       {
@@ -201,8 +190,7 @@ module.exports = {
         lng: -118.2437,
         name: "Game Development School",
         description: `Our university stands at the forefront of innovation, dedicated to empowering the next generation of leaders in 
-        technology and beyond. Nestled in a vibrant academic community, our campus offers state-of-the-art facilities and 
-        collaborative spaces designed to foster creativity and hands-on learning. `,
+        technology and beyond. `,
         price: 999,
       },
     ]);
