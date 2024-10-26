@@ -24,6 +24,7 @@ module.exports = {
         rejectUnauthorized: false
       }
     },
+    logging: console.log,
     define: {
       schema: process.env.SCHEMA
     }
