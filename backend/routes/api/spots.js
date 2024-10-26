@@ -303,7 +303,7 @@ router.get('/', async (req, res, next) => {
     // Format the response for each spot
     const formattedSpots = {
       Spots: spots.map(spot => {
-        const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null;
+        const previewImage = spot.SpotImages.length > 0 ? spot.SpotImages[0].preview : null;
 
         return {
           id: spot.id,
