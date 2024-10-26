@@ -69,6 +69,7 @@ function SpotsDisplayAll() {
         if (!response.ok) throw new Error("Error fetching spots data");
 
         const data = await response.json();
+        console.log('spot data from fetch', data)
         setSpots(data.Spots); // Set fetched spots data to local state
       } catch (error) {
         console.error("Error:", error);
