@@ -327,6 +327,10 @@ router.get('/', async (req, res, next) => {
       size
     };
 
+    console.log("Formatted Spots:", formattedSpots);
+    console.log("Total Spots:", formattedSpots.Spots.length);
+
+
     // Return the formatted spots in the response
     res.json(formattedSpots);
   } catch (error) {
