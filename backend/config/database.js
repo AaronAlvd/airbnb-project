@@ -1,7 +1,7 @@
 // backend/config/database.js
 const config = require('./index');
 require('dotenv').config();
-const path = require('path');
+// const path = require('path');
 
 
 
@@ -17,7 +17,9 @@ module.exports = {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
-    seederStoragePath: path.resolve(__dirname, '../db/seeders'), // specify the correct path if needed
+    // seederStoragePath: path.resolve(__dirname, '../db/seeders'), 
+    seederStorageTableName: 'SequelizeData', 
+
     dialectOptions: {
       ssl: {
         require: true,
