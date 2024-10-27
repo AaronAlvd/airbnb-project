@@ -6,6 +6,8 @@ const ADD_SPOT = "spots/addSpot"
 const DELETE_SPOT = "spots/deleteSpot";
 const SET_SPOT = "spots/setSpot";
 const SET_SPOT_REVIEWS = "spots/setSpot/reviews";
+const ADD_IMAGE_TO_SPOT = "spots/addImageToSpot"; // Add this line here
+
 
 
 const setSpots = (spots) => {
@@ -127,9 +129,10 @@ export const createSpot = (data) => async (dispatch) => {
         throw new Error("Failed to add image to spot.");
       }
 
-      // const newImage = await imageResponse.json();
-      // Optionally, add this image to the Redux store if needed
-    }
+     // Optionally, add the new image to your Redux store
+     const newImage = await imageResponse.json();
+     dispatch(addImageToSpot({ spotId: newSpot.id, image: newImage }));
+   }
 
     return newSpot;
   } catch (err) {
@@ -180,6 +183,20 @@ const spotReducer = (state = initialState, action) => {
       const newState = { ...state };
       newState.spots[action.payload.id] = action.payload;
       return newState;
+    }
+
+    case ADD_IMAGE_TO_SPOT: {
+      const { spotId, image } = action.payload;
+      const updatedSpots = state.spots.map((spot) => {
+        if (spot.id === spotId) {
+          return {
+            ...spot,
+            images: spot.images ? [...spot.images, image] : [image], // Add new image
+          };
+        }
+        return spot;
+      });
+      return { ...state, spots: updatedSpots };
     }
 
     case DELETE_SPOT: {
