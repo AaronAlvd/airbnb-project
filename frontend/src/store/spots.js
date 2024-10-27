@@ -99,6 +99,7 @@ export const createSpot = (data) => async (dispatch) => {
         lng,
         description,
         price,
+        imageUrl,
       }),
     });
 
