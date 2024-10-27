@@ -1,4 +1,4 @@
-import * as spotActions from "../../../store/spots"; // Import your actions
+import * as spotActions from "../../../store/spots"; 
 import * as bookingActions from '../../../store/booking';
 import * as reviewActions from '../../../store/review';
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +7,11 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OpenModalButton from '../../OpenModalButton/OpenModalButton';
-import ReviewForm from '../../Reviews/ReviewForm/ReviewForm'
+import ReviewForm from '../../Reviews/ReviewForm/ReviewForm';
+import EditSpots from "../EditSpots/EditSpots";
+import DeleteReviewConfirm from '../../Reviews/ManageReviews/DeleteReviewConfirm';
 import "./Spot.css";
+
 
 function Spot() {
   const dispatch = useDispatch();
@@ -48,29 +51,32 @@ function Spot() {
     };
   
     fetchSpots();
-  }, [dispatch, spotId]);  // Dependencies: re-run on `spotId` or `dispatch` change
+  }, [dispatch, spotId, user]);  // Dependencies: re-run on `spotId` or `dispatch` change
 
   useEffect(() => {
      bookings.forEach((booking) => {
-      if (new Date(booking.endDate).getTime() < Date.now()) {
+      if (booking.spotId === spotId && new Date(booking.endDate).getTime() < Date.now()) {
         setShowReview(true);
       }
      });
 
-     setShowReview(true);
-
-  }, [showReview]);
+  }, [showReview, bookings, spotId]);
 
   useEffect(() => {
     if (user && spot && (spot.ownerId === user.id)) {
       setOwner(true);
     }
-  },[owner]);
+  },[owner, spot, user]);
 
   const showReviews = () => {
     if (!reviews) {
       return null
     } else {
+        const lessThanOne = reviews.length > 0 ? (<div className="div-spotReview">
+          <h3>{reviews[0].User.firstName}</h3>
+        </div>) : 
+        (<h3>Be the first to post a review</h3>)
+
       return reviews.length > 1 ? 
         reviews.map((review) => {
           const createdAt = new Date(review.createdAt);
@@ -81,18 +87,19 @@ function Spot() {
           });
 
           return (
-            <div className="div-spotReview">
+            <div className="div-spotReview" key={review.id}>
               <div className="div-reviewTop">
                 <h3 className="reviewTop">{review.User.firstName} {review.User.lastName}</h3><h3 className="reviewTop">{review.stars}<FontAwesomeIcon className="SD-icon"icon={faStar}/></h3>
               </div>
               <small>{traditionalDate}</small>
               <p>{review.review}</p>
+              {user.id === review.User.id && <button className='SD-deleteReviewButton'>
+                <OpenModalButton buttonText="Delete Review" modalComponent={<DeleteReviewConfirm reviewId={review.id}/>}/>
+              </button>}
             </div>
           )
-        }) : 
-        (<div className="div-spotReview">
-          <h3>{reviews[0].User.firstName}</h3>
-        </div>)
+        }) : lessThanOne
+
     }
   }
 
@@ -139,8 +146,8 @@ function Spot() {
                     <span className="spotReserve"><p className="spotReserve SR-price">${spot.price}</p><small className="SD-subscript">night</small></span>
                   </div> 
                   <div className="div-SRT-right">
-                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating} <FontAwesomeIcon className="SD-icon"icon={faStar}/></p> : <p className="spotReserve"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
-                    <span className="spotRating-divider"/><p className="spotReserve">{reviews.length} {reviews.length > 1 ? "Reviews" : "Review"}</p>
+                    {spot.avgRating ? <p className="spotReserve">{spot.avgRating} <FontAwesomeIcon className="SD-icon"icon={faStar}/></p> : <p className="spotReserve">New</p>}
+                    <p className="centered-DOT">.</p><p className="spotReserve">{reviews.length} {reviews.length > 1 ? "Reviews" : "Review"}</p>
                   </div>  
                 </div>
                   <div>
@@ -148,19 +155,19 @@ function Spot() {
                   </div>
               </div>
               <div className="div-SD-buttons">
-                {showReview && <button className="SD-Button">
+                {/* showReview && */<button className="SD-Button">
                   <OpenModalButton buttonText="Make Review" modalComponent={<ReviewForm props={spot}/>}/>
                 </button>}
-                {owner && <button className="SD-Button">
-                  <OpenModalButton buttonText="Edit"/>
-                </button>}
+                {/* {owner && <button className="SD-Button">
+                  <OpenModalButton buttonText="Edit" modalComponent={<EditSpots spotId={spotId}/>}/>
+                </button>} */}
               </div>
             </div>
           </div>
           <div className="div-lowerBody">
             <div className="div-lowerBodyTitle">
               {spot.avgRating ? <p className="LB-Reviews">{spot.avgRating} <FontAwesomeIcon className="SD-icon"icon={faStar}/></p> : <p className="LB-Reviews"> 0 <FontAwesomeIcon className="SD-icon"icon={faStar}/></p>}
-              <span className="spotRating-divider"/><p className="LB-Reviews">{reviews.length }</p><p>{reviews.length > 1 ? "Reviews" : "Review"}</p>
+              <p className="centered-DOT">.</p><p className="LB-Reviews">{reviews.length }</p><p>{reviews.length > 1 ? "Reviews" : "Review"}</p>
             </div>
             <div className="div-lowerBodyReviews">
               {showReviews()}

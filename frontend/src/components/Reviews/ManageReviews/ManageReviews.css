@@ -1,0 +1,17 @@
+.div-MSR {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 700px;
+  margin: 20px;
+  height: min-content;
+  padding: 10px;
+}
+
+.MSR-button {
+  margin: 10px 0 10px 0;
+}
+
+.div-confirmDelete {
+  width: 200px;
+  height: 100px;
+}

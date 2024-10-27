@@ -33,8 +33,8 @@ function SpotsDisplayAll() {
               <div className="div-SDA-info">
                 <span className="SDA-Location"><p className="SDA-info-p">{spot.city}, {spot.state}</p></span>
                 {spot.avgRating ? <span className="SDA-Rating"><p className="SDA-info-p">{spot.avgRating}<FontAwesomeIcon className="SDA-icon"icon={faStar}/></p></span> :
-                                  <span className="SDA-Rating"><p className="SDA-info-p">0</p><FontAwesomeIcon className="SDA-icon"icon={faStar}/></span>}
-                <span className="SDA-Price"><p className="SDA-info-p">${spot.price}</p></span>
+                                  <span className="SDA-Rating"><p className="SDA-info-p">New</p><FontAwesomeIcon className="SDA-icon"icon={faStar}/></span>}
+                <span className="SDA-Price"><p className="SDA-info-p">${spot.price}<small className="SDA-priceNight">/night</small></p></span>
               </div>
             </div>
           )

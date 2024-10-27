@@ -60,12 +60,76 @@ export const getSpots = () => {
   };
 };
 
+export const addSpotImage = (data) => async () => {
+  try {
+    const { url, spotId } = data;
+
+    const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        url: url,
+        preview: false
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Failed to add Image.");
+    }
+
+    const newData = await response.json();
+
+    return newData;
+  } catch (err) {
+    console.error("Error adding Image:", err);
+    return err;
+  }
+}
+
 export const createSpot = (data) => async (dispatch) => {
   try {
     const { address, lng, lat, city, state, country, description, price, name } = data;
 
     const response = await csrfFetch('/api/spots/', {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        address,
+        city,
+        state,
+        country,
+        name,
+        lat,
+        lng,
+        description,
+        price,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create a spot.");
+    }
+
+    const newData = await response.json();
+    dispatch(addSpot(newData));
+
+    return newData;
+  } catch (err) {
+    console.error("Error creating spot:", err);
+    return err;
+  }
+};
+
+export const editSpot = (data, spotId) => async (dispatch) => {
+  try {
+    const { address, lng, lat, city, state, country, description, price, name } = data;
+
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: 'PUT',
       headers: {
         "Content-Type": "application/json",
       },
@@ -132,19 +196,22 @@ const spotReducer = (state = initialState, action) => {
     case SET_SPOTS:
       return { ...state, spots: action.payload };
     case ADD_SPOT: {
-      const newState = {...state};
-      newState.spots[action.payload.id] = action.payload;
-      return newState;
+      const newSpot = action.payload;
+      return {
+        ...state,
+        spots: {
+          ...state.spots,
+          [newSpot.id]: newSpot,
+        },
+      };
     }
-    case DELETE_SPOT:
-      // Filter out the spot with the given ID from state.spots
+    case DELETE_SPOT: {
       const updatedSpots = state.spots.filter(spot => spot.id !== action.payload.spotId);
-        
-      // Return updated state with the filtered spots
       return {
         ...state,
         spots: updatedSpots,
       };
+    }
     default:
       return state;
   }

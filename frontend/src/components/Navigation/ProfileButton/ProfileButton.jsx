@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import OpenModalButton from '../../OpenModalButton/OpenModalButton';
 import LoginFormModal from '../../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../../SignUp/SignUpForm';
@@ -8,10 +8,12 @@ import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../../store/session';
 import './ProfileButton.css'
 
-function ProfileButton({ user }) {
+function ProfileButton() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const ulRef02 = useRef();
   const liveUser = useSelector(state => state.session.user)
 
   const toggleMenu = (e) => {
@@ -27,6 +29,9 @@ function ProfileButton({ user }) {
       if (ulRef.current && !ulRef.current.contains(e.target)) {
         setShowMenu(false);
       }
+      if (ulRef02.current && !ulRef02.current.contains(e.target)) {
+        setShowMenu(false);
+      }
     };
 
     document.addEventListener('click', closeMenu);
@@ -37,6 +42,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    navigate('/');
   };
 
   const ulClassName = () => {
@@ -44,21 +50,27 @@ function ProfileButton({ user }) {
       return (
         <ul className="UL-ModalButton-loggedIn" ref={ulRef}>
           <li className={showMenu ? "ModalButton-list pbl-top" : null}><p className="userInfo">{liveUser.username}</p></li>
-          <li className={showMenu ? "ModalButton-list" : null}><p className="userInfo">{liveUser.firstName} {liveUser.lastName}</p></li>
+          <li className={showMenu ? "ModalButton-list" : null}><p className="userInfo">Hello, {liveUser.firstName} {liveUser.lastName}</p></li>
           <li className={showMenu ? "ModalButton-list" : null}><p className="userInfo">{liveUser.email}</p></li>
           <li className={showMenu ? "ModalButton-list pbl-bottom" : null}>
             <button onClick={logout} className="pb-logout userInfo">Log Out</button>
+          </li>
+          <li className={showMenu ? "ModalButton-list pbl-bottom" : null} onClick={() => navigate('/spots/current')}>
+            <button className="pb-logout userInfo">Manage Spots</button>
+          </li>
+          <li className={showMenu ? "ModalButton-list pbl-bottom" : null} onClick={() => navigate('/reviews/current')}>
+            <button className="pb-logout userInfo">Manage Reviews</button>
           </li>
         </ul>
       )
     } else if (showMenu && !liveUser) {
       return (
-        <ul className="UL-ModalButton">
-          <li className="ModalButton-list pbl-top">
-            <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
-          </li>
-          <li className="ModalButton-list pbl-bottom">
+        <ul className="UL-ModalButton" ref={ulRef02}>
+          <li className={showMenu ? "ModalButton-list pbl-top" : null}>
             <OpenModalButton className="ModalButton" buttonText="Sign Up" modalComponent={<SignupFormModal/>}/>
+          </li>
+          <li className={showMenu ? "ModalButton-list pbl-bottom" : null}>
+            <OpenModalButton className="ModalButton" buttonText="Log In" modalComponent={<LoginFormModal/>}/>
           </li>
         </ul>
       )

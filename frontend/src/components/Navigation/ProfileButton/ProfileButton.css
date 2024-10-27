@@ -41,7 +41,7 @@
 
 .UL-ModalButton-loggedIn {
   position: absolute;
-  transform: translate(-30px, 130px);
+  transform: translate(-30px, 180px);
   box-shadow: 1px 1px 5px rgb(181, 180, 180);
   border-radius: 5%;
   padding: 0;

@@ -1,15 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as spotActions from '../../../store/spots';
-import './SpotFormPage.css';
+import './EditSpots.css'
 
-function SpotFormPage () {
-  const navigate = useNavigate();
+function EditSpots({ spotId }) {
   const [errors, setErrors] = useState({});
+  const spots = useSelector((state) => state.spots.spots)
+  const spot = spots.find((data) => data.id === Number(spotId));
   const dispatch = useDispatch();
-  const latitude = 90.00;
-  const longitude = 90.00;
   const [formData, setFormData] = useState({
     address: "",
     city: "",
@@ -36,28 +34,6 @@ function SpotFormPage () {
 
     setErrors(() => {
       const err = {};
-
-      if (description === "") {
-        err.description = "Description is required"
-      }
-      if (country === "") {
-        err.country = "Country is required"
-      }
-      if (city === "") {
-        err.city = "City is required"
-      }
-      if (state === "") {
-        err.state = "State is required"
-      }
-      if (price === "") {
-        err.price = "Price is required"
-      }
-      if (address === "") {
-        err.address = "Address is required"
-      }
-      if (name === "") {
-        err.name = "Name is required"
-      }
       if (description !== "" && description.length < 30) {
         err.description = "Description must be at least 30 characters"
       }
@@ -66,26 +42,22 @@ function SpotFormPage () {
     })
 
     return dispatch(
-      spotActions.createSpot({
-        address,
-        city,
-        state,
-        country,
-        name,
-        lat: lat !== "" ? lat : latitude,
-        lng: lng !== "" ? lng : longitude,
-        description,
-        price
+      spotActions.editSpot({
+        address: address !== "" ? address : spot.address,
+        city: city !== "" ? city : spot.city,
+        state: state !== "" ? state : spot.state,
+        country: country !== "" ? country : spot.country,
+        name: name !== "" ? name : spot.name,
+        lat: lat !== "" ? lat : spot.lat,
+        lng: lng !== "" ? lng : spot.lng,
+        description: description !== "" ? description : spot.description,
+        price: price !== "" ? price : spot.price,
     }))
     .then((response) => {
-      if (errors.address || errors.state || errors.city || errors.price || errors.description || errors.name || errors.country) {
         dispatch(spotActions.addSpotImage(response.id, photoUrl.url01));
-        navigate('/');
-      }
     }) 
     .catch(async (res) => {
       const data = await res.json();
-      console.log(data)
     });
   }
 
@@ -120,7 +92,7 @@ function SpotFormPage () {
   return (
     <div className='outerDiv-spotForm'>
       <div className="div-spotForm">
-        <h2>Create New Spot</h2>
+        <h2>Update Spot</h2>
         <form className="spotForm" onSubmit={(e) => handleSubmit(e)}>
           <div className='div-SF-location'>
             <h4 className='SF-title'>Where's your place located?</h4>
@@ -230,4 +202,4 @@ function SpotFormPage () {
   );
 }
 
-export default SpotFormPage;
+export default EditSpots;

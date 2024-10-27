@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
@@ -8,8 +8,7 @@ import './SignupForm.css';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  // const [cookies] = useCookies(['XSRF-Token']);
-  // const cookie = Object.values(cookies)[0]
+  const [disableSignup, setDisableSignup] = useState(true);
   const sessionUser = useSelector((state) => state.session.user);
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -45,6 +44,31 @@ function SignupFormModal() {
   });
   const { closeModal } = useModal();
 
+  useEffect(() => {
+    let testFailed = false;
+
+    if (formData.username.length < 4 || formData.username === "") {
+      testFailed = true;
+    }
+    else if (formData.password.length < 6 || formData.password === "") {
+      testFailed = true;
+    }
+    else if (formData.confirmPassword === "") {
+      testFailed = true;
+    }
+    else if (formData.email === "") {
+      testFailed = true;
+    }
+    else if (formData.firstName === "") {
+      testFailed = true;
+    }
+    else if (formData.lastName === "") {
+      testFailed = true;
+    }
+
+    setDisableSignup(testFailed);
+  }, [formData]);
+
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = (e) => {
@@ -77,7 +101,9 @@ function SignupFormModal() {
         .catch(async (res) => {
           const data = await res.json();
           if (data?.errors) {
-            setErrors(data.errors);
+            setErrors({
+              general: data.errors
+            });
           }
         });
     }
@@ -160,7 +186,7 @@ function SignupFormModal() {
         {errors.general && <p>{errors.general}</p>} {/* General error message */}
 
         <div className="div-submitButton">
-          <button type="submit" disabled={loading} className="register-submitButton">
+          <button type="submit" disabled={disableSignup} className="register-submitButton">
             {loading ? "Signing Up..." : "Sign Up"}
           </button>
         </div>
@@ -170,70 +196,3 @@ function SignupFormModal() {
 }
 
 export default SignupFormModal;
-
- {/* <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </label>
-      {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
-
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
-
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        {errors.general && <p>{errors.general}</p>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing Up..." : "Sign Up"}
-        </button>
-      </form> */}
