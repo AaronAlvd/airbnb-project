@@ -127,14 +127,14 @@ function SpotFormPage () {
                 <div>
                   <label id="lat-header"className="spotForm-inputLabel">Latitude</label> 
                 </div>
-                <input id="lat"type="text" placeholder='Lat' name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
+                <input id="lat" type="number" placeholder='Lat' name="lat" value={formData.lat} onChange={(e) => handleChange(e)}/>
               </div>
               
               <div id="lng-box">
                 <div>
                   <label id="lng-header"className="spotForm-inputLabel">Longitude</label>
                 </div>
-                  <input id="lng"type="text" placeholder='Lng' name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
+                  <input id="lng" type="number" placeholder='Lng' name="lng" value={formData.lng} onChange={(e) => handleChange(e)}/>
                 </div>
               </div>
 
