@@ -123,7 +123,7 @@ function SpotFormPage () {
         <h2>Create New Spot</h2>
         <form className="spotForm" onSubmit={(e) => handleSubmit(e)}>
           <div className='div-SF-location'>
-            <h4 className='SF-title'>Where's your place located?</h4>
+            <h4 className='SF-title'>Where&apos;s your place located?</h4>
             <p className="SF-caption"><small>Guests will only get your exact address once they booked a reservation.</small></p>
             <div className="div-inputSpotForm">
               <label className="spotForm-inputLabel">Address</label> {errors.address && <p className='SFL-addressError'>{errors.address}</p>}
@@ -169,7 +169,7 @@ function SpotFormPage () {
 
           <div>
             <h4 className='SF-title'>Create a title for your spot</h4>
-            <p className="SF-caption"><small>Catch guests' attention with a spot title that highlights what makes your place special.</small></p>
+            <p className="SF-caption"><small>Catch guests&apos; attention with a spot title that highlights what makes your place special.</small></p>
             <div className="div-inputSpotForm">
               <label className="spotForm-inputLabel">Name</label> {errors.name && <p className='SFL-nameError'>{errors.name}</p>}
               <input type="text" name="name" className="formInput formInput01" value={formData.name} onChange={(e) => handleChange(e)} 

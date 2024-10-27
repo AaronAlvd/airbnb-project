@@ -1,6 +1,6 @@
 import "./ReviewForm.css";
 import StarRating from "../StarRating";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { createReview } from "../../../store/review";
 
@@ -36,7 +36,7 @@ export default function ReviewForm({props}) {
         </div>
 
         <div className="div-reviewButton">
-          <button onSubmit={handleSubmit} className="RF-submitButton" disabled={disabledButton} type="submit">Submit Review</button>
+          <button onSubmit={handleSubmit} className="RF-submitButton" type="submit">Submit Review</button>
         </div>
       </form>
     </div>

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OpenModalButton from '../../OpenModalButton/OpenModalButton';
 import ReviewForm from '../../Reviews/ReviewForm/ReviewForm';
-import EditSpots from "../EditSpots/EditSpots";
+// import EditSpots from "../EditSpots/EditSpots";
 import DeleteReviewConfirm from '../../Reviews/ManageReviews/DeleteReviewConfirm';
 import "./Spot.css";
 
