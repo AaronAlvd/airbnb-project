@@ -23,7 +23,7 @@ function SpotFormPage () {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { address, lng, lat, city, state, country, description, price, name} = formData;
+    const { address, lng, lat, city, state, country, description, price, name, imageUrl} = formData;
 
     return dispatch(
       spotActions.createSpot({
@@ -36,7 +36,7 @@ function SpotFormPage () {
         lng,
         description,
         price,
-        imageUrl: "", // New field for the image URL
+        imageUrl, // New field for the image URL
     }))
     .then(() => console.log(formData)) 
     .catch(async (res) => {
