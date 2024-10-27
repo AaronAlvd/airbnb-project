@@ -72,8 +72,8 @@ function SpotFormPage () {
           <div className='spacer'>
                       <label className="spotForm-inputLabel">Country</label> </div>
                       <select className='scroll-input' value={formData.country} name="country" onChange={(e) => handleChange(e)}>
-                        <option>Select a country...</option>
-                        <option>United States</option>
+                          <option value="">Select a country...</option>
+                          <option value="United States">United States</option>
                       </select>
 
                     <div className='spacer'>
@@ -157,7 +157,7 @@ function SpotFormPage () {
               <div className='spacer'>
                 <label className="spotForm-inputLabel">Price</label>
                 </div>
-                <input id="spot-form-price-input"type="text" placeholder="Price" name="price" value={formData.price} onChange={(e) => handleChange(e)}></input>
+                <input id="spot-form-price-input" type="number" placeholder="Price" name="price" value={formData.price} min="0" onChange={(e) => handleChange(e)}></input>
           </div>
 
           <div id="spot-form-submit-button-box">
