@@ -15,7 +15,8 @@ function SpotFormPage () {
     lat: "",
     lng: "",
     description: "",
-    price: ""
+    price: "",
+    imageUrl: ""
   })
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
