@@ -126,7 +126,7 @@ export const createSpot = (data) => async (dispatch) => {
         throw new Error("Failed to add image to spot.");
       }
 
-      const newImage = await imageResponse.json();
+      // const newImage = await imageResponse.json();
       // Optionally, add this image to the Redux store if needed
     }
 
