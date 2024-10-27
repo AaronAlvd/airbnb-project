@@ -44,7 +44,8 @@ export const getSpots = () => {
             price: data.spot.price,
             createdAt: data.spot.createdAt,
             updatedAt: data.spot.updatedAt,
-            avgRating: data.spot.avgStarRating ? data.spot.avgStarRating.toFixed(2) : null,
+            avgRating: isNaN(Number(data.spot.avgStarRating)) ? null : Number(data.spot.avgStarRating).toFixed(2),
+
             previewImage
           };
         })
