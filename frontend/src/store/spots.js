@@ -24,6 +24,14 @@ const addSpot = (spot) => {
   }
 }
 
+const addImageToSpot = (spotId, image) => {
+  return {
+    type: ADD_IMAGE_TO_SPOT,
+    payload: { spotId, image },
+  };
+};
+
+
 const setSpot = (spot) => {
   return {
     type: SET_SPOT,
