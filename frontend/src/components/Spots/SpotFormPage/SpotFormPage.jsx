@@ -35,7 +35,8 @@ function SpotFormPage () {
         lat,
         lng,
         description,
-        price
+        price,
+        imageUrl: "", // New field for the image URL
     }))
     .then(() => console.log(formData)) 
     .catch(async (res) => {
@@ -159,6 +160,18 @@ function SpotFormPage () {
                 </div>
                 <input id="spot-form-price-input" type="number" placeholder="Price" name="price" value={formData.price} min="0" onChange={(e) => handleChange(e)}></input>
           </div>
+
+          <div className='spacer'>
+            <label className="spotForm-inputLabel">Image URL</label>
+          </div>
+          <input
+            type="text"
+            name="imageUrl"
+            placeholder="Enter image URL"
+            value={formData.imageUrl}
+            onChange={(e) => handleChange(e)}
+          />
+
 
           <div id="spot-form-submit-button-box">
               <div className='spacer'>

@@ -81,8 +81,9 @@ export const getSingleSpot = (spotId) => {
 
 export const createSpot = (data) => async (dispatch) => {
   try {
-    const { address, lng, lat, city, state, country, description, price, name } = data;
+    const { address, lng, lat, city, state, country, description, price, name, imageUrl } = data;
 
+    // First, create the Spot
     const response = await csrfFetch('/api/spots/', {
       method: 'POST',
       headers: {
@@ -105,15 +106,37 @@ export const createSpot = (data) => async (dispatch) => {
       throw new Error("Failed to create a spot.");
     }
 
-    const newData = await response.json();
-    dispatch(addSpot(newData));
+    const newSpot = await response.json();
+    dispatch(addSpot(newSpot));
 
-    return newData;
+    // If an image URL was provided, create the SpotImage
+    if (imageUrl) {
+      const imageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: imageUrl,
+          preview: true,
+        }),
+      });
+
+      if (!imageResponse.ok) {
+        throw new Error("Failed to add image to spot.");
+      }
+
+      const newImage = await imageResponse.json();
+      // Optionally, add this image to the Redux store if needed
+    }
+
+    return newSpot;
   } catch (err) {
     console.error("Error creating spot:", err);
     return err;
   }
 };
+
 
 export const deleteSpot = async (spotId) => {
   try {
