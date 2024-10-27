@@ -601,7 +601,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     };
 
     res.status(201).json({
-        id: newSpot.id,
+        // id: newSpot.id,
         ownerId: newSpot.userId,  // Rename userId to ownerId
         address: newSpot.address,
         city: newSpot.city,
