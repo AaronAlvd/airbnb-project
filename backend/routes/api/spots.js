@@ -319,7 +319,7 @@ router.get('/', async (req, res, next) => {
           price: spot.price,
           createdAt: spot.createdAt,
           updatedAt: spot.updatedAt,
-          avgRating: spot.avgStarRating ? parseFloat(spot.avgStarRating) : null,
+          avgRating: spot.avgStarRating ,
           previewImage
         };
       }),
@@ -425,7 +425,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     }
 
     const spot = await Spot.findByPk(spotId);
-    
+
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }

@@ -1,4 +1,4 @@
-import * as spotActions from "../../../store/spots"; // Import your actions
+import * as spotActions from "../../../store/spots";
 import * as bookingActions from "../../../store/booking";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -12,7 +12,6 @@ function Spot() {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots.spot);
   const user = useSelector((state) => state.session.user);
-  // const bookings = useSelector((state) => state.bookings.bookings);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -58,32 +57,45 @@ function Spot() {
         <div className="div-mainImage" id="picture-01">
           <img src={spot.SpotImages[0].url} id="image-01" alt={spot.name} />
         </div>
-        {/* Render side images here as needed */}
+
+        {/* Side images in a grid */}
+        <div className="div-sideImages">
+          {Array(4).fill().map((_, index) => (
+            <div key={index} className="sideImage">
+              <img
+                src="https://placehold.co/300x200" // Placeholder image
+                alt={`Placeholder ${index + 1}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <div className="spotDescription">
-        <h3>Hosted by Aaron, Tyler, & Bobby</h3>
+        <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
         <p>{spot.description}</p>
       </div>
       <div className="div-body">
-        <p id="spotprice">${spot.price}/Night</p>
-        {!owner && (
-          <button
-            id="reservebutton"
-            className="RF-modalButton"
-            onClick={() => window.alert("Feature Coming Soon!!")}
-          >
-            Reserve
-          </button>
-        )}
+        <div className="reserve-container">
+          <p id="spotprice">${spot.price}/Night</p>
+          {owner && (
+            <button className="RF-modalButton">
+              <OpenModalButton buttonText="Edit" />
+            </button>
+          )}
+          {!owner && (
+            <button
+              id="reservebutton"
+              className="RF-modalButton"
+              onClick={() => window.alert("Feature Coming Soon!!")}
+            >
+              Reserve
+            </button>
+          )}
+        </div>
+        <div id="review">
+          <ShowCaseReviews spot={spot} />
+        </div>
       </div>
-      <div id="review">
-        <ShowCaseReviews  spot={spot} />
-      </div>
-      {owner && (
-        <button className="RF-modalButton">
-          <OpenModalButton buttonText="Edit" />
-        </button>
-      )}
     </div>
   );
 }

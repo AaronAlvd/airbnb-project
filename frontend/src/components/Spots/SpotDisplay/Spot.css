@@ -1,192 +1,105 @@
 .div-spot {
   display: grid;
-
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  height: 100px;
-  margin-left: 10px;
-}
-
-#location {
-  margin-left: 161px;
-  grid-column: 2;
+  grid-template-columns: 1fr; /* Single column layout */
+  max-width: 1200px; /* Max width for the main container */
+  margin: 0 auto; /* Centering */
+  padding: 10px; /* Padding for the overall container */
 }
 
 .div-title {
-  grid-area: 'Title';
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
-  margin-left: 161px;
-  grid-column: 2;
-
+  margin: 10px 0; /* Adjust margins */
 }
-
-#reviewbutton {
-  position: relative;
-
-  left:150px;
-  bottom: 50px;
-  width: 250px;
-  height: 45px;
-  border-radius: 1px;
-  box-shadow: 2px 2px;
-  background-color: red;
-  grid-column: 2;
-
-
-}
-#reviewbutton:hover {
-    transform: translateY(-2px);
-
-  }
-#review {
-  height: 275px;
-  position: absolute;
-  bottom: -480px;
-  left: 161px;
-  grid-column: 2;
-  border: 3px solid black;
-  border-radius:15px ;
-  -webkit-border-radius:15px ;
-  -moz-border-radius:15px ;
-  -ms-border-radius:15px ;
-  -o-border-radius:15px ;
-  overflow-y: hidden;
-}
-
-
-/* ---- PICTURES ---- */
 
 .div-pictures {
-  grid-area: 'Pictures';
-  display: grid;
-  grid-template-columns: 500px 300px 300px 300px;
-  grid-template-rows: 150px 150px;
-  grid-template-areas:
-    "pic01 pic02 pic03 pic04"
-    "pic01 pic05 pic06 pic07";
-  margin: 0 161px;
-  grid-column: 2;
-
-}
-
-#picture-01 {
-  grid-area: pic01;
-}
-#image-01 {
-  width: 500px;
-  height: 400px;
-}
-
-#picture-02 {
-  grid-area: pic02;
-
-}
-#picture-03 {
-  grid-area: pic03;
-
-}
-#picture-04 {
-  grid-area: pic04;
-
-}
-#picture-05 {
-  grid-area: pic05;
-
-}
-
-.div-sideImage {
-  object-fit: cover;
-  border-radius: 5px;
+  display: flex; /* Flexbox to align main and side images */
+  margin: 10px 0; /* Adjust margins */
 }
 
 .div-mainImage {
-  object-fit: cover;
-
-
+  flex: 2; /* Takes more space */
+  margin-right: 10px; /* Space between main image and side images */
 }
 
-
-
-
-/* ---- PICTURES ---- */
-
-
-
-
-.div-mainImage > img {
-border-radius: 15px;
+.div-mainImage img {
+  width: 100%; /* Full width for main image */
+  height: 400px; /* Fixed height for main image */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 15px; /* Optional: add border radius */
 }
 
-span{
-  position: relative;
-  top: 10px;
+.div-sideImages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for side images */
+  gap: 10px; /* Space between side images */
+  flex: 1; /* Takes less space */
+}
+
+.sideImage img {
+  width: 100%; /* Full width for side images */
+  height: 200px; /* Fixed height for side images */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 5px; /* Optional: add border radius */
+}
+
+.spotDescription {
+  padding: 10px; /* Padding for description */
 }
 
 .div-body {
-  grid-area: 'Body';
-  border: 3px solid black;
+  display: flex; /* Flexbox for body */
+  justify-content: space-between; /* Space between reserve button and reviews */
+  gap: 20px; /* Space between elements */
   border-radius: 10px;
-  position: relative;
-  bottom:89px;
-  left: 1110px;
-  width: 335px;
-  height: 130px;
-  grid-column: 2;
+  padding: 10px; /* Add padding */
+  margin: 10px 0; /* Space above and below */
+}
 
+.reserve-container {
+  border: 3px solid black; /* Border for reserve section */
+  display: flex;
+  flex-direction: column; /* Arrange elements vertically */
+  width: 40%; /* Width of the reserve section */
+  padding: 20px; /* Padding inside reserve section */
+  border-radius: 10px; /* Rounded corners */
+  height: fit-content;
 }
 
 #reservebutton {
-  bottom: 10px;
-  left: 25px;
-  width: 283px;
-  height: 45px;
-  border-radius: 1px;
-  box-shadow: 2px 2px;
-  background-color: red;
-  grid-column: 2;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-#reservebutton:hover{
-  transform: translateY(-2px);
-  cursor:pointer;
+  width: 100%; /* Full width button */
+  height: 45px; /* Button height */
+  border-radius: 5px; /* Slightly rounded corners */
+  box-shadow: 2px 2px; /* Shadow for button */
+  background-color: red; /* Button background color */
+  transition: transform 0.2s ease; /* Smooth transition for hover effect */
 }
 
-.spotDescription{
-  position: relative;
-  left: 161px;
-  /* bottom: -275px; */
-  top: 95px;
-  padding: 10px 0px;
-  width: 870px;
-  grid-column: 2;
+#reservebutton:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+}
 
+#review {
+  flex: 1; /* Allow review to take remaining space */
+  border: 3px solid black; /* Optional: border for review section */
+  border-radius: 10px; /* Optional: rounding corners */
+  padding: 10px; /* Padding for review section */
+  /* Width of the review section */
 }
 
 #spotprice {
-  position: relative;
-  left: 25px;
-  top: -10px;
-  font-size: x-large
-  ;
+  font-size: x-large; /* Price styling */
 }
-
-/* ---- SPOT BODY BUTTON ---- */
 
 .RF-modalButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid black;
-  background-color: rgb(231, 232, 234);
-  width: 150px;
-  height: 30px;
-  border-radius: 5px;
-  padding: 0;
-  position: relative;
-  bottom: 35px;
-
+  width: 100%; /* Full width button */
+  height: 45px; /* Button height */
+  border-radius: 5px; /* Slightly rounded corners */
+  box-shadow: 2px 2px; /* Shadow for button */
+  background-color: red; /* Button background color */
+  transition: transform 0.2s ease; /* Smooth transition for hover effect */
 }
 
-/* ---- SPOT BODY BUTTON ---- */
+.RF-modalButton:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+}

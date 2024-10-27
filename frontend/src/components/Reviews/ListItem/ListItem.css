@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between; /* Align items */
     align-items: center; /* Center items vertically */
+    width: fit-content;
 }
 
 .username {
