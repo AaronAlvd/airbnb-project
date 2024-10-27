@@ -30,19 +30,18 @@ function Navigation() {
   return (
     <div className="div-nav">
       <div className="logo">
-        
+        <NavLink to="/">
+          <img id="logo" src="/edubnblogo.png" alt="EduBnB Logo" />
+        </NavLink>
       </div>
       <div className="div-ul">
         <ul className="nav-ul">
           <li className="nav-li">
-            <NavLink to="/"><img id="logo" src="/edubnblogo.png" alt="EduBnB Logo" /></NavLink>
-          </li >
-
-          <ProfileButton className="Profile"/>
+            <ProfileButton className="Profile" />
+          </li>
         </ul>
       </div>
     </div>
   );
 }
-
 export default Navigation;

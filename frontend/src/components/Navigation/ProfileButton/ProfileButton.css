@@ -5,14 +5,17 @@
 
 .pbl-bottom {
   /* border-radius: 0 0 5px 5px; */
-  
+
 }
 
 .pbl-top {
   border-radius: 5px 5px 0 0;
-  
+
 }
 
+.pb-logout:hover {
+cursor: pointer;
+}
 .pb-logout {
   font-size: 16px;
   background-color: white;
@@ -25,7 +28,7 @@
   padding: 0;
 }
 
-.FaUserCircle:hover { 
+.FaUserCircle:hover {
   cursor: pointer;
 }
 
@@ -55,7 +58,7 @@
   border-radius: 5%;
   padding: 0;
   margin-top: 21px;
-
+/* width: fit-content; */
   left: -66px
 }
 
@@ -65,7 +68,7 @@
   border-radius: 0 0 5px 5px
 }
 
-#signupmenu {
+#loginmenu {
     border-radius: 0 0 5px 5px;
 
 }
@@ -77,15 +80,15 @@
 .ModalButton-list {
   margin: 0;
   background-color: rgb(255, 255, 255);
-  width: 125px;
+  width: 240px;
   height: 50px;
   display: flex;
   align-items: center;
   padding-left: 25px;
-  
- 
-  
-  
+
+
+
+
 }
 
 .userInfo {

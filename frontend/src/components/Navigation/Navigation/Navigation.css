@@ -2,10 +2,10 @@
   grid-column: 1;
   justify-self: end;
   margin-right: 35px;
-  
-  
-  
-} 
+
+
+
+}
 
 .button-FaUser{
   grid-column: 4;
@@ -43,11 +43,11 @@ a {
 
 
 .div-nav {
-  
+
   margin: 18px 162px;
-  
+
 }
-  
+
   /*
 .div-ul {
   width: 50vw;
@@ -58,3 +58,43 @@ a {
 
 
 
+.div-nav {
+  display: flex;
+  justify-content: space-between; /* Aligns items on both ends */
+  align-items: center; /* Vertically centers items */
+  padding: 10px; /* Add some padding */
+  background-color: #fff; /* Background color for the header */
+  border-bottom: 1px solid #ccc; /* Optional: border for separation */
+}
+
+.logo {
+  flex: 1; /* Takes up available space */
+}
+
+.div-ul {
+  display: flex; /* Use flexbox for the list */
+  align-items: center; /* Vertically centers items */
+}
+
+.nav-ul {
+  list-style: none; /* Removes default list styling */
+  display: flex; /* Aligns list items horizontally */
+  margin: 0; /* Resets default margin */
+  padding: 0; /* Resets default padding */
+}
+
+.nav-li {
+  margin-left: 20px; /* Space between list items */
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-ul {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .nav-li {
+    margin: 10px 0; /* Space between stacked items */
+  }
+}

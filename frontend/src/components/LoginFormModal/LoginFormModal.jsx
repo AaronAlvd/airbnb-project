@@ -1,22 +1,28 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/modal";
-
 import "./LoginForm.css";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
+  const { closeModal, isOpen } = useModal();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
 
-  // if (sessionUser) return <Navigate to="/" replace={true} />; causing nav errors after login/signup
-  
+  // Reset state when the modal opens
+  useEffect(() => {
+    console.log(isOpen)
+    if (isOpen) {
+      console.log('isOpen', isOpen)
+      setCredential("");
+      setPassword("");
+      setErrors({});
+    }
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,22 +39,21 @@ function LoginFormPage() {
   };
 
   const handleDemoSubmit = () => {
-    const credential = 'Demo-lition';
-    const password = 'password';
+    const demoCredential = 'Demo-lition';
+    const demoPassword = 'password';
 
-    return dispatch(sessionActions.login({ credential, password }))
-    .then(closeModal)
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) {
-        setErrors(data.errors);
-      }
-    });
-  }
+    return dispatch(sessionActions.login({ credential: demoCredential, password: demoPassword }))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
+  };
 
   return (
     <div className="div-loginForm">
-
       <div className="div-h1">
         <h1 className="h1-login">Log In</h1>
       </div>
@@ -66,6 +71,7 @@ function LoginFormPage() {
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
+            autoComplete="off" // Prevent autofill
           />
         </div>
 
@@ -82,38 +88,27 @@ function LoginFormPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="off" // Prevent autofill
           />
         </div>
 
         <div className="div-button">
           {errors.credential && <p className="login-displayErrors">{errors.credential}</p>}
-          <button type="submit" className="submitButton" disabled={(password.length < 6) && (credential.length < 4)}>Login</button>
+          <button
+            type="submit"
+            className="submitButton"
+            disabled={credential.length < 4 || password.length < 6}
+          >
+            Login
+          </button>
         </div>
       </form>
 
-      <button className="LF-demoButton" onClick={() => handleDemoSubmit()}>Demo User</button>
+      <button className="LF-demoButton" onClick={handleDemoSubmit} aria-label="Log in as demo user">
+        Demo User
+      </button>
     </div>
   );
 }
 
 export default LoginFormPage;
-
-{
-  /* <form onSubmit={handleSubmit}>
-        <label>
-          Username or Email
-          <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required/>
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.credential && <p>{errors.credential}</p>}
-        <button type="submit">Log In</button>
-      </form> */
-}
