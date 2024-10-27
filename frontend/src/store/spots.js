@@ -98,8 +98,8 @@ export const createSpot = (data) => async (dispatch) => {
         lat,
         lng,
         description,
-        price,
-        imageUrl,
+        price
+        
       }),
     });
 
