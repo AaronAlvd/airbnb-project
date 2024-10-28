@@ -41,7 +41,9 @@ function ProfileButton() {
     navigate("/");
     dispatch(sessionActions.logout());
   };
-
+const manageSpot = ()=>{
+  navigate('/manageSpots')
+}
   const ulClassName = () => {
     if (showMenu && liveUser) {
       return (
@@ -60,6 +62,11 @@ function ProfileButton() {
           <li className="ModalButton-list">
             <p className="userInfo">{liveUser?.email}</p>
           </li>
+          <li className="ModalButton-list pbl-bottom">
+            <button onClick={manageSpot} className="pb-logout userInfo">
+              Manage Spots
+            </button>
+            </li>
           <li className="ModalButton-list pbl-bottom">
             <button onClick={logout} className="pb-logout userInfo">
               Log Out

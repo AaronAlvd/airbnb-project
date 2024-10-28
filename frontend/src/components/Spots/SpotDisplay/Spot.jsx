@@ -12,7 +12,7 @@ function Spot() {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots.spot);
   const user = useSelector((state) => state.session.user);
-  const reviews = spot?.Reviews || []; // Safely access reviews
+  const reviews = spot?.Reviews || [];
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,10 +43,10 @@ function Spot() {
   }, [spot, user]);
 
   const calculateAverageRating = () => {
-    if (!reviews.length) return 0; // Handle case where there are no reviews
+    if (!reviews.length) return 0;
 
     const totalStars = reviews.reduce((acc, review) => acc + review.stars, 0);
-    return (totalStars / reviews.length).toFixed(1); // Round to one decimal place
+    return (totalStars / reviews.length).toFixed(1);
   };
 
   const averageRating = calculateAverageRating();
@@ -54,6 +54,11 @@ function Spot() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!spot) return <div>Spot not found.</div>;
+
+  // Use default image if no SpotImages are available
+  const mainImageUrl = (spot.SpotImages && spot.SpotImages.length > 0)
+    ? spot.SpotImages[0].url
+    : "https://placehold.co/600x400"; // Default image URL
 
   return (
     <div className="div-spot">
@@ -65,13 +70,13 @@ function Spot() {
       </div>
       <div className="div-pictures">
         <div className="div-mainImage" id="picture-01">
-          <img src={spot.SpotImages[0].url} id="image-01" alt={spot.name} />
+          <img src={mainImageUrl} id="image-01" alt={spot.name} />
         </div>
         <div className="div-sideImages">
           {Array(4).fill().map((_, index) => (
             <div key={index} className="sideImage">
               <img
-                src="https://placehold.co/300x200" // Placeholder image
+                src="https://placehold.co/300x200" // Placeholder for side images
                 alt={`Placeholder ${index + 1}`}
               />
             </div>
@@ -102,8 +107,6 @@ function Spot() {
         </div>
 
         <div id="review">
-
-
           <ShowCaseReviews spot={spot} num={reviews.length} averageRating={averageRating} />
         </div>
       </div>
