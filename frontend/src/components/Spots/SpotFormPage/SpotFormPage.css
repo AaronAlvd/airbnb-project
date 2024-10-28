@@ -106,3 +106,15 @@ input {
     background-color: red;
     cursor: pointer;
 }
+
+
+#spot-form-page-name {
+    
+    margin-top: 20px;
+    
+}
+
+#spot-form-page-name-container {
+    margin-top: 20px;
+    border-bottom: 3px black solid;
+}

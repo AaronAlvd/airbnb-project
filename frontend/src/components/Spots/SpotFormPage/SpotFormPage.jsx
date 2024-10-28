@@ -82,8 +82,8 @@ function SpotFormPage() {
           {/* First section: Location */}
           <div className='location'>
             <div className='spacer'>
-              <p className='form-header'>Where's your place located?</p>
-              <p className='form-sub-header'>Guests will only get your exact location once they've booked a reservation.</p>
+              <p className='form-header'>Where&apos;s your place located?</p>
+              <p className='form-sub-header'>Guests will only get your exact location once they&apos;ve booked a reservation.</p>
             </div>
             <div className='spacer'>
               <label className="spotForm-inputLabel">Country</label>
@@ -195,7 +195,22 @@ function SpotFormPage() {
             <textarea id="location-description" placeholder="Please write at least 30 characters." name="description" value={formData.description} onChange={handleChange}></textarea>
           </div>
 
+          <div className='spacer'>
+            <p className='form-header'>Create a title for your spot.</p>
+          </div>
+
+          <p id='spot-form-page-title'className='form-sub-header'>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
+
+              <input id='spot-form-page-name' type="text" placeholder="Name of your spot" name="name" value={formData.name} onChange={handleChange} />
+          <div id='spot-form-page-name-container'>
+          </div>
+
           {/* Third section: Price */}
+          <div className='spacer'>
+            <p className='form-header'>Set a base price for your spot.</p>
+          </div>
+          <p className='form-sub-header'>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+
           <div id="spot-form-price-box">
             <div className='spacer'>
               <label className="spotForm-inputLabel">Price</label>
