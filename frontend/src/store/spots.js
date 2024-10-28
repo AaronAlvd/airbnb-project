@@ -36,16 +36,30 @@ const setSpotReviews = (reviews) => {
 }
 export const getSpots = () => {
   return async (dispatch) => {
-    // Return a function that takes dispatch as an argument
     try {
       const response = await csrfFetch("/api/spots/");
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(setSpots(data.Spots)); // Dispatch the action with the fetched spots
-        return data;
+        console.log('getSpots', data);
+
+        // Fetch reviews for each spot and add the reviews property
+        const spotsWithReviews = await Promise.all(
+          data.Spots.map(async (spot) => {
+            const reviewsResponse = await csrfFetch(`/api/spots/${spot.id}/reviews`);
+            if (reviewsResponse.ok) {
+              const reviewsData = await reviewsResponse.json();
+              // Append reviews to the spot object
+              return { ...spot, reviews: reviewsData };
+            }
+            return { ...spot, reviews: [] }; // Return spot with empty reviews if fetch fails
+          })
+        );
+
+        // Dispatch the action with the updated spots
+        dispatch(setSpots(spotsWithReviews));
+        return spotsWithReviews;
       } else {
-        // Handle non-200 responses
         console.error("Failed to fetch spots:", response.statusText);
       }
     } catch (error) {
@@ -53,6 +67,9 @@ export const getSpots = () => {
     }
   };
 };
+
+
+
 export const getSingleSpot = (spotId) => {
   return async (dispatch) => {
     // Return a function that takes dispatch as an argument
@@ -150,13 +167,13 @@ const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SPOTS:
       return { ...state, spots: action.payload };
-      
+
     case ADD_SPOT: {
       const newState = { ...state };
       newState.spots[action.payload.id] = action.payload;
       return newState;
     }
-    
+
     case DELETE_SPOT: {
       // Filter out the spot with the given ID from state.spots
       const updatedSpots = state.spots.filter(spot => spot.id !== action.payload.spotId);
@@ -167,16 +184,16 @@ const spotReducer = (state = initialState, action) => {
         spots: updatedSpots,
       };
     }
-    
+
     case SET_SPOT:
       return { ...state, spot: action.payload || {} };
-    
+
     case SET_SPOT_REVIEWS: {
       const sortedReviews = action.payload.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       console.log('sortedReview', sortedReviews);
       return { ...state, spot: { ...state.spot, Reviews: sortedReviews } };
     }
-    
+
     default:
       return state;
   }

@@ -60,7 +60,7 @@
   border: 3px solid black; /* Border for reserve section */
   display: flex;
   flex-direction: column; /* Arrange elements vertically */
-  width: 40%; /* Width of the reserve section */
+  width: 30%; /* Width of the reserve section */
   padding: 20px; /* Padding inside reserve section */
   border-radius: 10px; /* Rounded corners */
   height: fit-content;
@@ -84,6 +84,9 @@
   border: 3px solid black; /* Optional: border for review section */
   border-radius: 10px; /* Optional: rounding corners */
   padding: 10px; /* Padding for review section */
+  width: 41%;
+  position: relative;
+  left: 10px;
   /* Width of the review section */
 }
 

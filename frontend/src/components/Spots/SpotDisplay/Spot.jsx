@@ -12,6 +12,7 @@ function Spot() {
   const { spotId } = useParams();
   const spot = useSelector((state) => state.spots.spot);
   const user = useSelector((state) => state.session.user);
+  const reviews = spot?.Reviews || []; // Safely access reviews
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,6 +42,15 @@ function Spot() {
     }
   }, [spot, user]);
 
+  const calculateAverageRating = () => {
+    if (!reviews.length) return 0; // Handle case where there are no reviews
+
+    const totalStars = reviews.reduce((acc, review) => acc + review.stars, 0);
+    return (totalStars / reviews.length).toFixed(1); // Round to one decimal place
+  };
+
+  const averageRating = calculateAverageRating();
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!spot) return <div>Spot not found.</div>;
@@ -57,8 +67,6 @@ function Spot() {
         <div className="div-mainImage" id="picture-01">
           <img src={spot.SpotImages[0].url} id="image-01" alt={spot.name} />
         </div>
-
-        {/* Side images in a grid */}
         <div className="div-sideImages">
           {Array(4).fill().map((_, index) => (
             <div key={index} className="sideImage">
@@ -92,8 +100,11 @@ function Spot() {
             </button>
           )}
         </div>
+
         <div id="review">
-          <ShowCaseReviews spot={spot} />
+
+
+          <ShowCaseReviews spot={spot} num={reviews.length} averageRating={averageRating} />
         </div>
       </div>
     </div>

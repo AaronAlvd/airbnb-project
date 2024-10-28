@@ -6,7 +6,7 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import "./ShowCaseReviews.css";
 import OpenModalBtnReview from "../../OpenModalButton/OpenModalBtnReview";
 
-export default function ShowCaseReviews({ spot }) {
+export default function ShowCaseReviews({ spot, num, averageRating }) {
   const dispatch = useDispatch();
   const reviews = spot?.Reviews || [];
   const user = useSelector((state) => state.session.user);
@@ -22,7 +22,6 @@ export default function ShowCaseReviews({ spot }) {
   }, [spot, user]);
 
   useEffect(() => {
-    // You can use this effect to trigger side effects after loading
     if (loaded) {
       setLoaded(false); // Reset loaded state for next submission
     }
@@ -33,7 +32,6 @@ export default function ShowCaseReviews({ spot }) {
     setError(null);
     try {
       const spotId = spot.id;
-      console.log("SpotId", spotId);
       await dispatch(reviewActions.DeleteReview(spotId, reviewId));
       setLoaded(true); // Trigger re-render if needed
     } catch (error) {
@@ -46,11 +44,17 @@ export default function ShowCaseReviews({ spot }) {
 
   return (
     <div className="Review-list">
-      <h2 className="title">Reviews</h2>
+      <h2 className="title">
+        {reviews.length === 0 ? (
+          'New ⭐'
+        ) : (
+          `Average Rating: ${averageRating} ${averageRating > 0 ? '⭐' : ''} · ${num} Review${num !== 1 ? 's' : ''}`
+        )}
+      </h2>
       {!isOwner && (
         <OpenModalBtnReview
           buttonText="Make Review"
-          modalComponent={<ReviewForm props={spot}  />}
+          modalComponent={<ReviewForm props={spot} />}
         />
       )}
 
@@ -66,11 +70,12 @@ export default function ShowCaseReviews({ spot }) {
               review={review.review}
               starsRating={review.stars}
               onDelete={() => handleDelete(review.id)}
-              loading={loading} // Optional: Pass loading state to ListItem if needed
+              loading={loading}
+              createdAt={review.createdAt} // Pass the createdAt prop
             />
           ))
         ) : (
-          <li>No reviews available</li>
+          !isOwner && user && <li>Be the first to post a review!</li> // Show message if logged in user is not the owner
         )}
       </ul>
     </div>
