@@ -24,12 +24,12 @@ function SpotFormPage() {
   const [setErrors] = useState({});
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (ident !== null) {
-      navigate(`/spots/${ident}`);
-      window.ident = null;
-    }
-  }, [ident, navigate]);
+  // useEffect(() => {
+  //   if (ident !== null) {
+  //     navigate(`/spots/${ident}`);
+  //     window.ident = null;
+  //   }
+  // }, [ident, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,11 @@ function SpotFormPage() {
         images: [previewImage, ...imageUrls.filter(url => url)] // Only include non-empty URLs
       })
     )
-      .then(() => console.log(formData))
+      .then((newSpot) => {
+        if (newSpot?.id) {
+          navigate(`/spots/${newSpot.id}`); // Navigate to the newly created spot's page
+        }
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data?.errors) {
