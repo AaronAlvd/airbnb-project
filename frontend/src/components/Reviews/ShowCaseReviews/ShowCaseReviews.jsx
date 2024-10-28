@@ -5,6 +5,7 @@ import ListItem from "../ListItem";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import "./ShowCaseReviews.css";
 import OpenModalBtnReview from "../../OpenModalButton/OpenModalBtnReview";
+import ConfirmationModal from "./ConfirmModal/ConfirmModal"; // Import the new modal
 
 export default function ShowCaseReviews({ spot, num, averageRating }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [reviewToDelete, setReviewToDelete] = useState(null); // Track review to delete
 
   useEffect(() => {
     if (spot && user) {
@@ -39,6 +41,21 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
       setError("Error deleting review. Please try again.");
     } finally {
       setLoading(false);
+      setReviewToDelete(null); // Reset review to delete
+    }
+  };
+
+  const confirmDelete = (reviewId) => {
+    setReviewToDelete(reviewId); // Set the review to delete
+  };
+
+  const cancelDelete = () => {
+    setReviewToDelete(null); // Reset review to delete
+  };
+
+  const handleConfirmDelete = () => {
+    if (reviewToDelete) {
+      handleDelete(reviewToDelete);
     }
   };
 
@@ -73,7 +90,7 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
               firstname={review.User.firstName}
               review={review.review}
               starsRating={review.stars}
-              onDelete={() => handleDelete(review.id)}
+              onDelete={() => confirmDelete(review.id)} // Show confirmation on delete
               loading={loading}
               createdAt={review.createdAt} // Pass the createdAt prop
             />
@@ -82,6 +99,14 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
           !isOwner && user && <li>Be the first to post a review!</li> // Show message if logged in user is not the owner
         )}
       </ul>
+
+      {/* Render the confirmation modal */}
+      {reviewToDelete && (
+        <ConfirmationModal
+          onConfirm={handleConfirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
     </div>
   );
 }

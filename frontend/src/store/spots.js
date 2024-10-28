@@ -123,6 +123,8 @@ export const createSpot = (data) => async (dispatch) => {
 
     const newData = await response.json();
     dispatch(addSpot(newData));
+    console.log('newData', newData)
+    window.ident = newData.id
 
     return newData;
   } catch (err) {

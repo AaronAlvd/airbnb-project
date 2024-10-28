@@ -1,0 +1,77 @@
+.manage-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    margin-left: 20px; /* Optional margin to move away from the edge */
+  }
+
+  .manage-header {
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+     /* Space between header and button */
+  }
+
+  .no-spots-message {
+    margin-bottom: 1rem;
+    position: relative;
+    left: 10%; /* Space below the button */
+  }
+
+  .create-new-spot-button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+  }
+
+  .create-new-spot-button:hover {
+    background-color: #45a049;
+  }
+
+  /* Add your existing styles here for grid and spot items */
+  .spot-action-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+
+  .update-button,
+  .delete-button {
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  .update-button {
+    background-color: #4caf50; /* Green color for update */
+    color: white; /* White text */
+  }
+
+  .update-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+
+  .delete-button {
+    background-color: #f44336; /* Red color for delete */
+    color: white; /* White text */
+  }
+
+  .delete-button:hover {
+    background-color: #e53935; /* Darker red on hover */
+  }
+
+  .delete-button:focus,
+  .update-button:focus {
+    outline: none; /* Remove default outline */
+  }
+
+  .delete-button:active,
+  .update-button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+  }
+

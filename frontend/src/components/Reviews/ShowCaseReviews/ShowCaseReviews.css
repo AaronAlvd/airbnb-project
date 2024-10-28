@@ -2,10 +2,11 @@
   background-color: transparent;
   height: 275px;
   border-radius: 15px;
-  width: 475px;
+  width: 575px;
   max-width: 600px;
   padding: 20px;
   overflow-y: scroll ;
+  
 }
 
 .Review-list::-webkit-scrollbar {

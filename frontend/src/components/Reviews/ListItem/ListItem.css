@@ -8,7 +8,9 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
-    transition: transform 0.2s; /* Smooth hover effect */
+    transition: transform 0.2s;
+    position: relative;/* Smooth hover effect */
+    right: 10%;
 }
 
 .list-item:hover {
@@ -25,7 +27,10 @@
     margin: 0 10px;
     flex-grow: 1;
     color: #555; /* Lighter color for the review text */
-    font-style: italic; /* Italicize for differentiation */
+    font-style: italic;
+    width: fit-content;
+    padding: 20px;/* Italicize for differentiation */
+    overflow-x: scroll;
 }
 
 .stars-rating {
