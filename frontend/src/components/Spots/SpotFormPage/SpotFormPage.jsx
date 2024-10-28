@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 import * as spotActions from '../../../store/spots';
 import './SpotFormPage.css';
 import { useNavigate } from 'react-router-dom';
 
 function SpotFormPage() {
   const navigate = useNavigate();
-  let ident = window.ident;
+  // let ident = window.ident;
   const [formData, setFormData] = useState({
     address: "",
     city: "",
