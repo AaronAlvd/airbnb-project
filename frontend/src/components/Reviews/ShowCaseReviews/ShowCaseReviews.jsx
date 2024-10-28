@@ -42,6 +42,9 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
     }
   };
 
+  // Check if the user has already posted a review
+  const userHasPostedReview = reviews.some((review) => review.userId === user?.id);
+
   return (
     <div className="Review-list">
       <h2 className="title">
@@ -51,9 +54,10 @@ export default function ShowCaseReviews({ spot, num, averageRating }) {
           `Average Rating: ${averageRating} ${averageRating > 0 ? '⭐' : ''} · ${num} Review${num !== 1 ? 's' : ''}`
         )}
       </h2>
-      {!isOwner && (
+      {/* Hide the button if the user is not logged in or has already posted a review */}
+      {!isOwner && user && !userHasPostedReview && (
         <OpenModalBtnReview
-          buttonText="Make Review"
+          buttonText="Post Your Review"
           modalComponent={<ReviewForm props={spot} />}
         />
       )}
